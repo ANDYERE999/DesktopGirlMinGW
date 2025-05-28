@@ -10,6 +10,7 @@
 
 
 
+
 GLCore::GLCore(QWidget *parent)
     : QOpenGLWidget(parent)
 {
