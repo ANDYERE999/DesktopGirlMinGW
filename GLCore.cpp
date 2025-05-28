@@ -22,10 +22,18 @@ GLCore::GLCore(int w, int h, QWidget *parent)
 {
     setFixedSize(w, h);
     
+    // 设置OpenGL格式以支持透明度
+    QSurfaceFormat format;
+    format.setDepthBufferSize(24);
+    format.setStencilBufferSize(8);
+    format.setAlphaBufferSize(8);  // 关键：设置alpha缓冲区
+    format.setSamples(4);          // 抗锯齿
+    setFormat(format);
+    
     //this->setAttribute(Qt::WA_DeleteOnClose);       // 窗口关闭时自动释放内存
-    //this->setWindowFlag(Qt::FramelessWindowHint); // 设置无边框窗口
-    this->setWindowFlag(Qt::WindowStaysOnTopHint); // 设置窗口始终在顶部
-    //this->setWindowFlag(Qt::Tool); // 隐藏应用程序图标
+    this->setWindowFlag(Qt::FramelessWindowHint); // 设置无边框窗口
+    this->setWindowFlag(Qt::WindowStaysOnTopHint); // 设置窗口始终在顶层
+    //this->setWindowFlag(Qt::Tool); // 不在应用程序图标
     this->setAttribute(Qt::WA_TranslucentBackground); // 设置窗口背景透明
 
     
@@ -104,6 +112,11 @@ void GLCore::mouseReleaseEvent(QMouseEvent* event)
 
 void GLCore::initializeGL()
 {
+    // 设置OpenGL状态以支持透明度渲染
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glDisable(GL_DEPTH_TEST);  // 禁用深度测试以确保透明度正常工作
+    
     LAppDelegate::GetInstance()->Initialize(this);
     
     // 选择模型
@@ -111,6 +124,10 @@ void GLCore::initializeGL()
 
 void GLCore::paintGL()
 {
+    // 设置透明背景
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);  // RGBA，A=0表示完全透明
+    glClear(GL_COLOR_BUFFER_BIT);
+    
     LAppDelegate::GetInstance()->update();
     
 }
