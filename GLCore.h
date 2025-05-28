@@ -4,6 +4,7 @@
 #include <QOpenGLWidget>
 
 
+
 class GLCore : public QOpenGLWidget
 {
     Q_OBJECT
