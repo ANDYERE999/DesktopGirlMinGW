@@ -28,6 +28,7 @@ find_package(Qt6 COMPONENTS
         Widgets
         Sql
         Svg
+        Network
         REQUIRED)
 
 
@@ -37,7 +38,12 @@ if (NOT CONSOLE)
     set(CON WIN32)
 endif()
 
-add_executable(DesktopGirlMinGW ${CON} main.cpp GLCore.cpp ${LApp2D})
+add_executable(DesktopGirlMinGW ${CON} 
+    main.cpp 
+    GLCore.cpp 
+    SettingsDialog.cpp
+    ChatWidget.cpp
+    ${LApp2D})
 
 
 
@@ -57,6 +63,7 @@ target_link_libraries(DesktopGirlMinGW
         Qt::Widgets
         Qt::Sql
         Qt::Svg
+        Qt::Network
 )
 
 

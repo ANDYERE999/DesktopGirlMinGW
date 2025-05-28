@@ -2,8 +2,14 @@
 
 #include <QtWidgets/QWidget>
 #include <QOpenGLWidget>
+#include <QSystemTrayIcon>
+#include <QMenu>
+#include <QAction>
+#include <QApplication>
 
-
+// å‰å‘å£°æ˜
+class SettingsDialog;
+class ChatWidget;
 
 class GLCore : public QOpenGLWidget
 {
@@ -20,15 +26,35 @@ public:
     void mouseReleaseEvent(QMouseEvent* event) override;
 
 
-    // ÖØĞ´º¯Êı
+    // é‡å†™å‡½æ•°
     void initializeGL() override;
     void paintGL() override;
     void resizeGL(int w, int h) override;
 
+private slots:
+    void onTrayIconActivated(QSystemTrayIcon::ActivationReason reason);
+    void onExitTriggered();
+    void onShowHideTriggered();
+    void onSettingsTriggered();
+    void onChatToggleTriggered();
 
 private:
-    bool isLeftPressed; // Êó±ê×ó¼üÊÇ·ñ°´ÏÂ
-    bool isRightPressed;// Êó±êÓÒ¼üÊÇ·ñ°´ÏÂ
-    QPoint currentPos;  // µ±Ç°Êó±êÎ»ÖÃ
+    void setupSystemTray();
+    
+    bool isLeftPressed; // é¼ æ ‡å·¦é”®æ˜¯å¦æŒ‰ä¸‹
+    bool isRightPressed;// é¼ æ ‡å³é”®æ˜¯å¦æŒ‰ä¸‹
+    QPoint currentPos;  // å½“å‰é¼ æ ‡ä½ç½®
+    
+    // ç³»ç»Ÿæ‰˜ç›˜ç›¸å…³
+    QSystemTrayIcon* m_systemTray;
+    QMenu* m_trayMenu;
+    QAction* m_exitAction;
+    QAction* m_showHideAction;
+    QAction* m_settingsAction;
+    QAction* m_chatToggleAction;
+    
+    // å¯¹è¯æ¡†
+    SettingsDialog* m_settingsDialog;
+    ChatWidget* m_chatWidget;
 
 };

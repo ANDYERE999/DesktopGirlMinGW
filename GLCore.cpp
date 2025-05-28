@@ -1,11 +1,20 @@
-#include "LAppDelegate.hpp" // 必须要放在第一个，不然包老实的
+#include "LAppDelegate.hpp" // 锟斤拷锟斤拷要锟斤拷锟节碉拷一锟斤拷锟斤拷锟斤拷然锟斤拷锟斤拷实锟斤拷
 #include "LAppView.hpp"
 #include "LAppPal.hpp"
 #include "LAppLive2DManager.hpp"
 #include "LAppDefine.hpp"
 #include "GLCore.h"
+#include "SettingsDialog.h"
+#include "ChatWidget.h"
 #include <QTimer>
 #include <QMouseEvent>
+#include <QSystemTrayIcon>
+#include <QApplication>
+#include <QStyle>
+#include <QAction>
+#include <QFile>
+#include <QIcon>
+#include <QDateTime>
 
 
 
@@ -13,28 +22,44 @@
 
 GLCore::GLCore(QWidget *parent)
     : QOpenGLWidget(parent)
+    , m_systemTray(nullptr)
+    , m_trayMenu(nullptr)
+    , m_exitAction(nullptr)
+    , m_showHideAction(nullptr)
+    , m_settingsAction(nullptr)
+    , m_chatToggleAction(nullptr)
+    , m_settingsDialog(nullptr)
+    , m_chatWidget(nullptr)
 {
     
 }
 
 GLCore::GLCore(int w, int h, QWidget *parent)
     : QOpenGLWidget(parent)
+    , m_systemTray(nullptr)
+    , m_trayMenu(nullptr)
+    , m_exitAction(nullptr)
+    , m_showHideAction(nullptr)
+    , m_settingsAction(nullptr)
+    , m_chatToggleAction(nullptr)
+    , m_settingsDialog(nullptr)
+    , m_chatWidget(nullptr)
 {
     setFixedSize(w, h);
     
-    // 设置OpenGL格式以支持透明度
+    // 锟斤拷锟斤拷OpenGL锟斤拷式锟斤拷支锟斤拷透锟斤拷锟斤拷锟斤拷染
     QSurfaceFormat format;
     format.setDepthBufferSize(24);
     format.setStencilBufferSize(8);
-    format.setAlphaBufferSize(8);  // 关键：设置alpha缓冲区
-    format.setSamples(4);          // 抗锯齿
+    format.setAlphaBufferSize(8);  // 锟截硷拷锟斤拷锟斤拷锟斤拷alpha锟斤拷锟斤拷锟斤拷
+    format.setSamples(4);          // 锟斤拷锟斤拷锟?
     setFormat(format);
     
-    //this->setAttribute(Qt::WA_DeleteOnClose);       // 窗口关闭时自动释放内存
-    this->setWindowFlag(Qt::FramelessWindowHint); // 设置无边框窗口
-    this->setWindowFlag(Qt::WindowStaysOnTopHint); // 设置窗口始终在顶层
-    //this->setWindowFlag(Qt::Tool); // 不在应用程序图标
-    this->setAttribute(Qt::WA_TranslucentBackground); // 设置窗口背景透明
+    //this->setAttribute(Qt::WA_DeleteOnClose);       // 锟斤拷锟节关憋拷时锟皆讹拷锟酵凤拷锟节达拷
+    this->setWindowFlag(Qt::FramelessWindowHint); // 锟斤拷锟斤拷锟睫边框窗匡拷
+    this->setWindowFlag(Qt::WindowStaysOnTopHint); // 锟斤拷锟矫达拷锟斤拷始锟斤拷锟节讹拷锟斤拷
+    //this->setWindowFlag(Qt::Tool); // 锟斤拷锟斤拷应锟矫筹拷锟斤拷图锟斤拷
+    this->setAttribute(Qt::WA_TranslucentBackground); // 锟斤拷锟矫达拷锟节憋拷锟斤拷透锟斤拷
 
     
 
@@ -44,13 +69,29 @@ GLCore::GLCore(int w, int h, QWidget *parent)
         });
     timer->start((1.0 / 60) * 1000);    // 60FPS
 
-
+    // 设置系统托盘
+    setupSystemTray();
 
 }
 
 GLCore::~GLCore()
 {
+    // 清理系统托盘资源
+    if (m_systemTray) {
+        m_systemTray->hide();
+        delete m_systemTray;
+    }
+    if (m_trayMenu) {
+        delete m_trayMenu;
+    }
     
+    // 清理对话框
+    if (m_settingsDialog) {
+        delete m_settingsDialog;
+    }
+    if (m_chatWidget) {
+        delete m_chatWidget;
+    }
 }
 
 
@@ -65,7 +106,7 @@ void GLCore::mouseMoveEvent(QMouseEvent* event)
 
     
 
-    // 允许事件继续传递，将鼠标事件传递给主窗口，实现鼠标拖动无边框窗口
+    // 锟斤拷锟斤拷锟铰硷拷锟斤拷锟斤拷锟斤拷锟捷ｏ拷锟斤拷锟斤拷锟斤拷录锟斤拷锟斤拷莞锟斤拷锟斤拷锟斤拷冢锟绞碉拷锟斤拷锟斤拷锟较讹拷锟睫边框窗匡拷
     event->ignore();
 }
 
@@ -77,10 +118,10 @@ void GLCore::mousePressEvent(QMouseEvent* event)
         this->isLeftPressed = true;
         this->currentPos = event->pos();
     }
-    // TODO: 右键菜单等
+    // TODO: 锟揭硷拷锟剿碉拷锟斤拷
     if (event->button() == Qt::RightButton) {
         
-        // 设置窗口大小
+        // 锟斤拷锟矫达拷锟节达拷小
         //LAppDelegate::GetInstance()->resize(400, 400);
         //this->setFixedSize(400, 400);
         LAppLive2DManager::GetInstance()->LoadModelFromPath("Resources/Mao/", "Mao.model3.json");
@@ -90,7 +131,7 @@ void GLCore::mousePressEvent(QMouseEvent* event)
 
 
     
-    // 允许事件继续传递
+    // 锟斤拷锟斤拷锟铰硷拷锟斤拷锟斤拷锟斤拷锟斤拷
     event->ignore();
 }
 
@@ -106,26 +147,26 @@ void GLCore::mouseReleaseEvent(QMouseEvent* event)
     }
 
     
-    // 允许事件继续传递
+    // 锟斤拷锟斤拷锟铰硷拷锟斤拷锟斤拷锟斤拷锟斤拷
     event->ignore();
 }
 
 void GLCore::initializeGL()
 {
-    // 设置OpenGL状态以支持透明度渲染
+    // 锟斤拷锟斤拷OpenGL状态锟斤拷支锟斤拷透锟斤拷锟斤拷锟斤拷染
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glDisable(GL_DEPTH_TEST);  // 禁用深度测试以确保透明度正常工作
+    glDisable(GL_DEPTH_TEST);  // 锟斤拷锟斤拷锟斤拷炔锟斤拷锟斤拷锟饺凤拷锟酵革拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟?
     
     LAppDelegate::GetInstance()->Initialize(this);
     
-    // 选择模型
+    // 选锟斤拷模锟斤拷
 }
 
 void GLCore::paintGL()
 {
-    // 设置透明背景
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);  // RGBA，A=0表示完全透明
+    // 锟斤拷锟斤拷透锟斤拷锟斤拷锟斤拷
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);  // RGBA锟斤拷A=0锟斤拷示锟斤拷全透锟斤拷
     glClear(GL_COLOR_BUFFER_BIT);
     
     LAppDelegate::GetInstance()->update();
@@ -135,4 +176,135 @@ void GLCore::paintGL()
 void GLCore::resizeGL(int w, int h)
 {
     LAppDelegate::GetInstance()->resize(w, h);
+}
+
+void GLCore::setupSystemTray()
+{
+    // 检查系统是否支持托盘图标
+    if (!QSystemTrayIcon::isSystemTrayAvailable()) {
+        return;
+    }
+
+    // 创建托盘图标
+    m_systemTray = new QSystemTrayIcon(this);
+    
+    // 设置托盘图标（使用Resources目录中的图标）
+    QString iconPath = "Resources/icon_gear.png";
+    if (QFile::exists(iconPath)) {
+        m_systemTray->setIcon(QIcon(iconPath));
+    } else {
+        // 如果找不到自定义图标，使用默认图标
+        m_systemTray->setIcon(QApplication::style()->standardIcon(QStyle::SP_ComputerIcon));
+    }
+    m_systemTray->setToolTip("Desktop Girl - Live2D");
+
+    // 创建托盘菜单
+    m_trayMenu = new QMenu(this);
+    
+    // 创建显示/隐藏动作
+    m_showHideAction = new QAction("Show/Hide", this);
+    m_showHideAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_FileDialogDetailedView));
+    
+    // 创建聊天开关动作
+    m_chatToggleAction = new QAction("Open Chat", this);
+    m_chatToggleAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_ComputerIcon));
+    
+    // 创建设置动作
+    m_settingsAction = new QAction("Settings", this);
+    m_settingsAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_FileDialogDetailedView));
+    
+    // 创建退出动作
+    m_exitAction = new QAction("Exit", this);
+    m_exitAction->setIcon(QApplication::style()->standardIcon(QStyle::SP_DialogCloseButton));
+    
+    // 将动作添加到菜单
+    m_trayMenu->addAction(m_showHideAction);
+    m_trayMenu->addSeparator(); // 添加分隔线
+    m_trayMenu->addAction(m_chatToggleAction);
+    m_trayMenu->addAction(m_settingsAction);
+    m_trayMenu->addSeparator(); // 添加分隔线
+    m_trayMenu->addAction(m_exitAction);
+    
+    // 设置托盘的上下文菜单
+    m_systemTray->setContextMenu(m_trayMenu);
+    
+    // 连接信号和槽
+    connect(m_systemTray, &QSystemTrayIcon::activated, this, &GLCore::onTrayIconActivated);
+    connect(m_showHideAction, &QAction::triggered, this, &GLCore::onShowHideTriggered);
+    connect(m_chatToggleAction, &QAction::triggered, this, &GLCore::onChatToggleTriggered);
+    connect(m_settingsAction, &QAction::triggered, this, &GLCore::onSettingsTriggered);
+    connect(m_exitAction, &QAction::triggered, this, &GLCore::onExitTriggered);
+    
+    // 显示托盘图标
+    m_systemTray->show();
+}
+
+void GLCore::onTrayIconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+    switch (reason) {
+    case QSystemTrayIcon::DoubleClick:
+        // 双击托盘图标时显示/隐藏主窗口
+        if (this->isVisible()) {
+            this->hide();
+        } else {
+            this->show();
+            this->raise();
+            this->activateWindow();
+        }
+        break;
+    case QSystemTrayIcon::Context:
+        // 右键点击时会自动显示上下文菜单
+        break;
+    default:
+        break;
+    }
+}
+
+void GLCore::onShowHideTriggered()
+{
+    // 实现显示/隐藏功能
+    if (this->isVisible()) {
+        this->hide();
+    } else {
+        this->show();
+        this->raise();
+        this->activateWindow();
+    }
+}
+
+void GLCore::onChatToggleTriggered()
+{
+    // 创建聊天组件（如果还没有创建）
+    if (!m_chatWidget) {
+        m_chatWidget = new ChatWidget(this);
+        m_chatWidget->resize(400, 60); // 设置初始大小
+    }
+    
+    // 切换聊天窗口的显示状态
+    if (m_chatWidget->isChatVisible()) {
+        m_chatWidget->hideChatInput();
+        m_chatToggleAction->setText("Open Chat");
+    } else {
+        m_chatWidget->showChatInput();
+        m_chatToggleAction->setText("Close Chat");
+    }
+}
+
+void GLCore::onSettingsTriggered()
+{
+    // 创建设置对话框（如果还没有创建）
+    if (!m_settingsDialog) {
+        m_settingsDialog = new SettingsDialog(this);
+    }
+    
+    // 显示设置对话框
+    m_settingsDialog->show();
+    m_settingsDialog->raise();
+    m_settingsDialog->activateWindow();
+}
+
+void GLCore::onExitTriggered()
+{
+    // 退出应用程序
+    QApplication::quit();
 }
