@@ -52,6 +52,7 @@ GLCore::~GLCore()
 
 
 
+
 void GLCore::mouseMoveEvent(QMouseEvent* event)
 {
     LAppDelegate::GetInstance()->GetView()->OnTouchesMoved(event->x(), event->y());
