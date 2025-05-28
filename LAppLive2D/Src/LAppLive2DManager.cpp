@@ -64,7 +64,7 @@ LAppLive2DManager::LAppLive2DManager()
     _viewMatrix = new CubismMatrix44();
     //SetUpModel();
     // Resources/Haru/   Haru.model3.json
-    LoadModelFromPath("Resources/Mao/", "Mao.model3.json");
+    LoadModelFromPath("Resources/Nahida_1080/", "Nahida_1080.model3.json");
     //ChangeScene(_sceneIndex);
 }
 

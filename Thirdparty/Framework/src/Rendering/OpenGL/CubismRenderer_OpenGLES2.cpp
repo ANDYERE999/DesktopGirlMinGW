@@ -143,7 +143,7 @@ void CubismClippingManager_OpenGLES2::SetupClippingContext(CubismModel& model, C
             {
                 // マスクをクリアする
                 // 1が無効（描かれない）領域、0が有効（描かれる）領域。（シェーダーCd*Csで0に近い値をかけてマスクを作る。1をかけると何も起こらない）
-                glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+                glClearColor(1.0f, 1.0f, 1.0f, 0.0f);  // 蒙版：RGB=白色用于计算，A=0保持透明
                 glClear(GL_COLOR_BUFFER_BIT);
                 _clearedMaskBufferFlags[clipContext->_bufferIndex] = true;
             }
@@ -602,7 +602,7 @@ void CubismRenderer_OpenGLES2::DoDrawModel()
 
                 // マスクをクリアする
                 // 1が無効（描かれない）領域、0が有効（描かれる）領域。（シェーダで Cd*Csで0に近い値をかけてマスクを作る。1をかけると何も起こらない）
-                glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+                glClearColor(1.0f, 1.0f, 1.0f, 0.0f);  // 蒙版：RGB=白色用于计算，A=0保持透明
                 glClear(GL_COLOR_BUFFER_BIT);
             }
 

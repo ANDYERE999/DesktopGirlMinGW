@@ -28,10 +28,10 @@ LAppView::LAppView():
     _renderSprite(NULL),
     _renderTarget(SelectTarget_None)
 {
-    _clearColor[0] = 1.0f;
-    _clearColor[1] = 1.0f;
-    _clearColor[2] = 1.0f;
-    _clearColor[3] = 0.0f;
+    _clearColor[0] = 0.0f;  // Red = 0.0 (黑色透明)
+    _clearColor[1] = 0.0f;  // Green = 0.0 (黑色透明)
+    _clearColor[2] = 0.0f;  // Blue = 0.0 (黑色透明)
+    _clearColor[3] = 0.0f;  // Alpha = 0.0 (完全透明)
 
     // タッチ関係のイベント管理
     _touchManager = new TouchManager();

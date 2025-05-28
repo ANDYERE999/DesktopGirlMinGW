@@ -10,7 +10,6 @@ class GLCore : public QOpenGLWidget
     Q_OBJECT
 
 public:
-    GLCore(QWidget *parent = nullptr);
     GLCore(int width, int height, QWidget* parent = nullptr);
     ~GLCore();
 
@@ -20,15 +19,15 @@ public:
     void mouseReleaseEvent(QMouseEvent* event) override;
 
 
-    // 重写函数
+    // 閲嶅啓鍑芥暟
     void initializeGL() override;
     void paintGL() override;
     void resizeGL(int w, int h) override;
 
 
 private:
-    bool isLeftPressed; // 鼠标左键是否按下
-    bool isRightPressed;// 鼠标右键是否按下
-    QPoint currentPos;  // 当前鼠标位置
+    bool isLeftPressed; // 榧犳爣宸﹂敭鏄惁鎸変笅
+    bool isRightPressed;// 榧犳爣鍙抽敭鏄惁鎸変笅
+    QPoint currentPos;  // 褰撳墠榧犳爣浣嶇疆
 
 };

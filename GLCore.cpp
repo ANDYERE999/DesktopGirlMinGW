@@ -11,11 +11,7 @@
 
 
 
-GLCore::GLCore(QWidget *parent)
-    : QOpenGLWidget(parent)
-{
-    
-}
+
 
 GLCore::GLCore(int w, int h, QWidget *parent)
     : QOpenGLWidget(parent)
@@ -34,7 +30,7 @@ GLCore::GLCore(int w, int h, QWidget *parent)
     this->setWindowFlag(Qt::FramelessWindowHint); // 设置无边框窗口
     this->setWindowFlag(Qt::WindowStaysOnTopHint); // 设置窗口始终在顶层
     //this->setWindowFlag(Qt::Tool); // 不在应用程序图标
-    this->setAttribute(Qt::WA_TranslucentBackground); // 设置窗口背景透明
+    //this->setAttribute(Qt::WA_TranslucentBackground); // 设置窗口背景透明 - 注释掉以显示OpenGL背景色
 
     
 
@@ -124,8 +120,15 @@ void GLCore::initializeGL()
 
 void GLCore::paintGL()
 {
-    // 设置透明背景
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);  // RGBA，A=0表示完全透明
+    // 设置背景颜色 - 可以选择以下任意一种颜色
+    // glClearColor(0.0f, 0.0f, 0.0f, 0.0f);  // 完全透明（原设置）
+    // glClearColor(1.0f, 1.0f, 1.0f, 1.0f);  // 白色背景
+    // glClearColor(0.0f, 0.0f, 0.0f, 1.0f);  // 黑色背景
+    // glClearColor(0.2f, 0.3f, 0.8f, 1.0f);  // 蓝色背景
+    // glClearColor(0.8f, 0.2f, 0.2f, 1.0f);  // 红色背景
+    glClearColor(0.2f, 0.8f, 0.2f, 1.0f);  // 绿色背景
+    // glClearColor(0.5f, 0.5f, 0.5f, 1.0f);  // 灰色背景
+    //glClearColor(0.9f, 0.9f, 0.9f, 1.0f);  // 浅灰色背景
     glClear(GL_COLOR_BUFFER_BIT);
     
     LAppDelegate::GetInstance()->update();
