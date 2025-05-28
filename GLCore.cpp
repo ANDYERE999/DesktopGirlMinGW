@@ -39,7 +39,8 @@ GLCore::GLCore(int w, int h, QWidget *parent)
         update();
         });
     timer->start((1.0 / 60) * 1000);    // 60FPS
-
+    // ÆôÓÃÊÓ½Ç¸úËæÊó±ê£¬×¢ÊÍµôÔò¹Ø±Õ
+    this->setMouseTracking(true);
 
 
 }
