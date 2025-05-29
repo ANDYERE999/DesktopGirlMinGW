@@ -51,6 +51,7 @@ target_link_libraries(DesktopGirlMinGW
         Live2DCubismCore_d
         opengl32
         glu32
+        dwmapi
         Qt::Core
         Qt::Gui
         Qt::OpenGLWidgets

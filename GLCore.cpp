@@ -1,4 +1,4 @@
-#include "LAppDelegate.hpp" // ±ØĞëÒª·ÅÔÚµÚÒ»¸ö£¬²»È»°üÀÏÊµµÄ
+#include "LAppDelegate.hpp" // å¿…é¡»è¦æ”¾åœ¨ç¬¬ä¸€ä¸ªï¼Œä¸ç„¶åŒ…è€å®çš„
 #include "LAppView.hpp"
 #include "LAppPal.hpp"
 #include "LAppLive2DManager.hpp"
@@ -6,6 +6,11 @@
 #include "GLCore.h"
 #include <QTimer>
 #include <QMouseEvent>
+
+#ifdef _WIN32
+#include <windows.h>
+#include <dwmapi.h>
+#endif
 
 
 
@@ -18,21 +23,34 @@ GLCore::GLCore(int w, int h, QWidget *parent)
 {
     setFixedSize(w, h);
     
-    // ÉèÖÃOpenGL¸ñÊ½ÒÔÖ§³ÖÍ¸Ã÷¶È
+    // è®¾ç½®OpenGLæ ¼å¼ä»¥æ”¯æŒé€æ˜åº¦
     QSurfaceFormat format;
     format.setDepthBufferSize(24);
     format.setStencilBufferSize(8);
-    format.setAlphaBufferSize(8);  // ¹Ø¼ü£ºÉèÖÃalpha»º³åÇø
-    format.setSamples(4);          // ¿¹¾â³İ
+    format.setAlphaBufferSize(8);  // å…³é”®ï¼šè®¾ç½®alphaç¼“å†²åŒº
+    format.setSamples(4);          // æŠ—é”¯é½¿
     setFormat(format);
     
-    //this->setAttribute(Qt::WA_DeleteOnClose);       // ´°¿Ú¹Ø±ÕÊ±×Ô¶¯ÊÍ·ÅÄÚ´æ
-    this->setWindowFlag(Qt::FramelessWindowHint); // ÉèÖÃÎŞ±ß¿ò´°¿Ú
-    this->setWindowFlag(Qt::WindowStaysOnTopHint); // ÉèÖÃ´°¿ÚÊ¼ÖÕÔÚ¶¥²ã
-    //this->setWindowFlag(Qt::Tool); // ²»ÔÚÓ¦ÓÃ³ÌĞòÍ¼±ê
-    //this->setAttribute(Qt::WA_TranslucentBackground); // ÉèÖÃ´°¿Ú±³¾°Í¸Ã÷ - ×¢ÊÍµôÒÔÏÔÊ¾OpenGL±³¾°É«
+    //this->setAttribute(Qt::WA_DeleteOnClose);       // çª—å£å…³é—­æ—¶è‡ªåŠ¨é‡Šæ”¾å†…å­˜
+    this->setWindowFlag(Qt::FramelessWindowHint); // è®¾ç½®æ— è¾¹æ¡†çª—å£
+    this->setWindowFlag(Qt::WindowStaysOnTopHint); // è®¾ç½®çª—å£å§‹ç»ˆåœ¨é¡¶å±‚
+    //this->setWindowFlag(Qt::Tool); // ä¸åœ¨åº”ç”¨ç¨‹åºå›¾æ ‡
+    this->setAttribute(Qt::WA_TranslucentBackground); // è®¾ç½®çª—å£èƒŒæ™¯é€æ˜
 
+    // æ˜¾ç¤ºçª—å£ä»¥è·å–æœ‰æ•ˆçš„çª—å£å¥æŸ„
+    this->show();
     
+    // ä½¿ç”¨Windows DWM APIè®¾ç½®é€æ˜èƒŒæ™¯
+#ifdef _WIN32
+    auto viewId = this->winId();
+    DWM_BLURBEHIND bb = { 0 };
+    HRGN hRgn = CreateRectRgn(0, 0, -1, -1); // åº”ç”¨é€æ˜çš„çŸ©å½¢èŒƒå›´ï¼Œæ•´ä¸ªçª—å£å®¢æˆ·åŒº
+    bb.dwFlags = DWM_BB_ENABLE | DWM_BB_BLURREGION;
+    bb.hRgnBlur = hRgn;
+    bb.fEnable = TRUE;
+    DwmEnableBlurBehindWindow((HWND)viewId, &bb);
+    DeleteObject(hRgn); // æ¸…ç†èµ„æº
+#endif
 
     QTimer* timer = new QTimer();
     connect(timer, &QTimer::timeout, [=]() {
@@ -61,7 +79,7 @@ void GLCore::mouseMoveEvent(QMouseEvent* event)
 
     
 
-    // ÔÊĞíÊÂ¼ş¼ÌĞø´«µİ£¬½«Êó±êÊÂ¼ş´«µİ¸øÖ÷´°¿Ú£¬ÊµÏÖÊó±êÍÏ¶¯ÎŞ±ß¿ò´°¿Ú
+    // å…è®¸äº‹ä»¶ç»§ç»­ä¼ é€’ï¼Œå°†é¼ æ ‡äº‹ä»¶ä¼ é€’ç»™ä¸»çª—å£ï¼Œå®ç°é¼ æ ‡æ‹–åŠ¨æ— è¾¹æ¡†çª—å£
     event->ignore();
 }
 
@@ -73,10 +91,10 @@ void GLCore::mousePressEvent(QMouseEvent* event)
         this->isLeftPressed = true;
         this->currentPos = event->pos();
     }
-    // TODO: ÓÒ¼ü²Ëµ¥µÈ
+    // TODO: å³é”®èœå•ç­‰
     if (event->button() == Qt::RightButton) {
         
-        // ÉèÖÃ´°¿Ú´óĞ¡
+        // è®¾ç½®çª—å£å¤§å°
         //LAppDelegate::GetInstance()->resize(400, 400);
         //this->setFixedSize(400, 400);
         LAppLive2DManager::GetInstance()->LoadModelFromPath("Resources/Mao/", "Mao.model3.json");
@@ -86,7 +104,7 @@ void GLCore::mousePressEvent(QMouseEvent* event)
 
 
     
-    // ÔÊĞíÊÂ¼ş¼ÌĞø´«µİ
+    // å…è®¸äº‹ä»¶ç»§ç»­ä¼ é€’
     event->ignore();
 }
 
@@ -102,33 +120,26 @@ void GLCore::mouseReleaseEvent(QMouseEvent* event)
     }
 
     
-    // ÔÊĞíÊÂ¼ş¼ÌĞø´«µİ
+    // å…è®¸äº‹ä»¶ç»§ç»­ä¼ é€’
     event->ignore();
 }
 
 void GLCore::initializeGL()
 {
-    // ÉèÖÃOpenGL×´Ì¬ÒÔÖ§³ÖÍ¸Ã÷¶ÈäÖÈ¾
+    // è®¾ç½®OpenGLçŠ¶æ€ä»¥æ”¯æŒé€æ˜åº¦æ¸²æŸ“
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glDisable(GL_DEPTH_TEST);  // ½ûÓÃÉî¶È²âÊÔÒÔÈ·±£Í¸Ã÷¶ÈÕı³£¹¤×÷
+    glDisable(GL_DEPTH_TEST);  // ç¦ç”¨æ·±åº¦æµ‹è¯•ä»¥ç¡®ä¿é€æ˜åº¦æ­£å¸¸å·¥ä½œ
     
     LAppDelegate::GetInstance()->Initialize(this);
     
-    // Ñ¡ÔñÄ£ĞÍ
+    // é€‰æ‹©æ¨¡å‹
 }
 
 void GLCore::paintGL()
 {
-    // ÉèÖÃ±³¾°ÑÕÉ« - ¿ÉÒÔÑ¡ÔñÒÔÏÂÈÎÒâÒ»ÖÖÑÕÉ«
-    // glClearColor(0.0f, 0.0f, 0.0f, 0.0f);  // ÍêÈ«Í¸Ã÷£¨Ô­ÉèÖÃ£©
-    // glClearColor(1.0f, 1.0f, 1.0f, 1.0f);  // °×É«±³¾°
-    // glClearColor(0.0f, 0.0f, 0.0f, 1.0f);  // ºÚÉ«±³¾°
-    // glClearColor(0.2f, 0.3f, 0.8f, 1.0f);  // À¶É«±³¾°
-    // glClearColor(0.8f, 0.2f, 0.2f, 1.0f);  // ºìÉ«±³¾°
-    glClearColor(0.2f, 0.8f, 0.2f, 1.0f);  // ÂÌÉ«±³¾°
-    // glClearColor(0.5f, 0.5f, 0.5f, 1.0f);  // »ÒÉ«±³¾°
-    //glClearColor(0.9f, 0.9f, 0.9f, 1.0f);  // Ç³»ÒÉ«±³¾°
+    // è®¾ç½®å®Œå…¨é€æ˜èƒŒæ™¯ä»¥é…åˆDWMé€æ˜æ•ˆæœ
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);  // RGBAï¼ŒA=0è¡¨ç¤ºå®Œå…¨é€æ˜
     glClear(GL_COLOR_BUFFER_BIT);
     
     LAppDelegate::GetInstance()->update();
