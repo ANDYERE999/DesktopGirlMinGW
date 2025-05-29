@@ -17,6 +17,7 @@ public:
     void mouseMoveEvent(QMouseEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
+    void wheelEvent(QWheelEvent* event) override;
 
 
     // 重写函数
@@ -29,5 +30,12 @@ private:
     bool isLeftPressed; // 鼠标左键是否按下
     bool isRightPressed;// 鼠标右键是否按下
     QPoint currentPos;  // 当前鼠标位置
+
+    // 边框显示状态
+    bool isFrameless;   // 是否无边框状态
+    
+    // 初始窗口大小
+    int initialWidth;
+    int initialHeight;
 
 };

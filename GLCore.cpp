@@ -6,20 +6,15 @@
 #include "GLCore.h"
 #include <QTimer>
 #include <QMouseEvent>
+#include <QWheelEvent>
 
 #ifdef _WIN32
 #include <windows.h>
 #include <dwmapi.h>
 #endif
 
-
-
-
-
-
-
 GLCore::GLCore(int w, int h, QWidget *parent)
-    : QOpenGLWidget(parent)
+    : QOpenGLWidget(parent), isFrameless(true), initialWidth(w), initialHeight(h)  // 保存初始大小
 {
     setFixedSize(w, h);
     
@@ -36,6 +31,7 @@ GLCore::GLCore(int w, int h, QWidget *parent)
     this->setWindowFlag(Qt::WindowStaysOnTopHint); // 设置窗口始终在顶层
     //this->setWindowFlag(Qt::Tool); // 不在应用程序图标
     this->setAttribute(Qt::WA_TranslucentBackground); // 设置窗口背景透明
+    
 
     // 显示窗口以获取有效的窗口句柄
     this->show();
@@ -57,9 +53,6 @@ GLCore::GLCore(int w, int h, QWidget *parent)
         update();
         });
     timer->start((1.0 / 60) * 1000);    // 60FPS
-
-
-
 }
 
 GLCore::~GLCore()
@@ -67,11 +60,9 @@ GLCore::~GLCore()
     
 }
 
-
-
 void GLCore::mouseMoveEvent(QMouseEvent* event)
 {
-    LAppDelegate::GetInstance()->GetView()->OnTouchesMoved(event->x(), event->y());
+    LAppDelegate::GetInstance()->GetView()->OnTouchesMoved(event->position().x(), event->position().y());
 
     if (isLeftPressed) {
         this->move(event->pos() - this->currentPos + this->pos());
@@ -85,32 +76,44 @@ void GLCore::mouseMoveEvent(QMouseEvent* event)
 
 void GLCore::mousePressEvent(QMouseEvent* event)
 {
-    LAppDelegate::GetInstance()->GetView()->OnTouchesBegan(event->x(), event->y());
+    LAppDelegate::GetInstance()->GetView()->OnTouchesBegan(event->position().x(), event->position().y());
 
     if (event->button() == Qt::LeftButton) {
         this->isLeftPressed = true;
         this->currentPos = event->pos();
     }
-    // TODO: 右键菜单等
+    // 右键切换边框显示
     if (event->button() == Qt::RightButton) {
+        // 切换边框状态
+        isFrameless = !isFrameless;
         
-        // 设置窗口大小
-        //LAppDelegate::GetInstance()->resize(400, 400);
-        //this->setFixedSize(400, 400);
-        LAppLive2DManager::GetInstance()->LoadModelFromPath("Resources/Mao/", "Mao.model3.json");
-
+        if (isFrameless) {
+            // 设置为无边框
+            this->setWindowFlag(Qt::FramelessWindowHint, true);
+            // 使用当前窗口大小而不是初始大小
+            QSize currentSize = this->size();
+            this->setFixedSize(currentSize.width(), currentSize.height());
+        } else {
+            // 显示边框
+            this->setWindowFlag(Qt::FramelessWindowHint, false);
+            // 移除固定大小限制，允许调整大小
+            this->setMinimumSize(200, 150);  // 设置最小大小
+            this->setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);  // 移除最大大小限制
+        }
+        
+        // 重新显示窗口以应用更改
+        this->show();
+        
         this->isRightPressed = true;
     }
 
-
-    
     // 允许事件继续传递
     event->ignore();
 }
 
 void GLCore::mouseReleaseEvent(QMouseEvent* event)
 {
-    LAppDelegate::GetInstance()->GetView()->OnTouchesEnded(event->x(), event->y());
+    LAppDelegate::GetInstance()->GetView()->OnTouchesEnded(event->position().x(), event->position().y());
 
     if (event->button() == Qt::LeftButton) {
         isLeftPressed = false;
@@ -149,4 +152,10 @@ void GLCore::paintGL()
 void GLCore::resizeGL(int w, int h)
 {
     LAppDelegate::GetInstance()->resize(w, h);
+}
+
+void GLCore::wheelEvent(QWheelEvent* event)
+{
+    // 不再处理缩放，直接接受事件防止传递
+    event->accept();
 }

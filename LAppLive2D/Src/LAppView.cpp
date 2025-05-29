@@ -8,6 +8,7 @@
 #include "LAppView.hpp"
 #include <math.h>
 #include <string>
+#include <iostream>
 #include "LAppPal.hpp"
 #include "LAppDelegate.hpp"
 #include "LAppLive2DManager.hpp"
@@ -76,7 +77,7 @@ void LAppView::Initialize()
 
     _viewMatrix->SetScreenRect(left, right, bottom, top); // デバイスに対応する画面の範囲。 Xの左端, Xの右端, Yの下端, Yの上端
     _viewMatrix->Scale(ViewScale, ViewScale);
-
+    
     _deviceToScreen->LoadIdentity(); // サイズが変わった際などリセット必須
     if (width > height)
     {
@@ -101,6 +102,9 @@ void LAppView::Initialize()
         ViewLogicalMaxBottom,
         ViewLogicalMaxTop
     );
+
+    std::cout << "ViewMatrix: " << _viewMatrix->GetArray()[0] << ", " << _viewMatrix->GetArray()[1] << ", " << _viewMatrix->GetArray()[2] << ", " << _viewMatrix->GetArray()[3] << std::endl;
+    std::cout << "_deviceToScreen: " << _deviceToScreen->GetArray()[0] << ", " << _deviceToScreen->GetArray()[1] << ", " << _deviceToScreen->GetArray()[2] << ", " << _deviceToScreen->GetArray()[3] << std::endl;
 }
 
 void LAppView::Render()

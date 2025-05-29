@@ -10,7 +10,7 @@ set(CMAKE_PREFIX_PATH "C:/Qt/6.9.0/mingw_64")
 
 set(D_OR_R ON)
 
-set(CONSOLE OFF)
+set(CONSOLE ON)
 
 set(FRAMEWORK_SOURCE OpenGL)
 
