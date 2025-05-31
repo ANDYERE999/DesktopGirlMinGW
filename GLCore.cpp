@@ -203,6 +203,7 @@ int GLCore::readFavorabilityFromConfig() {
     QFile file(configPath);
     
     if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "Failed to open config file:" << configPath;
         return currentFavorability; // 如果读取失败，返回当前值
     }
     
@@ -213,14 +214,23 @@ int GLCore::readFavorabilityFromConfig() {
     QJsonDocument doc = QJsonDocument::fromJson(data, &error);
     
     if (error.error != QJsonParseError::NoError) {
+        qDebug() << "JSON parse error:" << error.errorString();
         return currentFavorability; // 如果解析失败，返回当前值
     }
     
     QJsonObject obj = doc.object();
-    int favorability = obj["favorability"].toInt(0);
+    int rawFavorability = obj["favorability"].toInt(0);
     
-    // 确保好感度在0-100范围内
-    return qBound(0, favorability, 100);
+    // 强制限制在0-100范围内，提高鲁棒性
+    int boundedFavorability = qBound(0, rawFavorability, 100);
+    
+    // 如果值被修正了，输出调试信息
+    if (rawFavorability != boundedFavorability) {
+        qDebug() << "Favorability value corrected: raw=" << rawFavorability 
+                 << "corrected=" << boundedFavorability;
+    }
+    
+    return boundedFavorability;
 }
 
 // 设置好感度UI
