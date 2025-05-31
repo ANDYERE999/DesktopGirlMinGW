@@ -7,6 +7,14 @@
 #include <QTimer>
 #include <QMouseEvent>
 #include <QWheelEvent>
+#include <QResizeEvent>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QFile>
+#include <QDir>
+#include <QVBoxLayout>
+#include <QProgressBar>
+#include <QDebug>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -14,7 +22,8 @@
 #endif
 
 GLCore::GLCore(int w, int h, QWidget *parent)
-    : QOpenGLWidget(parent), isFrameless(true), initialWidth(w), initialHeight(h)  // 保存初始大小
+    : QOpenGLWidget(parent), isFrameless(true), initialWidth(w), initialHeight(h), 
+      favorabilityBar(nullptr), favorabilityTimer(nullptr), currentFavorability(0)  // 简化初始化
 {
     setFixedSize(w, h);
     
@@ -32,6 +41,8 @@ GLCore::GLCore(int w, int h, QWidget *parent)
     //this->setWindowFlag(Qt::Tool); // 不在应用程序图标
     this->setAttribute(Qt::WA_TranslucentBackground); // 设置窗口背景透明
     
+    // 初始化好感度UI
+    setupFavorabilityUI();
 
     // 显示窗口以获取有效的窗口句柄
     this->show();
@@ -57,7 +68,11 @@ GLCore::GLCore(int w, int h, QWidget *parent)
 
 GLCore::~GLCore()
 {
-    
+    // 清理好感度相关资源
+    if (favorabilityTimer) {
+        favorabilityTimer->stop();
+    }
+    // Qt的父子关系会自动清理QProgressBar和QTimer等组件
 }
 
 void GLCore::mouseMoveEvent(QMouseEvent* event)
@@ -87,6 +102,9 @@ void GLCore::mousePressEvent(QMouseEvent* event)
         // 切换边框状态
         isFrameless = !isFrameless;
         
+        // 调试输出
+        qDebug() << "Switching to frameless:" << isFrameless;
+        
         if (isFrameless) {
             // 设置为无边框
             this->setWindowFlag(Qt::FramelessWindowHint, true);
@@ -103,6 +121,14 @@ void GLCore::mousePressEvent(QMouseEvent* event)
         
         // 重新显示窗口以应用更改
         this->show();
+        
+        // 在show()之后设置进度条可见性，防止被重置
+        if (favorabilityBar) {
+            bool shouldShow = !isFrameless;  // 有边框时显示
+            favorabilityBar->setVisible(shouldShow);
+            qDebug() << "Setting progress bar visible:" << shouldShow;
+            qDebug() << "Progress bar actual visible:" << favorabilityBar->isVisible();
+        }
         
         this->isRightPressed = true;
     }
@@ -154,8 +180,113 @@ void GLCore::resizeGL(int w, int h)
     LAppDelegate::GetInstance()->resize(w, h);
 }
 
+void GLCore::resizeEvent(QResizeEvent* event)
+{
+    QOpenGLWidget::resizeEvent(event);
+    
+    // 调整进度条位置和大小
+    if (favorabilityBar) {
+        int margin = 5;
+        favorabilityBar->setGeometry(margin, margin, width() - 2 * margin, 20);
+    }
+}
+
 void GLCore::wheelEvent(QWheelEvent* event)
 {
     // 不再处理缩放，直接接受事件防止传递
     event->accept();
+}
+
+// 从配置文件读取好感度
+int GLCore::readFavorabilityFromConfig() {
+    QString configPath = QDir::currentPath() + "/contact/config.json";
+    QFile file(configPath);
+    
+    if (!file.open(QIODevice::ReadOnly)) {
+        return currentFavorability; // 如果读取失败，返回当前值
+    }
+    
+    QByteArray data = file.readAll();
+    file.close();
+    
+    QJsonParseError error;
+    QJsonDocument doc = QJsonDocument::fromJson(data, &error);
+    
+    if (error.error != QJsonParseError::NoError) {
+        return currentFavorability; // 如果解析失败，返回当前值
+    }
+    
+    QJsonObject obj = doc.object();
+    int favorability = obj["favorability"].toInt(0);
+    
+    // 确保好感度在0-100范围内
+    return qBound(0, favorability, 100);
+}
+
+// 设置好感度UI
+void GLCore::setupFavorabilityUI() {
+    // 创建好感度进度条作为GLCore的子widget
+    favorabilityBar = new QProgressBar(this);  // 重要：设置this作为父对象
+    favorabilityBar->setRange(0, 100);
+    favorabilityBar->setValue(0);
+    favorabilityBar->setFixedHeight(20);
+    favorabilityBar->setTextVisible(true);
+    favorabilityBar->setFormat("好感度: %p%");
+    
+    // 设置进度条样式
+    updateProgressBarStyle();
+    
+    // 初始状态下隐藏进度条（因为默认是无边框）
+    favorabilityBar->setVisible(false);
+    qDebug() << "Initial setup: frameless=" << isFrameless << ", progress bar visible=" << favorabilityBar->isVisible();
+    
+    // 创建并启动定时器
+    favorabilityTimer = new QTimer(this);
+    connect(favorabilityTimer, &QTimer::timeout, this, &GLCore::updateFavorability);
+    favorabilityTimer->start(1000); // 每1秒更新一次
+    
+    // 立即读取一次好感度
+    updateFavorability();
+    
+    // 设置进度条的初始位置
+    int margin = 5;
+    favorabilityBar->setGeometry(margin, margin, width() - 2 * margin, 20);
+}
+
+// 更新进度条样式
+void GLCore::updateProgressBarStyle() {
+    if (!favorabilityBar) return;
+    
+    QString style = R"(
+        QProgressBar {
+            border: 2px solid #555555;
+            border-radius: 10px;
+            background-color: #CC4444;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 0px;
+        }
+        QProgressBar::chunk {
+            background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                       stop:0 #88DD88, stop:1 #66BB66);
+            border-radius: 8px;
+            margin: 0px;
+            border: none;
+        }
+    )";
+    
+    favorabilityBar->setStyleSheet(style);
+}
+
+// 更新好感度槽函数
+void GLCore::updateFavorability() {
+    int newFavorability = readFavorabilityFromConfig();
+    if (newFavorability != currentFavorability) {
+        currentFavorability = newFavorability;
+        if (favorabilityBar) {
+            favorabilityBar->setValue(currentFavorability);
+        }
+    }
 }

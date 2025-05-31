@@ -12,6 +12,10 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <Rendering/CubismRenderer.hpp>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QFile>
+#include <QDir>
 #include "LAppPal.hpp"
 #include "LAppDefine.hpp"
 #include "LAppDelegate.hpp"
@@ -21,6 +25,38 @@
 using namespace Csm;
 using namespace LAppDefine;
 using namespace std;
+
+// 读取配置文件的静态函数
+static std::string ReadModelNameFromConfig() {
+    QString configPath = QDir::currentPath() + "/contact/config.json";
+    QFile file(configPath);
+    
+    if (!file.open(QIODevice::ReadOnly)) {
+        LAppPal::PrintLogLn("Failed to open config file: %s", configPath.toStdString().c_str());
+        return "Nahida_1080"; // 默认值
+    }
+    
+    QByteArray data = file.readAll();
+    file.close();
+    
+    QJsonParseError error;
+    QJsonDocument doc = QJsonDocument::fromJson(data, &error);
+    
+    if (error.error != QJsonParseError::NoError) {
+        LAppPal::PrintLogLn("JSON parse error: %s", error.errorString().toStdString().c_str());
+        return "Nahida_1080"; // 默认值
+    }
+    
+    QJsonObject obj = doc.object();
+    QString modelName = obj["modelName"].toString();
+    
+    if (modelName.isEmpty()) {
+        LAppPal::PrintLogLn("modelName not found in config, using default");
+        return "Nahida_1080"; // 默认值
+    }
+    
+    return modelName.toStdString();
+}
 
 namespace {
     LAppLive2DManager* s_instance = NULL;
@@ -64,7 +100,11 @@ LAppLive2DManager::LAppLive2DManager()
     _viewMatrix = new CubismMatrix44();
     //SetUpModel();
     // Resources/Haru/   Haru.model3.json
-    LoadModelFromPath("Resources/Nahida_1080/", "Nahida_1080.model3.json");
+    // 从配置文件读取模型名称
+    std::string modelName = ReadModelNameFromConfig();
+    std::string modelPath = "Resources/" + modelName + "/";
+    std::string modelFile = modelName + ".model3.json";
+    LoadModelFromPath(modelPath, modelFile);
     //ChangeScene(_sceneIndex);
 }
 

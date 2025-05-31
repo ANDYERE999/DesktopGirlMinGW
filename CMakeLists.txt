@@ -91,6 +91,16 @@ if (NOT RESOURCE_W) # 如果没有这个Resources目录就复制过去
     )
 endif ()
 
+# 复制contact目录到生成目录cmake-build-debug
+file(GLOB CONTACT_W "${CMAKE_BINARY_DIR}/contact")
+if (NOT CONTACT_W) # 如果没有这个contact目录就复制过去
+    file(COPY
+            "${CMAKE_SOURCE_DIR}/contact"
+            DESTINATION
+            "${CMAKE_BINARY_DIR}/"
+    )
+endif ()
+
 # 复制库文件中的dll文件到生成目录cmake-build-debug
 file(GLOB GLEW_DLL_W "${CMAKE_BINARY_DIR}/glew32d.dll")
 file(GLOB LIVE2D_DLL_W "${CMAKE_BINARY_DIR}/Live2DCubismCore.dll")
