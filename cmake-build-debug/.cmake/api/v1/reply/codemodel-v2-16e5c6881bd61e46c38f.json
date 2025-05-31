@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "DesktopGirlMinGW",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "DesktopGirlMinGW::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DesktopGirlMinGW-Debug-ea9b02bf5c3d2fa9f188.json",
+					"name" : "DesktopGirlMinGW",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "DesktopGirlMinGW_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DesktopGirlMinGW_autogen-Debug-42b47533cf3e72a6af4a.json",
+					"name" : "DesktopGirlMinGW_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "DesktopGirlMinGW_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DesktopGirlMinGW_autogen_timestamp_deps-Debug-c6f2c21adf4cdd4db508.json",
+					"name" : "DesktopGirlMinGW_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/project/DesktopGirlMinGW/cmake-build-debug",
+		"source" : "D:/project/DesktopGirlMinGW"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

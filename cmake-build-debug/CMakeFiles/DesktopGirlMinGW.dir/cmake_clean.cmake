@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDefine.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDefine.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppPal.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppPal.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppSprite.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppSprite.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppTextureManager.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppTextureManager.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW_autogen.dir/AutogenUsed.txt"
+  "CMakeFiles/DesktopGirlMinGW_autogen.dir/ParseCache.txt"
+  "DesktopGirlMinGW_autogen"
+  "DesktopGirlMinGW.exe"
+  "DesktopGirlMinGW.exe.manifest"
+  "DesktopGirlMinGW.pdb"
+  "libDesktopGirlMinGW.dll.a"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/DesktopGirlMinGW.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
