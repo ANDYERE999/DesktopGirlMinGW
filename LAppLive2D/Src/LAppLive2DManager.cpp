@@ -367,6 +367,28 @@ void LAppLive2DManager::ChangeScene(Csm::csmInt32 index)
     }
 }
 
+/**
+ *
+ * @return
+ */
+void LAppLive2DManager::StartLipSync(const Csm::csmString& wavFilePath)
+{
+    if (_models.GetSize()==0)
+    {
+        LAppPal::PrintLogLn("[APP]Error: No model is loaded");
+        return;
+    }
+
+    LAppModel * model = _models[0];
+    if (model == nullptr)
+    {
+        LAppPal::PrintLogLn("[APP]Error: Current model is nullptr");
+        return;
+    }
+
+    model->StartLipSync(wavFilePath);
+}
+
 csmUint32 LAppLive2DManager::GetModelNum() const
 {
     return _models.GetSize();

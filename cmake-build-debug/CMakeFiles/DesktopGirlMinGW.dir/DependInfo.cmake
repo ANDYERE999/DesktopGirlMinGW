@@ -21,6 +21,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppView.cpp" "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj.d"
   "D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppWavFileHandler.cpp" "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj.d"
   "D:/project/DesktopGirlMinGW/LAppLive2D/Src/TouchManager.cpp" "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj.d"
+  "D:/project/DesktopGirlMinGW/ProjectSources/Src/AudioOutput.cpp" "CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj.d"
   "D:/project/DesktopGirlMinGW/main.cpp" "CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj.d"
   )
 

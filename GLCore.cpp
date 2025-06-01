@@ -2,12 +2,14 @@
 #include "LAppView.hpp"
 #include "LAppPal.hpp"
 #include "LAppLive2DManager.hpp"
+#include "LAppModel.hpp"
 #include "LAppDefine.hpp"
 #include "GLCore.h"
 #include <QTimer>
 #include <QMouseEvent>
 #include <QWheelEvent>
 #include <QResizeEvent>
+#include <QKeyEvent>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QFile>
@@ -15,17 +17,58 @@
 #include <QVBoxLayout>
 #include <QProgressBar>
 #include <QDebug>
+#include <QTextStream>
+#include <QDateTime>
+#include <QPushButton>
+#include <QTextEdit>
+#include <QFontMetrics>
+#include <QTextDocument>
+#include <QLabel>
+#include <QThread>
 
 #ifdef _WIN32
 #include <windows.h>
 #include <dwmapi.h>
 #endif
 
+// 添加Live2D命名空间引用
+using namespace Live2D::Cubism::Framework;
+
 GLCore::GLCore(int w, int h, QWidget *parent)
-    : QOpenGLWidget(parent), isFrameless(true), initialWidth(w), initialHeight(h), 
-      favorabilityBar(nullptr), favorabilityTimer(nullptr), currentFavorability(0)  // 简化初始化
+    : QOpenGLWidget(parent),
+      isLeftPressed(false),
+      isRightPressed(false),
+      isFrameless(true),  // 默认无边框
+      initialWidth(w),
+      initialHeight(h),
+      currentFavorability(0),
+      favorabilityBar(nullptr),
+      favorabilityTimer(nullptr),
+      isHotkeySystemReady(false),  // 初始化热键系统状态
+      currentModelDirectory(""),  // 初始化模型目录
+      chatContainer(nullptr),     // 初始化对话框容器
+      inputTextEdit(nullptr),     // 初始化文本输入框
+      sendButton(nullptr),        // 初始化发送按钮
+      chatLayout(nullptr),        // 初始化对话框布局
+      isReacted(true),            // 初始化为已反应状态
+      debugChatPosition(true),    // 启用对话框位置调试（可根据需要调整）
+      timeoutTimer(nullptr),      // 初始化超时定时器
+      timeoutLabel(nullptr),      // 初始化超时标签
+      isWaitingForResponse(false), // 初始化响应等待状态
+      audioPlayer(nullptr)        // 初始化音频播放器
 {
-    setFixedSize(w, h);
+    this->resize(w, h);
+    setFocusPolicy(Qt::StrongFocus);  // 确保可以接收键盘事件
+    
+    qDebug() << "GLCore constructor: initial size" << w << "x" << h;
+    qDebug() << "GLCore constructor: frameless=" << isFrameless;
+    
+    // 初始化音频播放器
+    audioPlayer = AudioOutput::getInstance();
+    qDebug() << "AudioOutput实例已初始化";
+    
+    // 清理上次运行遗留的临时音频文件
+    cleanupTemporaryAudioFiles();
     
     // 设置OpenGL格式以支持透明度
     QSurfaceFormat format;
@@ -43,7 +86,16 @@ GLCore::GLCore(int w, int h, QWidget *parent)
     
     // 初始化好感度UI
     setupFavorabilityUI();
-
+    
+    // 初始化对话框UI
+    setupChatUI();
+    
+    // 初始化超时UI
+    setupTimeoutUI();
+    
+    // 不要在构造函数中初始化热键系统，等Live2D准备好再初始化
+    qDebug() << "GLCore constructor: 延迟初始化热键系统，等待Live2D准备完成";
+    
     // 显示窗口以获取有效的窗口句柄
     this->show();
     
@@ -64,6 +116,8 @@ GLCore::GLCore(int w, int h, QWidget *parent)
         update();
         });
     timer->start((1.0 / 60) * 1000);    // 60FPS
+
+    this->setMouseTracking(true);
 }
 
 GLCore::~GLCore()
@@ -130,6 +184,13 @@ void GLCore::mousePressEvent(QMouseEvent* event)
             qDebug() << "Progress bar actual visible:" << favorabilityBar->isVisible();
         }
         
+        // 在show()之后设置对话框可见性，防止被重置
+        if (chatContainer) {
+            bool shouldShow = !isFrameless && isReacted;  // 有边框且已反应时显示对话框
+            chatContainer->setVisible(shouldShow);
+            qDebug() << "Setting chat container visible:" << shouldShow << "(frameless:" << isFrameless << ", isReacted:" << isReacted << ")";
+        }
+        
         this->isRightPressed = true;
     }
 
@@ -162,7 +223,11 @@ void GLCore::initializeGL()
     
     LAppDelegate::GetInstance()->Initialize(this);
     
-    // 选择模型
+    // Live2D系统初始化完成后，延迟一段时间再初始化热键系统
+    QTimer::singleShot(1000, this, [this]() {
+        qDebug() << "Live2D系统已准备好，开始初始化热键系统...";
+        initKeyMapping();
+    });
 }
 
 void GLCore::paintGL()
@@ -188,6 +253,25 @@ void GLCore::resizeEvent(QResizeEvent* event)
     if (favorabilityBar) {
         int margin = 5;
         favorabilityBar->setGeometry(margin, margin, width() - 2 * margin, 20);
+    }
+    
+    // 调整对话框位置和大小
+    if (chatContainer) {
+        int margin = 10;
+        int containerHeight = chatContainer->height();
+        // 将对话框放置在窗口底部
+        chatContainer->setGeometry(margin, height() - containerHeight - margin, 
+                                   width() - 2 * margin, containerHeight);
+        qDebug() << "对话框位置调整:" << chatContainer->geometry();
+    }
+    
+    // 调整超时标签位置
+    if (timeoutLabel && timeoutLabel->isVisible()) {
+        int labelWidth = width() - 40;
+        int labelX = 20;
+        int labelY = height() / 4; // 屏幕中上部
+        timeoutLabel->setGeometry(labelX, labelY, labelWidth, 40);
+        qDebug() << "超时标签位置调整:" << timeoutLabel->geometry();
     }
 }
 
@@ -297,6 +381,901 @@ void GLCore::updateFavorability() {
         currentFavorability = newFavorability;
         if (favorabilityBar) {
             favorabilityBar->setValue(currentFavorability);
+        }
+    }
+    
+    // 检查isReacted状态并控制对话框显示
+    bool newIsReacted = readIsReactedFromConfig();
+    if (newIsReacted != isReacted) {
+        isReacted = newIsReacted;
+        qDebug() << "isReacted状态变化:" << isReacted;
+        
+        // 如果从等待响应状态变为已响应，停止超时计时
+        if (isWaitingForResponse && isReacted) {
+            if (timeoutTimer && timeoutTimer->isActive()) {
+                timeoutTimer->stop();
+                qDebug() << "收到AI响应，停止超时计时";
+            }
+            isWaitingForResponse = false;
+        }
+        
+        // 只有在有边框模式下才考虑显示对话框
+        if (chatContainer && !isFrameless) {
+            chatContainer->setVisible(isReacted);
+            qDebug() << "根据isReacted状态更新对话框显示:" << isReacted;
+        }
+    }
+    
+    // 持续监控并调整对话框位置 - 每秒更新一次
+    updateChatPosition();
+    
+    // 检查并播放音频文件 - 每秒监测一次
+    checkAndPlayAudioFile();
+}
+
+// 新增方法：更新对话框位置
+void GLCore::updateChatPosition() {
+    if (!chatContainer) return;
+    
+    int margin = 10;
+    int containerHeight = chatContainer->height();
+    QRect newGeometry(margin, height() - containerHeight - margin, 
+                     width() - 2 * margin, containerHeight);
+    
+    // 检查是否需要调整位置
+    if (chatContainer->geometry() != newGeometry) {
+        chatContainer->setGeometry(newGeometry);
+        if (debugChatPosition) {
+            qDebug() << "对话框位置调整:" << newGeometry;
+        }
+    }
+    
+    // 提供详细的状态调试信息（仅当启用调试时）
+    if (debugChatPosition) {
+        static int debugCounter = 0;
+        debugCounter++;
+        
+        // 每10秒输出一次详细状态（因为定时器是每秒触发）
+        if (debugCounter % 10 == 0) {
+            qDebug() << "=== 对话框状态监控 ===";
+            qDebug() << "窗口大小:" << width() << "x" << height();
+            qDebug() << "对话框位置:" << chatContainer->geometry();
+            qDebug() << "对话框可见:" << chatContainer->isVisible();
+            qDebug() << "边框模式:" << (!isFrameless ? "有边框" : "无边框");
+            qDebug() << "isReacted:" << isReacted;
+            qDebug() << "输入框高度:" << (inputTextEdit ? inputTextEdit->height() : 0);
+            qDebug() << "容器高度:" << containerHeight;
+            qDebug() << "========================";
+        }
+    }
+}
+
+// 检测并初始化模型 - 增加配置文件检测
+void GLCore::detectAndInitializeModel() {
+    // 首先检查config.json中指定的模型
+    QString configPath = QDir::currentPath() + "/contact/config.json";
+    QFile file(configPath);
+    QString primaryModel = "Nahida_1080"; // 默认值
+    
+    if (file.open(QIODevice::ReadOnly)) {
+        QByteArray data = file.readAll();
+        file.close();
+        
+        QJsonParseError error;
+        QJsonDocument doc = QJsonDocument::fromJson(data, &error);
+        
+        if (error.error == QJsonParseError::NoError) {
+            QJsonObject obj = doc.object();
+            primaryModel = obj["modelName"].toString("Nahida_1080");
+        }
+    }
+    
+    // 优先检测配置文件中指定的模型
+    QString primaryDir = "Resources/" + primaryModel;
+    QString primaryVtubeConfig = QDir::currentPath() + "/" + primaryDir + "/" + primaryModel + ".vtube.json";
+    
+    if (QFile::exists(primaryVtubeConfig)) {
+        qDebug() << "发现配置指定的模型配置:" << primaryVtubeConfig;
+        currentModelDirectory = primaryDir;
+        
+        if (loadVTubeHotkeyConfig(primaryDir)) {
+            isHotkeySystemReady = true;
+            printHotkeyMappings();
+            qDebug() << "热键系统初始化成功!";
+            return;
+        }
+    }
+    
+    // 如果指定模型不可用，回退到检测所有可能的模型
+    QStringList possibleDirs = {"Resources/Nahida_1080", "Resources/Haru", "Resources/Mao", "Resources/llny"};
+    
+    for (const QString& dir : possibleDirs) {
+        if (dir == primaryDir) continue; // 跳过已经检查过的主要模型
+        
+        QString fullPath = QDir::currentPath() + "/" + dir;
+        QString vtubeConfigPath = fullPath + "/" + QFileInfo(dir).baseName() + ".vtube.json";
+        
+        if (QFile::exists(vtubeConfigPath)) {
+            qDebug() << "发现备用模型配置:" << vtubeConfigPath;
+            currentModelDirectory = dir;
+            
+            // 加载热键配置
+            if (loadVTubeHotkeyConfig(dir)) {
+                isHotkeySystemReady = true;
+                printHotkeyMappings();
+                qDebug() << "热键系统初始化成功!";
+                return;
+            }
+        }
+    }
+    
+    qDebug() << "警告: 未找到有效的模型配置，热键系统不可用";
+}
+
+// 加载VTube热键配置
+bool GLCore::loadVTubeHotkeyConfig(const QString& modelDirectory) {
+    QString modelName = QFileInfo(modelDirectory).baseName();
+    QString vtubeConfigPath = QDir::currentPath() + "/" + modelDirectory + "/" + modelName + ".vtube.json";
+    
+    QFile file(vtubeConfigPath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "无法打开VTube配置文件:" << vtubeConfigPath;
+        return false;
+    }
+    
+    QByteArray data = file.readAll();
+    file.close();
+    
+    QJsonParseError error;
+    QJsonDocument doc = QJsonDocument::fromJson(data, &error);
+    
+    if (error.error != QJsonParseError::NoError) {
+        qDebug() << "VTube配置文件JSON解析错误:" << error.errorString();
+        return false;
+    }
+    
+    QJsonObject rootObj = doc.object();
+    QJsonArray hotkeys = rootObj["Hotkeys"].toArray();
+    
+    if (hotkeys.isEmpty()) {
+        qDebug() << "VTube配置文件中没有找到热键配置";
+        return false;
+    }
+    
+    // 清除现有配置
+    hotkeyConfigs.clear();
+    
+    // 解析热键配置
+    int successCount = 0;
+    for (const QJsonValue& value : hotkeys) {
+        QJsonObject hotkey = value.toObject();
+        
+        // 只处理表情热键
+        if (hotkey["Action"].toString() != "ToggleExpression") {
+            continue;
+        }
+        
+        QString expressionFile = hotkey["File"].toString();
+        if (expressionFile.isEmpty()) {
+            continue;
+        }
+        
+        QJsonObject triggers = hotkey["Triggers"].toObject();
+        QString trigger1 = triggers["Trigger1"].toString();
+        QString trigger2 = triggers["Trigger2"].toString();
+        QString trigger3 = triggers["Trigger3"].toString();
+        bool isActive = hotkey["IsActive"].toBool(true);
+        
+        if (!trigger1.isEmpty() && isActive) {
+            HotkeyConfig config;
+            config.expressionFile = expressionFile;
+            config.trigger1 = trigger1;
+            config.trigger2 = trigger2;
+            config.trigger3 = trigger3;
+            config.isActive = isActive;
+            
+            hotkeyConfigs[trigger1] = config;
+            
+            // 加载对应的表情文件
+            QString expressionName = QFileInfo(expressionFile).baseName();
+            if (loadExpressionFile(modelDirectory, expressionFile, expressionName)) {
+                successCount++;
+            }
+        }
+    }
+    
+    qDebug() << "成功加载" << successCount << "个表情热键配置";
+    return successCount > 0;
+}
+
+// 手动加载表情文件 - 使用AddExpressionManually正确存储表情
+bool GLCore::loadExpressionFile(const QString& modelDirectory, const QString& expressionFile, const QString& expressionName) {
+    QString expressionPath = QDir::currentPath() + "/" + modelDirectory + "/" + expressionFile;
+    
+    if (!QFile::exists(expressionPath)) {
+        qDebug() << "表情文件不存在:" << expressionPath;
+        return false;
+    }
+    
+    QFile file(expressionPath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "无法打开表情文件:" << expressionPath;
+        return false;
+    }
+    
+    QByteArray data = file.readAll();
+    file.close();
+    
+    // 获取Live2D模型并手动加载表情 - 增加安全检查
+    auto* manager = LAppLive2DManager::GetInstance();
+    if (!manager) {
+        qDebug() << "Live2D管理器不可用";
+        return false;
+    }
+    
+    if (manager->GetModelNum() == 0) {
+        qDebug() << "Live2D模型未加载，模型数量:" << manager->GetModelNum();
+        return false;
+    }
+    
+    auto* model = manager->GetModel(0);
+    if (!model) {
+        qDebug() << "Live2D模型指针为空";
+        return false;
+    }
+    
+    try {
+        // 使用Live2D框架直接加载表情，正确使用命名空间
+        ACubismMotion* motion = model->LoadExpression(reinterpret_cast<const csmByte*>(data.data()), 
+                                                      data.size(), 
+                                                      expressionName.toStdString().c_str());
+        
+        if (!motion) {
+            qDebug() << "表情Motion创建失败:" << expressionName;
+            return false;
+        }
+        
+        // 关键修复：使用新的AddExpressionManually方法正确存储表情
+        model->AddExpressionManually(expressionName.toStdString().c_str(), motion);
+        
+        qDebug() << "表情加载并存储成功:" << expressionName << "来自文件:" << expressionFile;
+        return true;
+    } catch (const std::exception& e) {
+        qDebug() << "表情加载时发生异常:" << e.what();
+        return false;
+    } catch (...) {
+        qDebug() << "表情加载时发生未知异常";
+        return false;
+    }
+}
+
+// Qt按键映射到VTube按键格式
+QString GLCore::mapQtKeyToVTubeKey(int qtKey) {
+    switch (qtKey) {
+        case Qt::Key_A: return "A";
+        case Qt::Key_B: return "B";
+        case Qt::Key_C: return "C";
+        case Qt::Key_D: return "D";
+        case Qt::Key_E: return "E";
+        case Qt::Key_F: return "F";
+        case Qt::Key_G: return "G";
+        case Qt::Key_H: return "H";
+        case Qt::Key_I: return "I";
+        case Qt::Key_J: return "J";
+        case Qt::Key_K: return "K";
+        case Qt::Key_L: return "L";
+        case Qt::Key_M: return "M";
+        case Qt::Key_N: return "N";
+        case Qt::Key_O: return "O";
+        case Qt::Key_P: return "P";
+        case Qt::Key_Q: return "Q";
+        case Qt::Key_R: return "R";
+        case Qt::Key_S: return "S";
+        case Qt::Key_T: return "T";
+        case Qt::Key_U: return "U";
+        case Qt::Key_V: return "V";
+        case Qt::Key_W: return "W";
+        case Qt::Key_X: return "X";
+        case Qt::Key_Y: return "Y";
+        case Qt::Key_Z: return "Z";
+        
+        case Qt::Key_1: return "N1";
+        case Qt::Key_2: return "N2";
+        case Qt::Key_3: return "N3";
+        case Qt::Key_4: return "N4";
+        case Qt::Key_5: return "N5";
+        case Qt::Key_6: return "N6";
+        case Qt::Key_7: return "N7";
+        case Qt::Key_8: return "N8";
+        case Qt::Key_9: return "N9";
+        case Qt::Key_0: return "N0";
+        
+        default: return "";
+    }
+}
+
+// 打印热键映射信息并保存到文件
+void GLCore::printHotkeyMappings() {
+    QString headerText = "========== " + currentModelDirectory + " 热键映射 ==========";
+    QString footerText = "==============================================";
+    
+    qDebug() << headerText;
+    
+    // 准备写入文件的内容
+    QStringList fileContent;
+    fileContent << headerText;
+    fileContent << "";  // 空行
+    
+    if (hotkeyConfigs.empty()) {
+        QString emptyMsg = "没有可用的热键映射";
+        qDebug() << emptyMsg;
+        fileContent << emptyMsg;
+    } else {
+        // 按键名排序以获得一致的输出
+        QStringList sortedKeys;
+        for (const auto& pair : hotkeyConfigs) {
+            sortedKeys << pair.first;
+        }
+        sortedKeys.sort();
+        
+        for (const QString& key : sortedKeys) {
+            const HotkeyConfig& config = hotkeyConfigs[key];
+            QString expressionName = QFileInfo(config.expressionFile).baseName();
+            
+            QString mappingLine = "  " + key + " -> " + expressionName + " (" + config.expressionFile + ")";
+            qDebug() << mappingLine;
+            fileContent << mappingLine;
+        }
+    }
+    
+    fileContent << "";  // 空行
+    fileContent << footerText;
+    
+    qDebug() << footerText;
+    
+    // 写入到文件
+    QString keymapFilePath = QDir::currentPath() + "/contact/keymap.txt";
+    
+    // 确保 contact 目录存在
+    QDir contactDir(QDir::currentPath() + "/contact");
+    if (!contactDir.exists()) {
+        contactDir.mkpath(".");
+        qDebug() << "创建 contact 目录:" << contactDir.absolutePath();
+    }
+    
+    QFile keymapFile(keymapFilePath);
+    if (keymapFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&keymapFile);
+        out.setEncoding(QStringConverter::Utf8); // 确保支持中文
+        
+        // 添加文件头信息
+        out << "# Live2D Desktop Girl - 热键映射配置文件" << Qt::endl;
+        out << "# 自动生成于: " << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss") << Qt::endl;
+        out << "# 当前模型: " << currentModelDirectory << Qt::endl;
+        out << Qt::endl;
+        
+        // 写入映射内容
+        for (const QString& line : fileContent) {
+            out << line << Qt::endl;
+        }
+        
+        // 添加使用说明
+        out << Qt::endl;
+        out << "# 使用说明:" << Qt::endl;
+        out << "# - 按对应的键即可触发表情动作" << Qt::endl;
+        out << "# - 按 ESC 键触发随机表情" << Qt::endl;
+        out << "# - 右键点击模型可切换窗口边框显示/隐藏" << Qt::endl;
+        out << "# - 修改 config.json 中的 modelName 可切换不同模型" << Qt::endl;
+        
+        keymapFile.close();
+        qDebug() << "热键映射已保存到:" << keymapFilePath;
+    } else {
+        qDebug() << "无法创建热键映射文件:" << keymapFilePath << "错误:" << keymapFile.errorString();
+    }
+}
+
+// 修改键盘事件处理
+void GLCore::keyPressEvent(QKeyEvent* event) {
+    if (!isHotkeySystemReady) {
+        qDebug() << "热键系统未准备就绪，尝试重新初始化...";
+        detectAndInitializeModel();
+        if (!isHotkeySystemReady) {
+            QOpenGLWidget::keyPressEvent(event);
+            return;
+        }
+    }
+    
+    // 将Qt按键映射到VTube格式
+    QString vtubeKey = mapQtKeyToVTubeKey(event->key());
+    
+    if (vtubeKey.isEmpty()) {
+        QOpenGLWidget::keyPressEvent(event);
+        return;
+    }
+    
+    // 查找热键配置
+    auto it = hotkeyConfigs.find(vtubeKey);
+    if (it != hotkeyConfigs.end()) {
+        const HotkeyConfig& config = it->second;
+        QString expressionName = QFileInfo(config.expressionFile).baseName();
+        
+        triggerExpression(expressionName);
+        qDebug() << "热键触发: " << vtubeKey << " -> " << expressionName;
+    } else {
+        // ESC键重置表情（随机表情）
+        if (event->key() == Qt::Key_Escape) {
+            LAppLive2DManager::GetInstance()->GetModel(0)->SetRandomExpression();
+            qDebug() << "触发随机表情";
+        }
+        // F12键切换对话框位置调试模式
+        else if (event->key() == Qt::Key_F12) {
+            debugChatPosition = !debugChatPosition;
+            qDebug() << "对话框位置调试模式:" << (debugChatPosition ? "开启" : "关闭");
+        }
+    }
+    
+    QOpenGLWidget::keyPressEvent(event);
+}
+
+// 修改triggerExpression方法 
+void GLCore::triggerExpression(const QString& expressionName) {
+    auto* manager = LAppLive2DManager::GetInstance();
+    if (manager && manager->GetModelNum() > 0) {
+        auto* model = manager->GetModel(0);
+        if (model) {
+            model->SetExpression(expressionName.toStdString().c_str());
+            qDebug() << "表情触发:" << expressionName;
+        }
+    }
+}
+
+// 修改initKeyMapping方法，增加模型切换检测
+void GLCore::initKeyMapping() {
+    qDebug() << "初始化热键系统...";
+    
+    // 检查当前配置的模型名称
+    QString configPath = QDir::currentPath() + "/contact/config.json";
+    QFile file(configPath);
+    QString configuredModel = "Nahida_1080"; // 默认值
+    
+    if (file.open(QIODevice::ReadOnly)) {
+        QByteArray data = file.readAll();
+        file.close();
+        
+        QJsonParseError error;
+        QJsonDocument doc = QJsonDocument::fromJson(data, &error);
+        
+        if (error.error == QJsonParseError::NoError) {
+            QJsonObject obj = doc.object();
+            configuredModel = obj["modelName"].toString("Nahida_1080");
+            qDebug() << "从配置文件读取模型名称:" << configuredModel;
+        }
+    }
+    
+    // 检查是否需要重新初始化（模型发生变化）
+    QString configuredModelDir = "Resources/" + configuredModel;
+    if (configuredModelDir != currentModelDirectory) {
+        qDebug() << "检测到模型切换: " << currentModelDirectory << " -> " << configuredModelDir;
+        isHotkeySystemReady = false; // 重置热键系统状态
+        hotkeyConfigs.clear(); // 清除现有配置
+    }
+    
+    detectAndInitializeModel();
+}
+
+// 初始化对话框UI
+void GLCore::setupChatUI() {
+    // 创建对话框容器
+    chatContainer = new QFrame(this);
+    chatContainer->setFixedHeight(72); // 初始高度
+    
+    // 创建水平布局
+    chatLayout = new QHBoxLayout(chatContainer);
+    chatLayout->setContentsMargins(10, 10, 10, 10);  // 确保上下边距相等
+    chatLayout->setSpacing(10);
+    chatLayout->setAlignment(Qt::AlignVCenter);  // 垂直居中对齐
+    
+    // 创建文本输入框
+    inputTextEdit = new QTextEdit(chatContainer);
+    inputTextEdit->setPlaceholderText("请输入文字");
+    inputTextEdit->setFixedHeight(52);
+    inputTextEdit->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    inputTextEdit->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    
+    // 创建发送按钮
+    sendButton = new QPushButton("发送", chatContainer);
+    sendButton->setFixedSize(80, 52);
+    
+    // 添加到布局，确保垂直居中
+    chatLayout->addWidget(inputTextEdit, 1, Qt::AlignVCenter);  // 输入框可伸缩，垂直居中
+    chatLayout->addWidget(sendButton, 0, Qt::AlignVCenter);     // 按钮固定大小，垂直居中
+    
+    // 设置样式
+    updateChatUIStyle();
+    
+    // 连接信号
+    connect(sendButton, &QPushButton::clicked, this, &GLCore::onSendButtonClicked);
+    connect(inputTextEdit, &QTextEdit::textChanged, this, &GLCore::onTextChanged);
+    
+    // 初始状态下隐藏对话框（因为默认是无边框）
+    chatContainer->setVisible(false);
+    qDebug() << "对话框UI初始化完成，初始状态隐藏";
+    
+    // 从配置文件读取初始isReacted状态
+    isReacted = readIsReactedFromConfig();
+    qDebug() << "初始isReacted状态:" << isReacted;
+}
+
+// 更新对话框样式
+void GLCore::updateChatUIStyle() {
+    if (!chatContainer || !inputTextEdit || !sendButton) return;
+    
+    // 设置容器样式
+    QString containerStyle = R"(
+        QFrame {
+            background-color: rgba(255, 255, 255, 240);
+            border: 2px solid #CCCCCC;
+            border-radius: 15px;
+            padding: 5px;
+        }
+    )";
+    chatContainer->setStyleSheet(containerStyle);
+    
+    // 设置输入框样式
+    QString inputStyle = R"(
+        QTextEdit {
+            border: 2px solid #DDDDDD;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 250);
+            font-size: 14px;
+            padding: 8px;
+            color: #333333;
+        }
+        QTextEdit:focus {
+            border: 2px solid #4CAF50;
+        }
+    )";
+    inputTextEdit->setStyleSheet(inputStyle);
+    
+    // 设置发送按钮样式
+    QString buttonStyle = R"(
+        QPushButton {
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        QPushButton:hover {
+            background-color: #45a049;
+        }
+        QPushButton:pressed {
+            background-color: #3d8b40;
+        }
+    )";
+    sendButton->setStyleSheet(buttonStyle);
+}
+
+// 调整输入框高度
+void GLCore::adjustInputHeight() {
+    if (!inputTextEdit || !chatContainer) return;
+    
+    QTextDocument* doc = inputTextEdit->document();
+    QFontMetrics fm(inputTextEdit->font());
+    
+    // 计算文本高度
+    int docHeight = static_cast<int>(doc->size().height());
+    int lineHeight = fm.lineSpacing();
+    int lines = qMax(1, (docHeight + lineHeight - 1) / lineHeight); // 向上取整
+    
+    // 限制最大行数为5行
+    lines = qMin(lines, 5);
+    
+    // 计算新的高度
+    int newInputHeight = lines * lineHeight + 16; // 16是padding
+    int newContainerHeight = newInputHeight + 20; // 20是容器的padding
+    
+    // 设置新高度
+    inputTextEdit->setFixedHeight(newInputHeight);
+    chatContainer->setFixedHeight(newContainerHeight);
+    sendButton->setFixedHeight(newInputHeight); // 按钮高度与输入框保持一致
+    
+    qDebug() << "调整输入框高度: 行数=" << lines << "输入框高度=" << newInputHeight;
+}
+
+// 发送消息
+void GLCore::sendMessage() {
+    if (!inputTextEdit) return;
+    
+    QString message = inputTextEdit->toPlainText().trimmed();
+    if (message.isEmpty()) {
+        qDebug() << "消息为空，不发送";
+        return;
+    }
+    
+    // 写入消息到 ./contact/in.txt
+    QString inFilePath = QDir::currentPath() + "/contact/in.txt";
+    
+    // 确保 contact 目录存在
+    QDir contactDir(QDir::currentPath() + "/contact");
+    if (!contactDir.exists()) {
+        contactDir.mkpath(".");
+        qDebug() << "创建 contact 目录:" << contactDir.absolutePath();
+    }
+    
+    QFile inFile(inFilePath);
+    if (inFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&inFile);
+        out.setEncoding(QStringConverter::Utf8); // 确保支持中文
+        out << message << Qt::endl;
+        inFile.close();
+        qDebug() << "消息已写入 in.txt:" << message;
+    } else {
+        qDebug() << "无法写入消息到 in.txt:" << inFile.errorString();
+        return;
+    }
+    
+    // 设置 config.json 的 isReacted 为 false
+    updateConfigIsReacted(false);
+    isReacted = false;
+    
+    // 启动超时计时
+    startResponseTimeout();
+    
+    // 清空输入框
+    inputTextEdit->clear();
+    
+    // 隐藏对话框（等待AI回复）
+    if (chatContainer) {
+        chatContainer->setVisible(false);
+        qDebug() << "消息发送完成，隐藏对话框等待AI回复";
+    }
+    
+    qDebug() << "消息发送流程完成，开始60秒超时计时";
+}
+
+// 从配置文件读取isReacted状态
+bool GLCore::readIsReactedFromConfig() {
+    QString configPath = QDir::currentPath() + "/contact/config.json";
+    QFile file(configPath);
+    
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "Failed to open config file for isReacted:" << configPath;
+        return true; // 默认返回true
+    }
+    
+    QByteArray data = file.readAll();
+    file.close();
+    
+    QJsonParseError error;
+    QJsonDocument doc = QJsonDocument::fromJson(data, &error);
+    
+    if (error.error != QJsonParseError::NoError) {
+        qDebug() << "JSON parse error for isReacted:" << error.errorString();
+        return true; // 默认返回true
+    }
+    
+    QJsonObject obj = doc.object();
+    bool reacted = obj["isReacted"].toBool(true);
+    
+    return reacted;
+}
+
+// 更新配置文件的isReacted值
+void GLCore::updateConfigIsReacted(bool reacted) {
+    QString configPath = QDir::currentPath() + "/contact/config.json";
+    QFile file(configPath);
+    
+    // 读取现有配置
+    QJsonObject config;
+    if (file.open(QIODevice::ReadOnly)) {
+        QByteArray data = file.readAll();
+        file.close();
+        
+        QJsonParseError error;
+        QJsonDocument doc = QJsonDocument::fromJson(data, &error);
+        
+        if (error.error == QJsonParseError::NoError) {
+            config = doc.object();
+        }
+    }
+    
+    // 更新isReacted值
+    config["isReacted"] = reacted;
+    
+    // 写回文件
+    if (file.open(QIODevice::WriteOnly)) {
+        QJsonDocument doc(config);
+        file.write(doc.toJson());
+        file.close();
+        qDebug() << "更新config.json中的isReacted为:" << reacted;
+    } else {
+        qDebug() << "无法写入config.json:" << file.errorString();
+    }
+}
+
+// 发送按钮点击槽函数
+void GLCore::onSendButtonClicked() {
+    qDebug() << "发送按钮被点击";
+    sendMessage();
+}
+
+// 文本改变槽函数
+void GLCore::onTextChanged() {
+    adjustInputHeight();
+}
+
+// 设置超时UI
+void GLCore::setupTimeoutUI() {
+    // 创建超时提示标签
+    timeoutLabel = new QLabel(this);
+    timeoutLabel->setText("AI后端响应超时！");
+    timeoutLabel->setAlignment(Qt::AlignCenter);
+    timeoutLabel->setFixedHeight(40);
+    timeoutLabel->setVisible(false); // 初始隐藏
+    
+    // 设置超时标签样式
+    QString timeoutStyle = R"(
+        QLabel {
+            background-color: rgba(255, 100, 100, 240);
+            border: 2px solid #FF4444;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 8px;
+        }
+    )";
+    timeoutLabel->setStyleSheet(timeoutStyle);
+    
+    // 创建超时定时器
+    timeoutTimer = new QTimer(this);
+    timeoutTimer->setSingleShot(true); // 单次触发
+    connect(timeoutTimer, &QTimer::timeout, this, &GLCore::onResponseTimeout);
+    
+    qDebug() << "超时UI初始化完成";
+}
+
+// 开始响应超时计时
+void GLCore::startResponseTimeout() {
+    if (timeoutTimer) {
+        isWaitingForResponse = true;
+        timeoutTimer->start(60000); // 60秒 = 60000毫秒
+        qDebug() << "开始超时计时，60秒后如果没有响应将触发超时";
+    }
+}
+
+// 处理响应超时
+void GLCore::handleResponseTimeout() {
+    qDebug() << "AI后端响应超时！强制设置isReacted=true";
+    
+    // 强制设置isReacted为true
+    updateConfigIsReacted(true);
+    isReacted = true;
+    isWaitingForResponse = false;
+    
+    // 显示对话框
+    if (chatContainer && !isFrameless) {
+        chatContainer->setVisible(true);
+        qDebug() << "超时后恢复对话框显示";
+    }
+    
+    // 显示超时消息
+    if (timeoutLabel) {
+        // 计算超时标签位置（屏幕中上部）
+        int labelWidth = width() - 40;
+        int labelX = 20;
+        int labelY = height() / 4; // 屏幕中上部
+        
+        timeoutLabel->setGeometry(labelX, labelY, labelWidth, 40);
+        timeoutLabel->setVisible(true);
+        
+        qDebug() << "显示超时提示标签:" << timeoutLabel->geometry();
+        
+        // 5秒后自动隐藏超时消息
+        QTimer::singleShot(5000, this, &GLCore::hideTimeoutMessage);
+    }
+}
+
+// 隐藏超时消息
+void GLCore::hideTimeoutMessage() {
+    if (timeoutLabel) {
+        timeoutLabel->setVisible(false);
+        qDebug() << "隐藏超时提示标签";
+    }
+}
+
+// 响应超时槽函数
+void GLCore::onResponseTimeout() {
+    qDebug() << "触发响应超时事件";
+    handleResponseTimeout();
+}
+
+// 检查并播放音频文件 - 每秒监测一次
+void GLCore::checkAndPlayAudioFile() {
+    // 构建音频文件路径
+    QString audioFilePath = QDir::currentPath() + "/contact/1.wav";
+    
+    // 检查文件是否存在
+    if (QFile::exists(audioFilePath)) {
+        qDebug() << "发现音频文件:" << audioFilePath;
+        
+        // 使用AudioOutput播放音频
+        if (audioPlayer) {
+            // 检查是否正在播放其他音频，避免重复播放
+            if (audioPlayer->getState() == QMediaPlayer::PlayingState) {
+                qDebug() << "正在播放其他音频，跳过当前文件";
+                return;
+            }
+            
+            // 使用带时间戳的临时文件名，避免文件名冲突
+            QString timestamp = QString::number(QDateTime::currentMSecsSinceEpoch());
+            QString tempAudioPath = QDir::currentPath() + "/contact/temp_" + timestamp + ".wav";
+            
+            // 复制文件到临时位置
+            if (QFile::copy(audioFilePath, tempAudioPath)) {
+                // 立即删除原始文件，避免循环播放
+                if (QFile::remove(audioFilePath)) {
+                    qDebug() << "原始音频文件已删除:" << audioFilePath;
+                } else {
+                    qDebug() << "删除原始音频文件失败:" << audioFilePath;
+                }
+                
+                // 使用临时文件播放音频
+                audioPlayer->setAudioPath(tempAudioPath);
+                audioPlayer->playAudio();
+                qDebug() << "开始播放音频文件:" << tempAudioPath;
+                
+                // 播放完成后删除临时文件
+                QObject::connect(audioPlayer, &AudioOutput::playbackFinished, 
+                               this, [this, tempAudioPath]() {
+                    // 删除临时音频文件，增加重试机制
+                    int retryCount = 0;
+                    bool deleted = false;
+                    
+                    while (retryCount < 3 && !deleted) {
+                        if (QFile::remove(tempAudioPath)) {
+                            qDebug() << "临时音频文件播放完成并已删除:" << tempAudioPath;
+                            deleted = true;
+                        } else {
+                            retryCount++;
+                            qDebug() << "删除临时音频文件失败，重试" << retryCount << "/3:" << tempAudioPath;
+                            QThread::msleep(100); // 等待100毫秒后重试
+                        }
+                    }
+                    
+                    if (!deleted) {
+                        qDebug() << "警告：临时音频文件删除失败，可能需要手动清理:" << tempAudioPath;
+                    }
+                    
+                    // 断开这个连接，避免后续重复触发
+                    QObject::disconnect(audioPlayer, &AudioOutput::playbackFinished, this, nullptr);
+                }, Qt::QueuedConnection);
+            } else {
+                qDebug() << "复制音频文件到临时位置失败，源文件:" << audioFilePath << "目标文件:" << tempAudioPath;
+            }
+        } else {
+            qDebug() << "AudioOutput实例不可用，无法播放音频";
+        }
+    }
+}
+
+// 清理上次运行遗留的临时音频文件
+void GLCore::cleanupTemporaryAudioFiles() {
+    // 构建临时音频文件的搜索路径
+    QString tempAudioPattern = QDir::currentPath() + "/contact/temp_*.wav";
+    
+    // 获取所有匹配的临时音频文件
+    QFileInfoList tempAudioFiles = QDir(QDir::currentPath() + "/contact").entryInfoList(QStringList() << "temp_*.wav", QDir::Files);
+    
+    // 遍历所有临时音频文件并删除
+    for (const QFileInfo& fileInfo : tempAudioFiles) {
+        QString tempAudioPath = fileInfo.absoluteFilePath();
+        if (QFile::remove(tempAudioPath)) {
+            qDebug() << "清理临时音频文件:" << tempAudioPath;
+        } else {
+            qDebug() << "清理临时音频文件失败:" << tempAudioPath;
         }
     }
 }

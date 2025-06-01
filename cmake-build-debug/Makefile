@@ -466,6 +466,30 @@ LAppLive2D/Src/TouchManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesktopGirlMinGW.dir\build.make CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.s
 .PHONY : LAppLive2D/Src/TouchManager.cpp.s
 
+ProjectSources/Src/AudioOutput.obj: ProjectSources/Src/AudioOutput.cpp.obj
+.PHONY : ProjectSources/Src/AudioOutput.obj
+
+# target to build an object file
+ProjectSources/Src/AudioOutput.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesktopGirlMinGW.dir\build.make CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj
+.PHONY : ProjectSources/Src/AudioOutput.cpp.obj
+
+ProjectSources/Src/AudioOutput.i: ProjectSources/Src/AudioOutput.cpp.i
+.PHONY : ProjectSources/Src/AudioOutput.i
+
+# target to preprocess a source file
+ProjectSources/Src/AudioOutput.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesktopGirlMinGW.dir\build.make CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.i
+.PHONY : ProjectSources/Src/AudioOutput.cpp.i
+
+ProjectSources/Src/AudioOutput.s: ProjectSources/Src/AudioOutput.cpp.s
+.PHONY : ProjectSources/Src/AudioOutput.s
+
+# target to generate assembly for a file
+ProjectSources/Src/AudioOutput.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesktopGirlMinGW.dir\build.make CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.s
+.PHONY : ProjectSources/Src/AudioOutput.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -540,6 +564,9 @@ help:
 	@echo ... LAppLive2D/Src/TouchManager.obj
 	@echo ... LAppLive2D/Src/TouchManager.i
 	@echo ... LAppLive2D/Src/TouchManager.s
+	@echo ... ProjectSources/Src/AudioOutput.obj
+	@echo ... ProjectSources/Src/AudioOutput.i
+	@echo ... ProjectSources/Src/AudioOutput.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

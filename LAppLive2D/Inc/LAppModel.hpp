@@ -57,6 +57,17 @@ public:
      *
      * @param[in]  matrix  View-Projection行列
      */
+    void StartLipSync(const Csm::csmString & filePath);
+
+    /**
+     * @brief 停止唇形同步并停止播放指定的 WAV 文件
+     */
+    void StopLipSync();
+
+    /**
+     * @brief 停止唇形同步
+     *
+     */
     void Draw(Csm::CubismMatrix44& matrix);
 
     /**
@@ -92,6 +103,14 @@ public:
      *
      */
     void SetRandomExpression();
+
+    /**
+     * @brief   手动添加表情到表情列表中
+     *
+     * @param[in]   expressionName    表情名称
+     * @param[in]   motion           表情Motion对象
+     */
+    void AddExpressionManually(const Csm::csmChar* expressionName, Csm::ACubismMotion* motion);
 
     /**
     * @brief   イベントの発火を受け取る
@@ -192,6 +211,10 @@ private:
     const Csm::CubismId* _idParamEyeBallY; ///< パラメータID: ParamEyeBallXY
 
     LAppWavFileHandler _wavFileHandler; ///< wavファイルハンドラ
+
+    // 滤波器参数
+    Live2D::Cubism::Framework::csmFloat32 alpha = 0.8f;
+    Live2D::Cubism::Framework::csmFloat32 filteredValue = 0;
 
     Csm::Rendering::CubismOffscreenSurface_OpenGLES2  _renderBuffer;   ///< フレームバッファ以外の描画先
 };

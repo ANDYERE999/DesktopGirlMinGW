@@ -125,6 +125,8 @@ public:
     * 至于为什么修改，原生的SDK是自动查找指定目录的模型文件，自动加载的
     * 但这样就与实际使用的需求大不相同，我们需要能够手动选择
     */
+    void StartLipSync(const Csm::csmString & wavFilePath);
+
     void ChangeScene(Csm::csmInt32 index);
 
     /**

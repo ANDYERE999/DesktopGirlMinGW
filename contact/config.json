@@ -3,5 +3,6 @@
     "mode":"online",
     "random":false,
     "favorability":50,
-    "modelList":["Nahida_1080"]
+    "modelList":["Nahida_1080"],
+    "isReacted":true
 }

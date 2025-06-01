@@ -25,6 +25,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj.d"
   "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj"
   "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj.d"
   "CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj"
   "CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj.d"
   "CMakeFiles/DesktopGirlMinGW_autogen.dir/AutogenUsed.txt"

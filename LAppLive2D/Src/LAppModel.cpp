@@ -259,6 +259,17 @@ void LAppModel::SetupModel(ICubismModelSetting* setting)
 
     _updating = false;
     _initialized = true;
+
+    if (_lipSyncIds.GetSize()==0)
+    {
+        LAppPal::PrintLogLn("No LipSync Parameter, LipSync not enable");
+    }else if (_lipSyncIds.GetSize()==1)
+    {
+        LAppPal::PrintLogLn("Only one LipSync Parameter, LipSync may not work properly");
+    }else
+    {
+        LAppPal::PrintLogLn("Sufficient LipSync Parameters, LipSync should work properly");
+    }
 }
 
 void LAppModel::PreloadMotionGroup(const csmChar* group)
@@ -431,9 +442,15 @@ void LAppModel::Update()
         _wavFileHandler.Update(deltaTimeSeconds);
         value = _wavFileHandler.GetRms();
 
+        filteredValue = alpha * value + (1.0f - alpha) * filteredValue;
+
         for (csmUint32 i = 0; i < _lipSyncIds.GetSize(); ++i)
         {
             _model->AddParameterValue(_lipSyncIds[i], value, 0.8f);
+            if (_debugMode)
+            {
+                //LAppPal::PrintLogLn("[App] LipSync Parameter ID %s",_lipSyncIds[i]->GetString().GetRawString());
+            }
         }
     }
 
@@ -445,6 +462,30 @@ void LAppModel::Update()
 
     _model->Update();
 
+}
+
+void LAppModel::StartLipSync(const Csm::csmString & filePath)
+{
+    if (filePath.GetLength()==0)
+    {
+        LAppPal::PrintLogLn("[App] Error: WAV file is empty");
+        return;
+    }
+    //启动WAV文件播放
+    _wavFileHandler.Start(filePath);
+
+    //确保唇形同步启用
+    _lipSync=true;
+
+    if (_debugMode)
+    {
+        LAppPal::PrintLogLn("[App] LipSync File Started with WAV file: %s",filePath);
+    }
+}
+
+void LAppModel::StopLipSync()
+{
+    _lipSync=false;
 }
 
 CubismMotionQueueEntryHandle LAppModel::StartMotion(const csmChar* group, csmInt32 no, csmInt32 priority, ACubismMotion::FinishedMotionCallback onFinishedMotionHandler)
@@ -612,6 +653,29 @@ void LAppModel::SetRandomExpression()
         }
         i++;
     }
+}
+
+void LAppModel::AddExpressionManually(const csmChar* expressionName, ACubismMotion* motion)
+{
+    if (!motion)
+    {
+        if (_debugMode) LAppPal::PrintLogLn("[APP]AddExpressionManually: motion is null for %s", expressionName);
+        return;
+    }
+    
+    csmString name(expressionName);
+    
+    // 如果同名表情已存在，先释放旧的
+    if (_expressions[name] != NULL)
+    {
+        ACubismMotion::Delete(_expressions[name]);
+        _expressions[name] = NULL;
+    }
+    
+    // 添加新表情
+    _expressions[name] = motion;
+    
+    if (_debugMode) LAppPal::PrintLogLn("[APP]AddExpressionManually: added expression %s", expressionName);
 }
 
 void LAppModel::ReloadRenderer()

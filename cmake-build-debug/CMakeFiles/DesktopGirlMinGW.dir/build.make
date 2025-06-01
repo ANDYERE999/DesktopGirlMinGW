@@ -281,6 +281,21 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.s"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\project\DesktopGirlMinGW\LAppLive2D\Src\TouchManager.cpp -o CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\TouchManager.cpp.s
 
+CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/flags.make
+CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
+CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj: D:/project/DesktopGirlMinGW/ProjectSources/Src/AudioOutput.cpp
+CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\ProjectSources\Src\AudioOutput.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\ProjectSources\Src\AudioOutput.cpp.obj -c D:\project\DesktopGirlMinGW\ProjectSources\Src\AudioOutput.cpp
+
+CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\project\DesktopGirlMinGW\ProjectSources\Src\AudioOutput.cpp > CMakeFiles\DesktopGirlMinGW.dir\ProjectSources\Src\AudioOutput.cpp.i
+
+CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\project\DesktopGirlMinGW\ProjectSources\Src\AudioOutput.cpp -o CMakeFiles\DesktopGirlMinGW.dir\ProjectSources\Src\AudioOutput.cpp.s
+
 # Object files for target DesktopGirlMinGW
 DesktopGirlMinGW_OBJECTS = \
 "CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj" \
@@ -296,7 +311,8 @@ DesktopGirlMinGW_OBJECTS = \
 "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppTextureManager.cpp.obj" \
 "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj" \
 "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj" \
-"CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj"
+"CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj" \
+"CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj"
 
 # External object files for target DesktopGirlMinGW
 DesktopGirlMinGW_EXTERNAL_OBJECTS =
@@ -315,18 +331,21 @@ DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppTexture
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj
+DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/build.make
 DesktopGirlMinGW.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6OpenGLWidgets.a
 DesktopGirlMinGW.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6Widgets.a
 DesktopGirlMinGW.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6Sql.a
 DesktopGirlMinGW.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6Svg.a
+DesktopGirlMinGW.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6Multimedia.a
 DesktopGirlMinGW.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6OpenGL.a
 DesktopGirlMinGW.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6Gui.a
+DesktopGirlMinGW.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6Network.a
 DesktopGirlMinGW.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6Core.a
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/linkLibs.rsp
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/objects1.rsp
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable DesktopGirlMinGW.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable DesktopGirlMinGW.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\DesktopGirlMinGW.dir\link.txt --verbose=$(VERBOSE)
 	"C:\Program Files\JetBrains\CLion 2025.1.1\bin\cmake\win\x64\bin\cmake.exe" -E make_directory D:/project/DesktopGirlMinGW/cmake-build-debug/plugins/platforms/
 	"C:\Program Files\JetBrains\CLion 2025.1.1\bin\cmake\win\x64\bin\cmake.exe" -E copy C:/Qt/6.9.0/mingw_64/plugins/platforms/qwindows.dll D:/project/DesktopGirlMinGW/cmake-build-debug/plugins/platforms/
@@ -334,6 +353,7 @@ DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/link.txt
 	"C:\Program Files\JetBrains\CLion 2025.1.1\bin\cmake\win\x64\bin\cmake.exe" -E copy C:/Qt/6.9.0/mingw_64/bin/Qt6Gui.dll D:/project/DesktopGirlMinGW/cmake-build-debug
 	"C:\Program Files\JetBrains\CLion 2025.1.1\bin\cmake\win\x64\bin\cmake.exe" -E copy C:/Qt/6.9.0/mingw_64/bin/Qt6Widgets.dll D:/project/DesktopGirlMinGW/cmake-build-debug
 	"C:\Program Files\JetBrains\CLion 2025.1.1\bin\cmake\win\x64\bin\cmake.exe" -E copy C:/Qt/6.9.0/mingw_64/bin/Qt6OpenGLWidgets.dll D:/project/DesktopGirlMinGW/cmake-build-debug
+	"C:\Program Files\JetBrains\CLion 2025.1.1\bin\cmake\win\x64\bin\cmake.exe" -E copy C:/Qt/6.9.0/mingw_64/bin/Qt6Multimedia.dll D:/project/DesktopGirlMinGW/cmake-build-debug
 
 # Rule to build all files generated by this target.
 CMakeFiles/DesktopGirlMinGW.dir/build: DesktopGirlMinGW.exe

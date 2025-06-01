@@ -28,8 +28,14 @@ find_package(Qt6 COMPONENTS
         Widgets
         Sql
         Svg
+        Multimedia
         REQUIRED)
 
+# 添加ProjectSources文件
+set(PROJECT_SOURCES
+        ProjectSources/Src/AudioOutput.cpp
+        ProjectSources/Inc/AudioOutput.h
+)
 
 #message(STATUS ${LApp2D})
 
@@ -37,9 +43,7 @@ if (NOT CONSOLE)
     set(CON WIN32)
 endif()
 
-add_executable(DesktopGirlMinGW ${CON} main.cpp GLCore.cpp ${LApp2D})
-
-
+add_executable(DesktopGirlMinGW ${CON} main.cpp GLCore.cpp ${LApp2D} ${PROJECT_SOURCES})
 
 # --- 新增/修改：为目标指定链接器搜索路径 ---
 #target_link_directories(DesktopGirlMinGW PRIVATE "${CMAKE_SOURCE_DIR}/Lib/Debug/")
@@ -58,13 +62,14 @@ target_link_libraries(DesktopGirlMinGW
         Qt::Widgets
         Qt::Sql
         Qt::Svg
+        Qt::Multimedia
 )
-
 
 # 添加头文件搜索路径
 include_directories(
         ./
         LAppLive2D/Inc
+        ProjectSources/Inc
         Thirdparty/Framework/src
         Thirdparty/Core/include
         Thirdparty/glew/include
@@ -141,7 +146,7 @@ if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
                 "${QT_INSTALL_PATH}/plugins/platforms/qwindows${DEBUG_SUFFIX}.dll"
                 "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms/")
     endif ()
-    foreach (QT_LIB Core Gui Widgets OpenGLWidgets)
+    foreach (QT_LIB Core Gui Widgets OpenGLWidgets Multimedia)
         add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy
                 "${QT_INSTALL_PATH}/bin/Qt6${QT_LIB}${DEBUG_SUFFIX}.dll"

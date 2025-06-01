@@ -1,7 +1,10 @@
 {
-    "modelName":"Nahida_1080",
-    "mode":"online",
-    "random":false,
-    "favorability":50,
-    "modelList":["Nahida_1080"]
+    "favorability": 100,
+    "isReacted": true,
+    "mode": "online",
+    "modelList": [
+        "Nahida_1080"
+    ],
+    "modelName": "Hiyori",
+    "random": false
 }
