@@ -38,6 +38,10 @@
 #include <QPixmap>
 #include <QBitmap>
 #include <QPainterPath>
+#include <QProcess>
+#include <QRandomGenerator>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -178,6 +182,22 @@ GLCore::~GLCore()
     if (recordingTimer) {
         recordingTimer->stop();
     }
+    
+    // 清理音乐播放器
+    stopAllMusic();
+    for (QMediaPlayer* player : musicPlayers) {
+        if (player) {
+            player->deleteLater();
+        }
+    }
+    musicPlayers.clear();
+    
+    for (QAudioOutput* output : audioOutputs) {
+        if (output) {
+            output->deleteLater();
+        }
+    }
+    audioOutputs.clear();
     
     // 清理好感度相关资源
     if (favorabilityTimer) {
@@ -1145,7 +1165,15 @@ void GLCore::updateConfigIsReacted(bool reacted) {
 // 发送按钮点击槽函数
 void GLCore::onSendButtonClicked() {
     qDebug() << "发送按钮被点击";
-    sendMessage();
+    
+    // 根据按钮2的状态选择不同的处理方式
+    if (button2State == Button2State::CommandMode) {
+        // 指令模式：执行指令解析
+        sendCommand();
+    } else {
+        // 聊天模式：发送消息
+        sendMessage();
+    }
 }
 
 // 文本改变槽函数
@@ -1497,6 +1525,8 @@ void GLCore::updateComponentsVisibility() {
         // 显示对话框
         if (chatContainer) chatContainer->setVisible(shouldShowBottomComponent);
         if (microphoneContainer) microphoneContainer->setVisible(false);
+        // 更新输入框提示文字
+        updateInputPlaceholder();
     } else if (button2State == Button2State::MicrophoneMode) {
         // 显示麦克风
         if (chatContainer) chatContainer->setVisible(false);
@@ -1819,4 +1849,273 @@ QIcon GLCore::createCircularIcon(const QString& iconPath, int size) {
     painter.end();
     
     return QIcon(roundedPixmap);
+}
+
+// ========== 指令系统实现 ==========
+
+// 更新输入框提示文字
+void GLCore::updateInputPlaceholder() {
+    if (!inputTextEdit) return;
+    
+    if (button2State == Button2State::CommandMode) {
+        inputTextEdit->setPlaceholderText("请输入指令");
+    } else {
+        inputTextEdit->setPlaceholderText("请输入文字");
+    }
+    
+    qDebug() << "更新输入框提示文字为:" << inputTextEdit->placeholderText();
+}
+
+// 发送指令（command模式）
+void GLCore::sendCommand() {
+    if (!inputTextEdit) return;
+    
+    QString command = inputTextEdit->toPlainText().trimmed();
+    if (command.isEmpty()) {
+        qDebug() << "指令为空，不执行";
+        return;
+    }
+    
+    qDebug() << "执行指令:" << command;
+    
+    // 解析并执行指令
+    parseAndExecuteCommand(command);
+    
+    // 清空输入框
+    inputTextEdit->clear();
+}
+
+// 解析并执行指令
+void GLCore::parseAndExecuteCommand(const QString& command) {
+    QStringList parts = command.split(' ', Qt::SkipEmptyParts);
+    
+    if (parts.isEmpty()) {
+        showCommandError("错误：指令不存在");
+        return;
+    }
+    
+    QString mainCommand = parts[0].toLower();
+    
+    if (mainCommand == "playmusic") {
+        executePlayMusicCommand(parts);
+    } else if (mainCommand == "execute") {
+        executeScriptCommand(parts);
+    } else {
+        showCommandError("错误：指令不存在");
+    }
+}
+
+// 执行音乐播放指令
+void GLCore::executePlayMusicCommand(const QStringList& args) {
+    if (args.size() == 1) {
+        // 没有参数时默认播放theme.mp3
+        QString defaultPath = QDir::currentPath() + "/UserData/music/theme.mp3";
+        
+        if (!QFile::exists(defaultPath)) {
+            showCommandError("错误：找不到默认音频文件theme.mp3");
+            return;
+        }
+        
+        QMediaPlayer* musicPlayer = createNewMusicPlayer();
+        if (musicPlayer) {
+            musicPlayer->setSource(QUrl::fromLocalFile(defaultPath));
+            musicPlayer->play();
+            qDebug() << "开始播放默认音乐:" << defaultPath;
+        } else {
+            showCommandError("错误：无法创建音乐播放器");
+        }
+        return;
+    }
+    
+    if (args.size() < 2) {
+        showCommandError("错误：playmusic指令格式错误");
+        return;
+    }
+    
+    QString action = args[1].toLower();
+    
+    if (action == "stop") {
+        // 停止所有音乐播放
+        stopAllMusic();
+        qDebug() << "已停止所有音乐播放";
+        return;
+    }
+    
+    QString musicDir = QDir::currentPath() + "/UserData/music";
+    QDir dir(musicDir);
+    
+    if (!dir.exists()) {
+        showCommandError("错误：音乐目录不存在");
+        return;
+    }
+    
+    // 获取所有mp3文件
+    QStringList mp3Files = dir.entryList(QStringList() << "*.mp3", QDir::Files);
+    
+    if (mp3Files.isEmpty()) {
+        showCommandError("错误：音乐目录中没有mp3文件");
+        return;
+    }
+    
+    QString targetFile;
+    
+    if (action == "random") {
+        // 随机选择一个mp3文件
+        int randomIndex = QRandomGenerator::global()->bounded(mp3Files.size());
+        targetFile = mp3Files[randomIndex];
+        qDebug() << "随机选择音乐文件:" << targetFile;
+    } else {
+        // 指定文件名
+        QString specifiedFile = args[1];
+        if (!specifiedFile.endsWith(".mp3", Qt::CaseInsensitive)) {
+            specifiedFile += ".mp3";
+        }
+        
+        // 检查文件是否存在
+        if (mp3Files.contains(specifiedFile, Qt::CaseInsensitive)) {
+            // 找到匹配的文件（不区分大小写）
+            for (const QString& file : mp3Files) {
+                if (file.compare(specifiedFile, Qt::CaseInsensitive) == 0) {
+                    targetFile = file;
+                    break;
+                }
+            }
+        } else {
+            showCommandError("错误：找不到对应的音频文件");
+            return;
+        }
+    }
+    
+    // 播放指定的音乐文件
+    QString fullPath = musicDir + "/" + targetFile;
+    
+    // 创建新的音乐播放器
+    QMediaPlayer* musicPlayer = createNewMusicPlayer();
+    if (musicPlayer) {
+        musicPlayer->setSource(QUrl::fromLocalFile(fullPath));
+        musicPlayer->play();
+        qDebug() << "开始播放音乐:" << fullPath;
+    } else {
+        showCommandError("错误：无法创建音乐播放器");
+    }
+}
+
+// 执行脚本指令
+void GLCore::executeScriptCommand(const QStringList& args) {
+    if (args.size() < 2) {
+        showCommandError("错误：execute指令格式错误");
+        return;
+    }
+    
+    QString scriptName = args[1];
+    if (!scriptName.endsWith(".bat", Qt::CaseInsensitive)) {
+        scriptName += ".bat";
+    }
+    
+    QString scriptPath = QDir::currentPath() + "/UserData/script/" + scriptName;
+    
+    if (!QFile::exists(scriptPath)) {
+        showCommandError("错误：找不到对应的脚本文件");
+        return;
+    }
+    
+    // 执行批处理文件
+    QProcess* process = new QProcess(this);
+    
+    // 连接进程完成信号
+    connect(process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+            this, [this, process, scriptName](int exitCode, QProcess::ExitStatus exitStatus) {
+        qDebug() << "脚本执行完成:" << scriptName << "退出码:" << exitCode;
+        process->deleteLater(); // 自动清理进程对象
+    });
+    
+    // 连接错误信号
+    connect(process, &QProcess::errorOccurred,
+            this, [this, process, scriptName](QProcess::ProcessError error) {
+        qDebug() << "脚本执行错误:" << scriptName << "错误:" << error;
+        showCommandError("错误：脚本执行失败");
+        process->deleteLater(); // 自动清理进程对象
+    });
+    
+    // 启动批处理文件
+    process->start("cmd.exe", QStringList() << "/c" << scriptPath);
+    qDebug() << "启动脚本:" << scriptPath;
+}
+
+// 显示指令错误信息
+void GLCore::showCommandError(const QString& message) {
+    if (timeoutLabel) {
+        // 使用超时标签显示错误信息
+        timeoutLabel->setText(message);
+        
+        // 计算标签位置（屏幕中上部）
+        int labelWidth = width() - 40;
+        int labelX = 20;
+        int labelY = height() / 4;
+        
+        timeoutLabel->setGeometry(labelX, labelY, labelWidth, 40);
+        timeoutLabel->setVisible(true);
+        
+        qDebug() << "显示指令错误信息:" << message;
+        
+        // 3秒后自动隐藏错误消息
+        QTimer::singleShot(3000, this, [this]() {
+            if (timeoutLabel) {
+                timeoutLabel->setVisible(false);
+                timeoutLabel->setText("AI后端响应超时！"); // 恢复原始文本
+                qDebug() << "隐藏指令错误信息";
+            }
+        });
+    }
+}
+
+// 停止所有音乐播放
+void GLCore::stopAllMusic() {
+    for (QMediaPlayer* player : musicPlayers) {
+        if (player) {
+            player->stop();
+        }
+    }
+    
+    // 清理已停止的播放器
+    for (int i = musicPlayers.size() - 1; i >= 0; --i) {
+        QMediaPlayer* player = musicPlayers[i];
+        if (player && player->playbackState() != QMediaPlayer::PlayingState) {
+            player->deleteLater();
+            musicPlayers.removeAt(i);
+        }
+    }
+    
+    qDebug() << "已停止所有音乐播放，当前播放器数量:" << musicPlayers.size();
+}
+
+// 创建新的音乐播放器
+QMediaPlayer* GLCore::createNewMusicPlayer() {
+    QMediaPlayer* musicPlayer = new QMediaPlayer(this);
+    QAudioOutput* audioOutput = new QAudioOutput(this);
+    
+    if (musicPlayer && audioOutput) {
+        // 设置音频输出
+        musicPlayer->setAudioOutput(audioOutput);
+        
+        // 添加到列表
+        musicPlayers.append(musicPlayer);
+        audioOutputs.append(audioOutput);
+        
+        // 连接播放完成信号，自动清理播放器
+        connect(musicPlayer, &QMediaPlayer::playbackStateChanged,
+                this, [this, musicPlayer, audioOutput](QMediaPlayer::PlaybackState state) {
+            if (state == QMediaPlayer::StoppedState) {
+                qDebug() << "音乐播放完成，清理播放器";
+                musicPlayers.removeOne(musicPlayer);
+                audioOutputs.removeOne(audioOutput);
+                musicPlayer->deleteLater();
+                audioOutput->deleteLater();
+            }
+        });
+        
+        qDebug() << "创建新的音乐播放器，当前播放器数量:" << musicPlayers.size();
+    }
+    
+    return musicPlayer;
 }

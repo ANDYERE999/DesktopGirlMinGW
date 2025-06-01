@@ -24,9 +24,12 @@
 #include <QMediaCaptureSession>
 #include <QAudioDevice>
 #include <QMediaDevices>
+#include <QProcess>
 #include <map>
 #include <string>
 #include "ProjectSources/Inc/AudioOutput.h"
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 // 热键配置结构体
 struct HotkeyConfig {
@@ -145,6 +148,10 @@ private:
     // 音频监测相关
     AudioOutput* audioPlayer;                       // 音频播放器实例
     
+    // 指令模式相关
+    QList<QMediaPlayer*> musicPlayers;             // 音乐播放器列表（支持多个同时播放）
+    QList<QAudioOutput*> audioOutputs;             // 音频输出设备列表
+    
     // 私有方法
     int readFavorabilityFromConfig(); // 从配置文件读取好感度
     void setupFavorabilityUI();      // 设置好感度UI
@@ -157,9 +164,19 @@ private:
     void updateChatUIStyle();        // 更新对话框样式
     void adjustInputHeight();        // 调整输入框高度
     void sendMessage();              // 发送消息
+    void sendCommand();              // 发送指令（command模式）
+    void updateInputPlaceholder();   // 更新输入框提示文字
     bool readIsReactedFromConfig();  // 从配置文件读取isReacted状态
     void updateConfigIsReacted(bool reacted); // 更新配置文件的isReacted值
     void updateChatPosition();       // 更新对话框位置
+    
+    // 指令系统相关方法
+    void parseAndExecuteCommand(const QString& command); // 解析并执行指令
+    void executePlayMusicCommand(const QStringList& args); // 执行音乐播放指令
+    void executeScriptCommand(const QStringList& args);    // 执行脚本指令
+    void showCommandError(const QString& message);         // 显示指令错误信息
+    void stopAllMusic();                                   // 停止所有音乐播放
+    QMediaPlayer* createNewMusicPlayer();                  // 创建新的音乐播放器
     
     // 超时机制相关方法
     void setupTimeoutUI();           // 设置超时UI

@@ -532,6 +532,8 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioformat.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaDevices \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediadevices.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QProcess \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qprocess.h \
  D:/project/DesktopGirlMinGW/ProjectSources/Inc/AudioOutput.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaPlayer \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaplayer.h \

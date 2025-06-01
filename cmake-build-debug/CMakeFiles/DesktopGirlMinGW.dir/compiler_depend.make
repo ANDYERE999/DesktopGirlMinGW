@@ -10,6 +10,7 @@ CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.ob
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QProcess \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTextStream \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QThread \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTimer \
@@ -108,6 +109,7 @@ CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.ob
   C:/Qt/6.9.0/mingw_64/include/QtCore/qoverload.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpair.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpoint.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qprocess.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qprocessordetection.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrefcount.h \
@@ -535,6 +537,8 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: D:/project/DesktopGirlMinGW/GLCo
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QList \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QObject \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QProcess \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QRandomGenerator \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QRect \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QSize \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QSizeF \
@@ -638,7 +642,9 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: D:/project/DesktopGirlMinGW/GLCo
   C:/Qt/6.9.0/mingw_64/include/QtCore/qoverload.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpair.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpoint.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qprocess.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qprocessordetection.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qrandom.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrefcount.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
@@ -921,6 +927,8 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: D:/project/DesktopGirlMinGW/GLCo
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/predefined_ops.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ptr_traits.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/quoted_string.h \
+  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/random.h \
+  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/random.tcc \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/range_access.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/refwrap.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h \
@@ -1022,6 +1030,7 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: D:/project/DesktopGirlMinGW/GLCo
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_memory_defs.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_numeric_defs.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/pstl_config.h \
+  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/random \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ratio \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/set \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/sstream \
@@ -1063,6 +1072,7 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: D:/project/DesktopGirlMinGW/GLCo
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/gthr-default.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/gthr.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/messages_members.h \
+  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/opt_random.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/time_members.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/cetintrin.h \
@@ -1437,6 +1447,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj: D:/project/
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QProcess \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTextStream \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QThread \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTimer \
@@ -1533,6 +1544,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj: D:/project/
   C:/Qt/6.9.0/mingw_64/include/QtCore/qoverload.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpair.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpoint.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qprocess.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qprocessordetection.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrefcount.h \
@@ -1982,6 +1994,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj: D:/pro
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QProcess \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTextStream \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QThread \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTimer \
@@ -2078,6 +2091,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj: D:/pro
   C:/Qt/6.9.0/mingw_64/include/QtCore/qoverload.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpair.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpoint.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qprocess.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qprocessordetection.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrefcount.h \
@@ -2550,6 +2564,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.obj: D:/project/Des
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QProcess \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTextStream \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QThread \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTimer \
@@ -2646,6 +2661,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.obj: D:/project/Des
   C:/Qt/6.9.0/mingw_64/include/QtCore/qoverload.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpair.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpoint.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qprocess.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qprocessordetection.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrefcount.h \
@@ -3510,6 +3526,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj: D:/project/Desk
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QProcess \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTextStream \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QThread \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTimer \
@@ -3606,6 +3623,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj: D:/project/Desk
   C:/Qt/6.9.0/mingw_64/include/QtCore/qoverload.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpair.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpoint.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qprocess.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qprocessordetection.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrefcount.h \
@@ -4650,6 +4668,7 @@ CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj: D:/project/DesktopGirlMinGW/main.c
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonArray \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QProcess \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTextStream \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QThread \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTimer \
@@ -4750,6 +4769,7 @@ CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj: D:/project/DesktopGirlMinGW/main.c
   C:/Qt/6.9.0/mingw_64/include/QtCore/qoverload.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpair.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qpoint.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qprocess.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qprocessordetection.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrefcount.h \
@@ -5186,6 +5206,12 @@ C:/Qt/6.9.0/mingw_64/include/QtGui/qvectornd.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qbytearray.h:
 
+C:/Qt/6.9.0/mingw_64/include/QtCore/QProcess:
+
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtextedit.h:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ostream.tcc:
+
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ios_base.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/QDateTime:
@@ -5471,6 +5497,10 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qfileinfo.h:
 C:/Qt/6.9.0/mingw_64/include/QtGui/qtguiglobal.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qflags.h:
+
+C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/psdk_inc/_socket_types.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtCore/qprocess.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qfloat16.h:
 
@@ -6068,10 +6098,6 @@ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qprogressbar.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qpushbutton.h:
 
-C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtextedit.h:
-
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ostream.tcc:
-
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/avxneconvertintrin.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtwidgets-config.h:
@@ -6308,8 +6334,6 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qnativeinterface.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/uses_allocator.h:
 
-C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/string.h:
-
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/climits:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/clocale:
@@ -6402,6 +6426,8 @@ C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/virtdisk.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/system_error:
 
+C:/Qt/6.9.0/mingw_64/include/QtCore/QRandomGenerator:
+
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/tr1/beta_function.tcc:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/tr1/ell_integral.tcc:
@@ -6480,6 +6506,8 @@ D:/project/DesktopGirlMinGW/Thirdparty/Framework/src/CubismFramework.hpp:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/pthread_signal.h:
 
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/random.h:
+
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/pthread_time.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/sec_api/stdio_s.h:
@@ -6493,6 +6521,8 @@ C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/ole2.h:
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/stddef.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/stdint.h:
+
+C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/string.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/swprintf.inl:
 
@@ -6537,6 +6567,8 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreapplication_platform.h:
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/sal.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreevent.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtCore/qrandom.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter:
 
@@ -6629,6 +6661,12 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/avxvnniintrin
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/bmiintrin.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/bmi2intrin.h:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/random.tcc:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/random:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/opt_random.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/cetintrin.h:
 
@@ -6799,8 +6837,6 @@ C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/processtopologyapi.h:
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/propidl.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/psdk_inc/_ip_mreq1.h:
-
-C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/psdk_inc/_socket_types.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/psdk_inc/intrin-impl.h:
 
