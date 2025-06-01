@@ -522,9 +522,11 @@ void GLCore::detectAndInitializeModel() {
     QString primaryDir = "Resources/" + primaryModel;
     QString primaryVtubeConfig = QDir::currentPath() + "/" + primaryDir + "/" + primaryModel + ".vtube.json";
     
+    // 设置当前模型目录为指定的模型
+    currentModelDirectory = primaryDir;
+    
     if (QFile::exists(primaryVtubeConfig)) {
         qDebug() << "发现配置指定的模型配置:" << primaryVtubeConfig;
-        currentModelDirectory = primaryDir;
         
         if (loadVTubeHotkeyConfig(primaryDir)) {
             isHotkeySystemReady = true;
@@ -534,30 +536,11 @@ void GLCore::detectAndInitializeModel() {
         }
     }
     
-    // 如果指定模型不可用，回退到检测所有可能的模型
-    QStringList possibleDirs = {"Resources/Nahida_1080", "Resources/Haru", "Resources/Mao", "Resources/llny"};
-    
-    for (const QString& dir : possibleDirs) {
-        if (dir == primaryDir) continue; // 跳过已经检查过的主要模型
-        
-        QString fullPath = QDir::currentPath() + "/" + dir;
-        QString vtubeConfigPath = fullPath + "/" + QFileInfo(dir).baseName() + ".vtube.json";
-        
-        if (QFile::exists(vtubeConfigPath)) {
-            qDebug() << "发现备用模型配置:" << vtubeConfigPath;
-            currentModelDirectory = dir;
-            
-            // 加载热键配置
-            if (loadVTubeHotkeyConfig(dir)) {
-                isHotkeySystemReady = true;
-                printHotkeyMappings();
-                qDebug() << "热键系统初始化成功!";
-                return;
-            }
-        }
-    }
-    
-    qDebug() << "警告: 未找到有效的模型配置，热键系统不可用";
+    // 如果指定模型没有热键配置，输出无配置信息，不再回退到备用模型
+    qDebug() << "指定模型" << primaryModel << "没有热键配置";
+    isHotkeySystemReady = false;
+    hotkeyConfigs.clear(); // 确保清空配置
+    printHotkeyMappings(); // 输出"无热键配置"信息
 }
 
 // 加载VTube热键配置
@@ -744,7 +727,8 @@ QString GLCore::mapQtKeyToVTubeKey(int qtKey) {
 
 // 打印热键映射信息并保存到文件
 void GLCore::printHotkeyMappings() {
-    QString headerText = "========== " + currentModelDirectory + " 热键映射 ==========";
+    QString modelName = QFileInfo(currentModelDirectory).baseName();
+    QString headerText = "========== " + modelName + " 热键映射 ==========";
     QString footerText = "==============================================";
     
     qDebug() << headerText;
@@ -755,9 +739,19 @@ void GLCore::printHotkeyMappings() {
     fileContent << "";  // 空行
     
     if (hotkeyConfigs.empty()) {
-        QString emptyMsg = "没有可用的热键映射";
+        QString emptyMsg = "当前模型 " + modelName + " 没有热键配置";
         qDebug() << emptyMsg;
         fileContent << emptyMsg;
+        fileContent << "";
+        fileContent << "可能的原因:";
+        fileContent << "  1. 模型目录下没有对应的 .vtube.json 文件";
+        fileContent << "  2. .vtube.json 文件中没有有效的热键配置";
+        fileContent << "  3. 热键配置文件格式不正确";
+        fileContent << "";
+        fileContent << "如需添加热键支持，请:";
+        fileContent << "  1. 确保模型目录下有 " + modelName + ".vtube.json 文件";
+        fileContent << "  2. 文件中包含有效的 Hotkeys 配置项";
+        fileContent << "  3. 确保表情文件(.exp3.json)存在于模型目录中";
     } else {
         // 按键名排序以获得一致的输出
         QStringList sortedKeys;
@@ -810,8 +804,13 @@ void GLCore::printHotkeyMappings() {
         // 添加使用说明
         out << Qt::endl;
         out << "# 使用说明:" << Qt::endl;
-        out << "# - 按对应的键即可触发表情动作" << Qt::endl;
-        out << "# - 按 ESC 键触发随机表情" << Qt::endl;
+        if (hotkeyConfigs.empty()) {
+            out << "# - 当前模型无热键配置，只能使用以下基本功能:" << Qt::endl;
+            out << "# - 按 ESC 键触发随机表情" << Qt::endl;
+        } else {
+            out << "# - 按对应的键即可触发表情动作" << Qt::endl;
+            out << "# - 按 ESC 键触发随机表情" << Qt::endl;
+        }
         out << "# - 右键点击模型可切换窗口边框显示/隐藏" << Qt::endl;
         out << "# - 修改 config.json 中的 modelName 可切换不同模型" << Qt::endl;
         

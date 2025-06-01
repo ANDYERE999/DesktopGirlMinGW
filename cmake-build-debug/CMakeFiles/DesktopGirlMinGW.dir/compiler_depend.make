@@ -699,11 +699,15 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: D:/project/DesktopGirlMinGW/GLCo
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QBitmap \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QFontMetrics \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QKeyEvent \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QPainterPath \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QResizeEvent \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QSurfaceFormat \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QTextDocument \
@@ -731,6 +735,8 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: D:/project/DesktopGirlMinGW/GLCo
   C:/Qt/6.9.0/mingw_64/include/QtGui/qopengl.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qopenglext.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qpaintdevice.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qpainterpath.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qpalette.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qpicture.h \
@@ -5332,6 +5338,8 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qbindingstorage.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/tr1/modified_bessel_func.tcc:
 
+C:/Qt/6.9.0/mingw_64/include/QtGui/qpainterpath.h:
+
 C:/Qt/6.9.0/mingw_64/include/QtCore/qbuffer.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qeventloop.h:
@@ -6530,6 +6538,10 @@ C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/sal.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qcoreevent.h:
 
+C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/QBitmap:
+
 D:/project/DesktopGirlMinGW/LAppLive2D/Inc/LAppSprite.hpp:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/QFontMetrics:
@@ -6537,6 +6549,10 @@ C:/Qt/6.9.0/mingw_64/include/QtGui/QFontMetrics:
 D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppView.cpp:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/QKeyEvent:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/QPainterPath:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/raointintrin.h:
 
@@ -6549,6 +6565,10 @@ C:/Qt/6.9.0/mingw_64/include/QtGui/QTransform:
 C:/Qt/6.9.0/mingw_64/include/QtGui/qevent.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h:
+
+D:/project/DesktopGirlMinGW/Thirdparty/Framework/src/Live2DCubismCore.hpp:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h:
 
 D:/project/DesktopGirlMinGW/LAppLive2D/Inc/LAppAllocator.hpp:
 
@@ -6857,8 +6877,6 @@ D:/project/DesktopGirlMinGW/Thirdparty/Framework/src/Effect/CubismBreath.hpp:
 D:/project/DesktopGirlMinGW/Thirdparty/Framework/src/ICubismModelSetting.hpp:
 
 D:/project/DesktopGirlMinGW/Thirdparty/Framework/src/Id/CubismId.hpp:
-
-D:/project/DesktopGirlMinGW/Thirdparty/Framework/src/Live2DCubismCore.hpp:
 
 D:/project/DesktopGirlMinGW/Thirdparty/Framework/src/Math/CubismTargetPoint.hpp:
 

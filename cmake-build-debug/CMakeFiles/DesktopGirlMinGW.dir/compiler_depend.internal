@@ -701,11 +701,15 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj
  C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h
  C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h
  C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QBitmap
  C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices
  C:/Qt/6.9.0/mingw_64/include/QtGui/QFontMetrics
  C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon
  C:/Qt/6.9.0/mingw_64/include/QtGui/QKeyEvent
  C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QPainterPath
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap
  C:/Qt/6.9.0/mingw_64/include/QtGui/QResizeEvent
  C:/Qt/6.9.0/mingw_64/include/QtGui/QSurfaceFormat
  C:/Qt/6.9.0/mingw_64/include/QtGui/QTextDocument
@@ -733,6 +737,8 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj
  C:/Qt/6.9.0/mingw_64/include/QtGui/qopengl.h
  C:/Qt/6.9.0/mingw_64/include/QtGui/qopenglext.h
  C:/Qt/6.9.0/mingw_64/include/QtGui/qpaintdevice.h
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpainterpath.h
  C:/Qt/6.9.0/mingw_64/include/QtGui/qpalette.h
  C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h
  C:/Qt/6.9.0/mingw_64/include/QtGui/qpicture.h
