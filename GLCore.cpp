@@ -1927,12 +1927,25 @@ void GLCore::executePlayMusicCommand(const QStringList& args) {
         return;
     }
     
-    if (args.size() < 2) {
-        showCommandError("错误：playmusic指令格式错误");
+    // 检查是否有-r参数（循环播放）
+    bool isLooping = false;
+    QStringList processedArgs = args;
+    
+    // 如果第二个参数是-r，则启用循环播放
+    if (args.size() >= 2 && args[1] == "-r") {
+        isLooping = true;
+        processedArgs.removeAt(1); // 移除-r参数
+        qDebug() << "检测到循环播放参数";
+    }
+    
+    // 如果移除-r后只剩下主命令，则报错
+    if (processedArgs.size() == 1) {
+        showCommandError("错误：-r参数后缺少文件名");
         return;
     }
     
-    QString action = args[1].toLower();
+    // 将除第一个参数外的所有参数重新拼接，支持包含空格的文件名
+    QString action = processedArgs.mid(1).join(" ").toLower();
     
     if (action == "stop") {
         // 停止所有音乐播放
@@ -1965,8 +1978,8 @@ void GLCore::executePlayMusicCommand(const QStringList& args) {
         targetFile = mp3Files[randomIndex];
         qDebug() << "随机选择音乐文件:" << targetFile;
     } else {
-        // 指定文件名
-        QString specifiedFile = args[1];
+        // 指定文件名（支持包含空格的文件名）
+        QString specifiedFile = action;  // 使用拼接后的完整文件名
         if (!specifiedFile.endsWith(".mp3", Qt::CaseInsensitive)) {
             specifiedFile += ".mp3";
         }
@@ -1993,8 +2006,15 @@ void GLCore::executePlayMusicCommand(const QStringList& args) {
     QMediaPlayer* musicPlayer = createNewMusicPlayer();
     if (musicPlayer) {
         musicPlayer->setSource(QUrl::fromLocalFile(fullPath));
+        
+        // 设置循环播放
+        if (isLooping) {
+            musicPlayer->setLoops(QMediaPlayer::Infinite);
+            qDebug() << "设置为循环播放模式";
+        }
+        
         musicPlayer->play();
-        qDebug() << "开始播放音乐:" << fullPath;
+        qDebug() << "开始播放音乐:" << fullPath << (isLooping ? "(循环模式)" : "");
     } else {
         showCommandError("错误：无法创建音乐播放器");
     }
