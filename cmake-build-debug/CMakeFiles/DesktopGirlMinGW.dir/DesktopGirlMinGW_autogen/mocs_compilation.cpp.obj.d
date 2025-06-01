@@ -486,23 +486,32 @@ CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.ob
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLabel \
  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlabel.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qpicture.h \
- D:/project/DesktopGirlMinGW/ProjectSources/Inc/AudioOutput.h \
- C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaPlayer \
- C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaplayer.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qdesktopservices.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QUrl \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qurl.h \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaRecorder \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediarecorder.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaglobal.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediametadata.h \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioInput \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioinput.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtaudio.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudio.h \
- C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioOutput \
- C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaCaptureSession \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediacapturesession.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioDevice \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiodevice.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioformat.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaDevices \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediadevices.h \
- C:/Qt/6.9.0/mingw_64/include/QtCore/QUrl \
- C:/Qt/6.9.0/mingw_64/include/QtCore/qurl.h \
+ D:/project/DesktopGirlMinGW/ProjectSources/Inc/AudioOutput.h \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaPlayer \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaplayer.h \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioOutput \
+ C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QThread \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qthread.h \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/future \

@@ -25,6 +25,19 @@
 #include <QTextDocument>
 #include <QLabel>
 #include <QThread>
+#include <QIcon>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QMediaRecorder>
+#include <QAudioInput>
+#include <QMediaCaptureSession>
+#include <QAudioDevice>
+#include <QMediaDevices>
+#include <QMediaFormat>
+#include <QPainter>
+#include <QPixmap>
+#include <QBitmap>
+#include <QPainterPath>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -55,7 +68,24 @@ GLCore::GLCore(int w, int h, QWidget *parent)
       timeoutTimer(nullptr),      // 初始化超时定时器
       timeoutLabel(nullptr),      // 初始化超时标签
       isWaitingForResponse(false), // 初始化响应等待状态
-      audioPlayer(nullptr)        // 初始化音频播放器
+      audioPlayer(nullptr),       // 初始化音频播放器
+      // 新增的成员变量初始化
+      buttonContainer(nullptr),   // 初始化按钮容器
+      buttonLayout(nullptr),      // 初始化按钮布局
+      button1(nullptr),           // 初始化按钮1
+      button2(nullptr),           // 初始化按钮2
+      button3(nullptr),           // 初始化按钮3
+      button1State(Button1State::Hide), // 初始化按钮1状态
+      button2State(Button2State::ChatMode), // 初始化按钮2状态
+      componentsVisible(true),    // 初始化组件可见性
+      microphoneContainer(nullptr), // 初始化麦克风容器
+      microphoneButton(nullptr),  // 初始化麦克风按钮
+      microphoneState(MicrophoneState::Start), // 初始化麦克风状态
+      mediaRecorder(nullptr),     // 初始化媒体录音器
+      audioInput(nullptr),        // 初始化音频输入
+      captureSession(nullptr),    // 初始化捕获会话
+      recordingTimer(nullptr),    // 初始化录音计时器
+      isRecording(false)          // 初始化录音状态
 {
     this->resize(w, h);
     setFocusPolicy(Qt::StrongFocus);  // 确保可以接收键盘事件
@@ -93,8 +123,22 @@ GLCore::GLCore(int w, int h, QWidget *parent)
     // 初始化超时UI
     setupTimeoutUI();
     
+    // 初始化按钮UI
+    setupButtonUI();
+    
+    // 初始化麦克风UI
+    setupMicrophoneUI();
+    
+    // 设置录音系统
+    setupRecording();
+    
     // 不要在构造函数中初始化热键系统，等Live2D准备好再初始化
     qDebug() << "GLCore constructor: 延迟初始化热键系统，等待Live2D准备完成";
+    
+    // 程序启动时默认设置isReacted为true
+    updateConfigIsReacted(true);
+    isReacted = true;
+    qDebug() << "程序启动：设置默认isReacted=true";
     
     // 显示窗口以获取有效的窗口句柄
     this->show();
@@ -122,6 +166,19 @@ GLCore::GLCore(int w, int h, QWidget *parent)
 
 GLCore::~GLCore()
 {
+    // 清理录音相关资源
+    if (isRecording) {
+        stopRecording();
+    }
+    
+    if (mediaRecorder) {
+        mediaRecorder->stop();
+    }
+    
+    if (recordingTimer) {
+        recordingTimer->stop();
+    }
+    
     // 清理好感度相关资源
     if (favorabilityTimer) {
         favorabilityTimer->stop();
@@ -176,20 +233,8 @@ void GLCore::mousePressEvent(QMouseEvent* event)
         // 重新显示窗口以应用更改
         this->show();
         
-        // 在show()之后设置进度条可见性，防止被重置
-        if (favorabilityBar) {
-            bool shouldShow = !isFrameless;  // 有边框时显示
-            favorabilityBar->setVisible(shouldShow);
-            qDebug() << "Setting progress bar visible:" << shouldShow;
-            qDebug() << "Progress bar actual visible:" << favorabilityBar->isVisible();
-        }
-        
-        // 在show()之后设置对话框可见性，防止被重置
-        if (chatContainer) {
-            bool shouldShow = !isFrameless && isReacted;  // 有边框且已反应时显示对话框
-            chatContainer->setVisible(shouldShow);
-            qDebug() << "Setting chat container visible:" << shouldShow << "(frameless:" << isFrameless << ", isReacted:" << isReacted << ")";
-        }
+        // 在show()之后更新所有组件的可见性
+        updateComponentsVisibility();
         
         this->isRightPressed = true;
     }
@@ -255,6 +300,9 @@ void GLCore::resizeEvent(QResizeEvent* event)
         favorabilityBar->setGeometry(margin, margin, width() - 2 * margin, 20);
     }
     
+    // 调整按钮容器位置
+    updateButtonContainer();
+    
     // 调整对话框位置和大小
     if (chatContainer) {
         int margin = 10;
@@ -264,6 +312,9 @@ void GLCore::resizeEvent(QResizeEvent* event)
                                    width() - 2 * margin, containerHeight);
         qDebug() << "对话框位置调整:" << chatContainer->geometry();
     }
+    
+    // 调整麦克风容器位置
+    updateMicrophoneContainer();
     
     // 调整超时标签位置
     if (timeoutLabel && timeoutLabel->isVisible()) {
@@ -399,11 +450,8 @@ void GLCore::updateFavorability() {
             isWaitingForResponse = false;
         }
         
-        // 只有在有边框模式下才考虑显示对话框
-        if (chatContainer && !isFrameless) {
-            chatContainer->setVisible(isReacted);
-            qDebug() << "根据isReacted状态更新对话框显示:" << isReacted;
-        }
+        // 更新组件可见性
+        updateComponentsVisibility();
     }
     
     // 持续监控并调整对话框位置 - 每秒更新一次
@@ -1155,11 +1203,9 @@ void GLCore::handleResponseTimeout() {
     isReacted = true;
     isWaitingForResponse = false;
     
-    // 显示对话框
-    if (chatContainer && !isFrameless) {
-        chatContainer->setVisible(true);
-        qDebug() << "超时后恢复对话框显示";
-    }
+    // 根据当前按钮状态更新组件可见性，而不是硬编码显示对话框
+    updateComponentsVisibility();
+    qDebug() << "超时后根据当前模式恢复组件显示";
     
     // 显示超时消息
     if (timeoutLabel) {
@@ -1278,4 +1324,500 @@ void GLCore::cleanupTemporaryAudioFiles() {
             qDebug() << "清理临时音频文件失败:" << tempAudioPath;
         }
     }
+}
+
+// ========== 新增方法实现 ==========
+
+// 设置按钮UI
+void GLCore::setupButtonUI() {
+    // 创建按钮容器
+    buttonContainer = new QFrame(this);
+    buttonContainer->setFixedWidth(80); // 固定宽度
+    buttonContainer->setVisible(false); // 初始隐藏，只在有边框模式显示
+    
+    // 创建垂直布局
+    buttonLayout = new QVBoxLayout(buttonContainer);
+    buttonLayout->setContentsMargins(10, 20, 10, 10);
+    buttonLayout->setSpacing(15);
+    buttonLayout->setAlignment(Qt::AlignTop);
+    
+    // 创建按钮1（隐藏/显示）
+    button1 = new QPushButton(buttonContainer);
+    button1->setFixedSize(60, 60);
+    button1->setIconSize(QSize(50, 50));
+    updateButton1Icon();
+    
+    // 创建按钮2（模式切换）
+    button2 = new QPushButton(buttonContainer);
+    button2->setFixedSize(60, 60);
+    button2->setIconSize(QSize(50, 50));
+    updateButton2Icon();
+    
+    // 创建按钮3（指南）
+    button3 = new QPushButton(buttonContainer);
+    button3->setFixedSize(60, 60);
+    button3->setIconSize(QSize(50, 50));
+    QString button3IconPath = QDir::currentPath() + "/asset/Buttons/3_guidebook.ico";
+    QIcon button3CircularIcon = createCircularIcon(button3IconPath, 50);
+    button3->setIcon(button3CircularIcon);
+    
+    // 设置按钮样式为圆形
+    QString buttonStyle = R"(
+        QPushButton {
+            border-radius: 30px;
+            background-color: rgba(255, 255, 255, 240);
+            border: 2px solid #CCCCCC;
+            padding: 0px;
+        }
+        QPushButton:hover {
+            background-color: rgba(230, 230, 230, 250);
+            border: 2px solid #999999;
+        }
+        QPushButton:pressed {
+            background-color: rgba(200, 200, 200, 250);
+            border: 2px solid #666666;
+        }
+        QPushButton::icon {
+            border-radius: 25px;
+            padding: 5px;
+        }
+    )";
+    
+    button1->setStyleSheet(buttonStyle);
+    button2->setStyleSheet(buttonStyle);
+    button3->setStyleSheet(buttonStyle);
+    
+    // 添加按钮到布局
+    buttonLayout->addWidget(button1);
+    buttonLayout->addWidget(button2);
+    buttonLayout->addWidget(button3);
+    buttonLayout->addStretch(); // 添加伸缩空间
+    
+    // 连接信号
+    connect(button1, &QPushButton::clicked, this, &GLCore::onButton1Clicked);
+    connect(button2, &QPushButton::clicked, this, &GLCore::onButton2Clicked);
+    connect(button3, &QPushButton::clicked, this, &GLCore::onButton3Clicked);
+    
+    qDebug() << "按钮UI初始化完成";
+}
+
+// 设置麦克风UI
+void GLCore::setupMicrophoneUI() {
+    // 创建麦克风容器
+    microphoneContainer = new QFrame(this);
+    microphoneContainer->setFixedSize(120, 120);
+    microphoneContainer->setVisible(false); // 初始隐藏
+    
+    // 创建麦克风按钮
+    microphoneButton = new QPushButton(microphoneContainer);
+    microphoneButton->setFixedSize(100, 100);
+    microphoneButton->setIconSize(QSize(80, 80));
+    microphoneButton->move(10, 10); // 居中放置
+    updateMicrophoneIcon();
+    
+    // 设置麦克风按钮样式为圆形
+    QString micButtonStyle = R"(
+        QPushButton {
+            border-radius: 50px;
+            background-color: rgba(255, 255, 255, 240);
+            border: 3px solid #4CAF50;
+            padding: 0px;
+        }
+        QPushButton:hover {
+            background-color: rgba(230, 255, 230, 250);
+            border: 3px solid #45a049;
+        }
+        QPushButton:pressed {
+            background-color: rgba(200, 255, 200, 250);
+            border: 3px solid #3d8b40;
+        }
+        QPushButton::icon {
+            border-radius: 40px;
+            padding: 10px;
+        }
+    )";
+    microphoneButton->setStyleSheet(micButtonStyle);
+    
+    // 连接信号
+    connect(microphoneButton, &QPushButton::clicked, this, &GLCore::onMicrophoneClicked);
+    
+    qDebug() << "麦克风UI初始化完成";
+}
+
+// 更新按钮容器位置
+void GLCore::updateButtonContainer() {
+    if (!buttonContainer) return;
+    
+    // 将按钮容器放置在窗口左侧
+    int containerHeight = buttonContainer->sizeHint().height();
+    buttonContainer->setGeometry(10, 30, 80, height() - 60);
+    
+    qDebug() << "按钮容器位置调整:" << buttonContainer->geometry();
+}
+
+// 更新麦克风容器位置
+void GLCore::updateMicrophoneContainer() {
+    if (!microphoneContainer) return;
+    
+    // 将麦克风容器放置在窗口底部中央（与对话框同位置）
+    int margin = 10;
+    int containerWidth = microphoneContainer->width();
+    int containerHeight = microphoneContainer->height();
+    int x = (width() - containerWidth) / 2;
+    int y = height() - containerHeight - margin;
+    
+    microphoneContainer->setGeometry(x, y, containerWidth, containerHeight);
+    
+    qDebug() << "麦克风容器位置调整:" << microphoneContainer->geometry();
+}
+
+// 更新组件可见性
+void GLCore::updateComponentsVisibility() {
+    if (isFrameless) {
+        // 无边框模式：隐藏所有UI组件
+        if (buttonContainer) buttonContainer->setVisible(false);
+        if (favorabilityBar) favorabilityBar->setVisible(false);
+        if (chatContainer) chatContainer->setVisible(false);
+        if (microphoneContainer) microphoneContainer->setVisible(false);
+        return;
+    }
+    
+    // 有边框模式：根据按钮1状态决定其他组件的可见性
+    bool shouldShowComponents = componentsVisible && (button1State == Button1State::Show);
+    
+    // 按钮容器始终显示（在有边框模式下）
+    if (buttonContainer) buttonContainer->setVisible(true);
+    
+    // 好感度条的可见性
+    if (favorabilityBar) favorabilityBar->setVisible(shouldShowComponents);
+    
+    // 底部组件的可见性（根据按钮2的状态）
+    bool shouldShowBottomComponent = shouldShowComponents && isReacted;
+    
+    if (button2State == Button2State::ChatMode || button2State == Button2State::CommandMode) {
+        // 显示对话框
+        if (chatContainer) chatContainer->setVisible(shouldShowBottomComponent);
+        if (microphoneContainer) microphoneContainer->setVisible(false);
+    } else if (button2State == Button2State::MicrophoneMode) {
+        // 显示麦克风
+        if (chatContainer) chatContainer->setVisible(false);
+        if (microphoneContainer) microphoneContainer->setVisible(shouldShowBottomComponent);
+    }
+    
+    qDebug() << "组件可见性更新 - 边框:" << !isFrameless 
+             << "组件可见:" << shouldShowComponents 
+             << "底部组件可见:" << shouldShowBottomComponent
+             << "按钮2状态:" << static_cast<int>(button2State);
+}
+
+// 播放点击音效
+void GLCore::playClickSound() {
+    if (audioPlayer) {
+        QString clickSoundPath = QDir::currentPath() + "/asset/Buttons/click_effect.mp3";
+        if (QFile::exists(clickSoundPath)) {
+            audioPlayer->setAudioPath(clickSoundPath);
+            audioPlayer->playAudio();
+            qDebug() << "播放点击音效:" << clickSoundPath;
+        } else {
+            qDebug() << "点击音效文件不存在:" << clickSoundPath;
+        }
+    }
+}
+
+// 更新按钮1图标
+void GLCore::updateButton1Icon() {
+    if (!button1) return;
+    
+    QString iconPath;
+    if (button1State == Button1State::Hide) {
+        iconPath = QDir::currentPath() + "/asset/Buttons/1_hide.ico";
+    } else {
+        iconPath = QDir::currentPath() + "/asset/Buttons/1_show.ico";
+    }
+    
+    // 创建圆形蒙版图标
+    QIcon circularIcon = createCircularIcon(iconPath, 50);
+    button1->setIcon(circularIcon);
+    qDebug() << "更新按钮1图标:" << iconPath;
+}
+
+// 更新按钮2图标
+void GLCore::updateButton2Icon() {
+    if (!button2) return;
+    
+    QString iconPath;
+    switch (button2State) {
+        case Button2State::ChatMode:
+            iconPath = QDir::currentPath() + "/asset/Buttons/2_chat_mode.ico";
+            break;
+        case Button2State::MicrophoneMode:
+            iconPath = QDir::currentPath() + "/asset/Buttons/2_microphone_mode.ico";
+            break;
+        case Button2State::CommandMode:
+            iconPath = QDir::currentPath() + "/asset/Buttons/2_command_mode.ico";
+            break;
+    }
+    
+    // 创建圆形蒙版图标
+    QIcon circularIcon = createCircularIcon(iconPath, 50);
+    button2->setIcon(circularIcon);
+    qDebug() << "更新按钮2图标:" << iconPath;
+}
+
+// 更新麦克风图标
+void GLCore::updateMicrophoneIcon() {
+    if (!microphoneButton) return;
+    
+    QString iconPath;
+    if (microphoneState == MicrophoneState::Start) {
+        iconPath = QDir::currentPath() + "/asset/microphone_widget/microphone_Start.png";
+    } else {
+        iconPath = QDir::currentPath() + "/asset/microphone_widget/microphone_Stop.png";
+    }
+    
+    // 创建圆形蒙版图标
+    QIcon circularIcon = createCircularIcon(iconPath, 80);
+    microphoneButton->setIcon(circularIcon);
+    qDebug() << "更新麦克风图标:" << iconPath;
+}
+
+// 设置录音
+void GLCore::setupRecording() {
+    // 创建录音相关组件
+    captureSession = new QMediaCaptureSession(this);
+    mediaRecorder = new QMediaRecorder(this);
+    
+    // 获取默认音频输入设备
+    QAudioDevice defaultAudioInput = QMediaDevices::defaultAudioInput();
+    if (defaultAudioInput.isNull()) {
+        qDebug() << "警告：未找到音频输入设备";
+        return;
+    }
+    
+    audioInput = new QAudioInput(defaultAudioInput, this);
+    
+    // 设置捕获会话
+    captureSession->setAudioInput(audioInput);
+    captureSession->setRecorder(mediaRecorder);
+    
+    // 创建录音计时器（最长1分钟）
+    recordingTimer = new QTimer(this);
+    recordingTimer->setSingleShot(true);
+    connect(recordingTimer, &QTimer::timeout, this, &GLCore::onRecordingTimeout);
+    
+    // 连接录音完成信号
+    connect(mediaRecorder, &QMediaRecorder::recorderStateChanged, 
+            this, [this](QMediaRecorder::RecorderState state) {
+        qDebug() << "录音状态变化:" << state;
+        if (state == QMediaRecorder::StoppedState && isRecording) {
+            finishRecording();
+        }
+    });
+    
+    qDebug() << "录音系统初始化完成";
+}
+
+// 开始录音
+void GLCore::startRecording() {
+    if (!mediaRecorder || isRecording) {
+        qDebug() << "无法开始录音：录音器不可用或已在录音中";
+        return;
+    }
+    
+    // 确保输出目录存在
+    QDir contactDir(QDir::currentPath() + "/contact");
+    if (!contactDir.exists()) {
+        contactDir.mkpath(".");
+    }
+    
+    QString outputPath = QDir::currentPath() + "/contact/voice.mp3";
+    
+    // 如果文件已存在，先删除
+    if (QFile::exists(outputPath)) {
+        QFile::remove(outputPath);
+    }
+    
+    // 设置录音格式和输出位置
+    mediaRecorder->setOutputLocation(QUrl::fromLocalFile(outputPath));
+    
+    // 设置音频格式
+    QMediaFormat format;
+    format.setFileFormat(QMediaFormat::MP3);
+    format.setAudioCodec(QMediaFormat::AudioCodec::MP3);
+    mediaRecorder->setMediaFormat(format);
+    
+    // 设置音频质量
+    mediaRecorder->setAudioSampleRate(44100);
+    mediaRecorder->setAudioBitRate(128000);
+    
+    // 开始录音
+    mediaRecorder->record();
+    isRecording = true;
+    
+    // 启动超时计时器（60秒）
+    recordingTimer->start(60000);
+    
+    // 更新麦克风状态和图标
+    microphoneState = MicrophoneState::Stop;
+    updateMicrophoneIcon();
+    
+    qDebug() << "开始录音，输出到:" << outputPath;
+}
+
+// 停止录音
+void GLCore::stopRecording() {
+    if (!isRecording) {
+        qDebug() << "当前未在录音，无需停止";
+        return;
+    }
+    
+    // 停止录音计时器
+    if (recordingTimer && recordingTimer->isActive()) {
+        recordingTimer->stop();
+    }
+    
+    // 停止录音
+    if (mediaRecorder) {
+        mediaRecorder->stop();
+    }
+    
+    qDebug() << "停止录音";
+}
+
+// 完成录音处理
+void GLCore::finishRecording() {
+    isRecording = false;
+    
+    // 更新麦克风状态和图标
+    microphoneState = MicrophoneState::Start;
+    updateMicrophoneIcon();
+    
+    // 设置config.json的isReacted为false
+    updateConfigIsReacted(false);
+    isReacted = false;
+    
+    // 启动AI响应超时计时
+    startResponseTimeout();
+    
+    // 隐藏麦克风组件
+    if (microphoneContainer) {
+        microphoneContainer->setVisible(false);
+    }
+    
+    qDebug() << "录音完成，设置isReacted=false，启动60秒超时计时并隐藏麦克风组件";
+}
+
+// 按钮1点击处理
+void GLCore::onButton1Clicked() {
+    playClickSound();
+    
+    // 切换按钮1状态
+    if (button1State == Button1State::Hide) {
+        button1State = Button1State::Show;
+        componentsVisible = true;
+    } else {
+        button1State = Button1State::Hide;
+        componentsVisible = false;
+    }
+    
+    updateButton1Icon();
+    updateComponentsVisibility();
+    
+    qDebug() << "按钮1点击，新状态:" << static_cast<int>(button1State) 
+             << "组件可见:" << componentsVisible;
+}
+
+// 按钮2点击处理
+void GLCore::onButton2Clicked() {
+    playClickSound();
+    
+    // 循环切换按钮2状态
+    switch (button2State) {
+        case Button2State::ChatMode:
+            button2State = Button2State::MicrophoneMode;
+            break;
+        case Button2State::MicrophoneMode:
+            button2State = Button2State::CommandMode;
+            break;
+        case Button2State::CommandMode:
+            button2State = Button2State::ChatMode;
+            break;
+    }
+    
+    updateButton2Icon();
+    updateComponentsVisibility();
+    
+    qDebug() << "按钮2点击，新状态:" << static_cast<int>(button2State);
+}
+
+// 按钮3点击处理
+void GLCore::onButton3Clicked() {
+    playClickSound();
+    
+    // 打开keymap.txt文件
+    QString keymapPath = QDir::currentPath() + "/contact/keymap.txt";
+    
+    if (QFile::exists(keymapPath)) {
+        bool success = QDesktopServices::openUrl(QUrl::fromLocalFile(keymapPath));
+        if (success) {
+            qDebug() << "成功打开keymap.txt文件";
+        } else {
+            qDebug() << "打开keymap.txt文件失败";
+        }
+    } else {
+        qDebug() << "keymap.txt文件不存在:" << keymapPath;
+    }
+}
+
+// 麦克风按钮点击处理
+void GLCore::onMicrophoneClicked() {
+    playClickSound();
+    
+    if (!isRecording) {
+        // 开始录音
+        startRecording();
+    } else {
+        // 停止录音
+        stopRecording();
+    }
+}
+
+// 录音超时处理
+void GLCore::onRecordingTimeout() {
+    qDebug() << "录音超时（60秒），强制停止录音";
+    stopRecording();
+}
+
+// 创建圆形蒙版图标
+QIcon GLCore::createCircularIcon(const QString& iconPath, int size) {
+    // 加载原始图标
+    QPixmap originalPixmap(iconPath);
+    if (originalPixmap.isNull()) {
+        qDebug() << "无法加载图标:" << iconPath;
+        return QIcon();
+    }
+    
+    // 缩放到指定大小
+    QPixmap scaledPixmap = originalPixmap.scaled(size, size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    
+    // 创建圆形蒙版
+    QPixmap roundedPixmap(size, size);
+    roundedPixmap.fill(Qt::transparent);
+    
+    QPainter painter(&roundedPixmap);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    
+    // 设置圆形裁剪路径
+    QPainterPath path;
+    path.addEllipse(0, 0, size, size);
+    painter.setClipPath(path);
+    
+    // 绘制缩放后的图标，居中放置
+    int x = (size - scaledPixmap.width()) / 2;
+    int y = (size - scaledPixmap.height()) / 2;
+    painter.drawPixmap(x, y, scaledPixmap);
+    
+    painter.end();
+    
+    return QIcon(roundedPixmap);
 }

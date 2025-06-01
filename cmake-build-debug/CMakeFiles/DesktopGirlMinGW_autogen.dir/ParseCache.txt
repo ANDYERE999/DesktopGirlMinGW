@@ -166,12 +166,14 @@ D:/project/DesktopGirlMinGW/GLCore.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/QSurfaceFormat
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qdesktopservices.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qfontinfo.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qfontmetrics.h
@@ -203,15 +205,22 @@ D:/project/DesktopGirlMinGW/GLCore.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs_win.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioDevice
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioInput
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioOutput
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaCaptureSession
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaDevices
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaPlayer
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaRecorder
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudio.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiodevice.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioformat.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioinput.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediacapturesession.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediadevices.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediametadata.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaplayer.h
+ mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediarecorder.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtaudio.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimedia-config.h
  mdp:C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaexports.h

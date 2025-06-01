@@ -44,7 +44,12 @@ template <> constexpr inline auto GLCore::qt_create_metaobjectdata<qt_meta_tag_Z
         "",
         "onSendButtonClicked",
         "onTextChanged",
-        "onResponseTimeout"
+        "onResponseTimeout",
+        "onButton1Clicked",
+        "onButton2Clicked",
+        "onButton3Clicked",
+        "onMicrophoneClicked",
+        "onRecordingTimeout"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -56,6 +61,16 @@ template <> constexpr inline auto GLCore::qt_create_metaobjectdata<qt_meta_tag_Z
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'onResponseTimeout'
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onButton1Clicked'
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onButton2Clicked'
+        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onButton3Clicked'
+        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onMicrophoneClicked'
+        QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onRecordingTimeout'
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -83,6 +98,11 @@ void GLCore::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 1: _t->onSendButtonClicked(); break;
         case 2: _t->onTextChanged(); break;
         case 3: _t->onResponseTimeout(); break;
+        case 4: _t->onButton1Clicked(); break;
+        case 5: _t->onButton2Clicked(); break;
+        case 6: _t->onButton3Clicked(); break;
+        case 7: _t->onMicrophoneClicked(); break;
+        case 8: _t->onRecordingTimeout(); break;
         default: ;
         }
     }
@@ -108,14 +128,14 @@ int GLCore::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 9;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 9)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 9;
     }
     return _id;
 }

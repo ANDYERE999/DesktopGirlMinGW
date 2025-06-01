@@ -171,12 +171,14 @@ CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.ob
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QSurfaceFormat \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qdesktopservices.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontinfo.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontmetrics.h \
@@ -208,15 +210,22 @@ CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.ob
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioDevice \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioInput \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioOutput \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaCaptureSession \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaDevices \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaPlayer \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaRecorder \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiodevice.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioformat.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioinput.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediacapturesession.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediadevices.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediametadata.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaplayer.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediarecorder.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
@@ -690,7 +699,9 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: D:/project/DesktopGirlMinGW/GLCo
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QFontMetrics \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QKeyEvent \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QMouseEvent \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QResizeEvent \
@@ -703,6 +714,7 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: D:/project/DesktopGirlMinGW/GLCo
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qdesktopservices.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qevent.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qeventpoint.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h \
@@ -745,15 +757,24 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: D:/project/DesktopGirlMinGW/GLCo
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioDevice \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioInput \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioOutput \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaCaptureSession \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaDevices \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaFormat \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaPlayer \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaRecorder \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiodevice.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioformat.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioinput.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediacapturesession.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediadevices.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaformat.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediametadata.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaplayer.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediarecorder.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
@@ -1567,12 +1588,14 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj: D:/project/
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QSurfaceFormat \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qdesktopservices.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontinfo.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontmetrics.h \
@@ -1604,15 +1627,22 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj: D:/project/
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioDevice \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioInput \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioOutput \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaCaptureSession \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaDevices \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaPlayer \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaRecorder \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiodevice.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioformat.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioinput.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediacapturesession.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediadevices.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediametadata.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaplayer.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediarecorder.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
@@ -2103,12 +2133,14 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj: D:/pro
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QSurfaceFormat \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qdesktopservices.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontinfo.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontmetrics.h \
@@ -2140,15 +2172,22 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj: D:/pro
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioDevice \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioInput \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioOutput \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaCaptureSession \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaDevices \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaPlayer \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaRecorder \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiodevice.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioformat.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioinput.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediacapturesession.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediadevices.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediametadata.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaplayer.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediarecorder.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
@@ -2662,12 +2701,14 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.obj: D:/project/Des
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QSurfaceFormat \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qdesktopservices.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontinfo.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontmetrics.h \
@@ -2699,15 +2740,22 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.obj: D:/project/Des
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioDevice \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioInput \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioOutput \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaCaptureSession \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaDevices \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaPlayer \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaRecorder \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiodevice.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioformat.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioinput.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediacapturesession.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediadevices.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediametadata.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaplayer.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediarecorder.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
@@ -3613,12 +3661,14 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj: D:/project/Desk
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QSurfaceFormat \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qdesktopservices.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontinfo.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontmetrics.h \
@@ -3650,15 +3700,22 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj: D:/project/Desk
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioDevice \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioInput \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioOutput \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaCaptureSession \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaDevices \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaPlayer \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaRecorder \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiodevice.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioformat.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioinput.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediacapturesession.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediadevices.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediametadata.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaplayer.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediarecorder.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
@@ -4748,12 +4805,14 @@ CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj: D:/project/DesktopGirlMinGW/main.c
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QSurfaceFormat \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qdesktopservices.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontinfo.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontmetrics.h \
@@ -4788,15 +4847,22 @@ CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj: D:/project/DesktopGirlMinGW/main.c
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioDevice \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioInput \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioOutput \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaCaptureSession \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaDevices \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaPlayer \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaRecorder \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiodevice.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioformat.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioinput.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiooutput.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediacapturesession.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediadevices.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediametadata.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaplayer.h \
+  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediarecorder.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtaudio.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimedia-config.h \
   C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtmultimediaexports.h \
@@ -5336,6 +5402,8 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/syslimits.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h:
 
+C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QAudioInput:
+
 C:/Qt/6.9.0/mingw_64/include/QtCore/qdeadlinetimer.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlayoutitem.h:
@@ -5507,6 +5575,8 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/rdseedintrin.
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/debug/debug.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qmath.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioinput.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qmetacontainer.h:
 
@@ -5770,6 +5840,12 @@ C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h:
 
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/avx512pfintrin.h:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/atomic:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices:
+
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/alloc_traits.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/avx512vbmi2vlintrin.h:
@@ -5793,6 +5869,16 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/vect
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/map:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/math.h:
+
+D:/project/DesktopGirlMinGW/LAppLive2D/Inc/LAppView.hpp:
+
+C:/Qt/6.9.0/mingw_64/include/QtGui/qdesktopservices.h:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_list.h:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ios:
+
+C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlayout.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h:
 
@@ -5886,15 +5972,27 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bit:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs_win.h:
 
+C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winver.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaCaptureSession:
+
+C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/mcx.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediametadata.h:
+
 C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaDevices:
 
 C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaPlayer:
+
+C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaRecorder:
 
 C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudiodevice.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/avx512erintrin.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qaudioformat.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediacapturesession.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediadevices.h:
 
@@ -5903,6 +6001,8 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/atom
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_vector.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaplayer.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediarecorder.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qtaudio.h:
 
@@ -5944,10 +6044,6 @@ C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/psdk_inc/_ip_types.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/QTextEdit:
 
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/mmintrin.h:
-
-D:/project/DesktopGirlMinGW/GLCore.h:
-
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/QVBoxLayout:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/functexcept.h:
@@ -5960,19 +6056,7 @@ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgridlayout.h:
 
-D:/project/DesktopGirlMinGW/LAppLive2D/Inc/LAppView.hpp:
-
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_list.h:
-
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ios:
-
-C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlayout.h:
-
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qprogressbar.h:
-
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/avx5124vnniwintrin.h:
-
-C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h:
 
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qpushbutton.h:
 
@@ -5999,10 +6083,6 @@ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtwidgetsglobal.h:
 C:/Qt/6.9.0/mingw_64/include/QtWidgets/qwidget.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/array:
-
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/avx512pfintrin.h:
-
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/atomic:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward/auto_ptr.h:
 
@@ -6140,8 +6220,6 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/rang
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/pthread_compat.h:
 
-C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/sys/types.h:
-
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/shared_ptr.h:
@@ -6262,6 +6340,8 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/align
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/string_conversions.h:
 
+C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon:
+
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/type_traits.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/functional:
@@ -6284,9 +6364,9 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/memory:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent:
 
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/optional:
-
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/optional:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_algorithm_defs.h:
 
@@ -6340,9 +6420,9 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w6
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/wbnoinvdintrin.h:
 
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/variant:
-
 DesktopGirlMinGW_autogen/EWIEGA46WW/moc_GLCore.cpp:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/variant:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/ammintrin.h:
 
@@ -6410,11 +6490,21 @@ C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/swprintf.inl:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/sys/timeb.h:
 
+C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/sys/types.h:
+
 D:/project/DesktopGirlMinGW/ProjectSources/Src/AudioOutput.cpp:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/avx5124vnniwintrin.h:
+
+C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/mmintrin.h:
+
+D:/project/DesktopGirlMinGW/GLCore.h:
 
 D:/project/DesktopGirlMinGW/ProjectSources/Inc/AudioOutput.h:
 
@@ -6463,6 +6553,12 @@ C:/Qt/6.9.0/mingw_64/include/QtGui/qguiapplication_platform.h:
 D:/project/DesktopGirlMinGW/LAppLive2D/Inc/LAppAllocator.hpp:
 
 C:/Qt/6.9.0/mingw_64/include/QtGui/qscreen_platform.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaFormat:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/xtestintrin.h:
+
+C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaformat.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/amxcomplexintrin.h:
 
@@ -6598,8 +6694,6 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/xsaveoptintri
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/xsavesintrin.h:
 
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/xtestintrin.h:
-
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/apisetcconv.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/bcrypt.h:
@@ -6655,8 +6749,6 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fstr
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/ktmtypes.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/lzexpand.h:
-
-C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/mcx.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/minwinbase.h:
 
@@ -6751,8 +6843,6 @@ C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winspool.h:
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsvc.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winuser.h:
-
-C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winver.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wnnc.h:
 

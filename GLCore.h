@@ -16,9 +16,16 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDateTime>
+#include <QLabel>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QMediaRecorder>
+#include <QAudioInput>
+#include <QMediaCaptureSession>
+#include <QAudioDevice>
+#include <QMediaDevices>
 #include <map>
 #include <string>
-#include <QLabel>
 #include "ProjectSources/Inc/AudioOutput.h"
 
 // 热键配置结构体
@@ -30,6 +37,23 @@ struct HotkeyConfig {
     bool isActive;           // 是否激活
 };
 
+// 按钮状态枚举
+enum class Button1State {
+    Hide,  // 1_hide.ico
+    Show   // 1_show.ico
+};
+
+enum class Button2State {
+    ChatMode,       // 2_chat_mode.ico
+    MicrophoneMode, // 2_microphone_mode.ico
+    CommandMode     // 2_command_mode.ico
+};
+
+enum class MicrophoneState {
+    Start,  // microphone_Start.png
+    Stop    // microphone_Stop.png
+};
+
 class GLCore : public QOpenGLWidget
 {
     Q_OBJECT
@@ -38,12 +62,10 @@ public:
     GLCore(int width, int height, QWidget* parent = nullptr);
     ~GLCore();
 
-
     void mouseMoveEvent(QMouseEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void wheelEvent(QWheelEvent* event) override;
-
 
     // 重写函数
     void initializeGL() override;
@@ -57,6 +79,13 @@ private slots:
     void onSendButtonClicked(); // 发送按钮点击槽函数
     void onTextChanged();       // 文本改变槽函数
     void onResponseTimeout();   // 响应超时槽函数
+    
+    // 新增的按钮和麦克风相关槽函数
+    void onButton1Clicked();    // 按钮1点击槽函数
+    void onButton2Clicked();    // 按钮2点击槽函数
+    void onButton3Clicked();    // 按钮3点击槽函数
+    void onMicrophoneClicked(); // 麦克风按钮点击槽函数
+    void onRecordingTimeout();  // 录音超时槽函数
 
 private:
     bool isLeftPressed; // 鼠标左键是否按下
@@ -87,6 +116,26 @@ private:
     QTimer* timeoutTimer;          // 超时定时器
     QLabel* timeoutLabel;          // 超时提示标签
     bool isWaitingForResponse;     // 是否正在等待响应
+    
+    // 左侧按钮栏相关
+    QFrame* buttonContainer;       // 按钮容器
+    QVBoxLayout* buttonLayout;     // 按钮布局
+    QPushButton* button1;          // 按钮1（隐藏/显示）
+    QPushButton* button2;          // 按钮2（模式切换）
+    QPushButton* button3;          // 按钮3（指南）
+    Button1State button1State;     // 按钮1状态
+    Button2State button2State;     // 按钮2状态
+    bool componentsVisible;        // 其他组件是否可见
+    
+    // 麦克风组件相关
+    QFrame* microphoneContainer;   // 麦克风容器
+    QPushButton* microphoneButton; // 麦克风按钮
+    MicrophoneState microphoneState; // 麦克风状态
+    QMediaRecorder* mediaRecorder; // 媒体录音器
+    QAudioInput* audioInput;       // 音频输入
+    QMediaCaptureSession* captureSession; // 捕获会话
+    QTimer* recordingTimer;        // 录音计时器
+    bool isRecording;              // 是否正在录音
     
     // 热键系统相关
     std::map<QString, HotkeyConfig> hotkeyConfigs;  // 键盘映射配置
@@ -128,5 +177,26 @@ private:
     // 音频监测相关方法
     void checkAndPlayAudioFile();                               // 检查并播放音频文件
     void cleanupTemporaryAudioFiles();                          // 清理临时音频文件
-
+    
+    // 新增的UI设置方法
+    void setupButtonUI();            // 设置按钮UI
+    void setupMicrophoneUI();        // 设置麦克风UI
+    void updateButtonContainer();    // 更新按钮容器位置
+    void updateMicrophoneContainer(); // 更新麦克风容器位置
+    void updateComponentsVisibility(); // 更新组件可见性
+    void playClickSound();           // 播放点击音效
+    
+    // 按钮状态更新方法
+    void updateButton1Icon();        // 更新按钮1图标
+    void updateButton2Icon();        // 更新按钮2图标
+    void updateMicrophoneIcon();     // 更新麦克风图标
+    
+    // 录音相关方法
+    void setupRecording();           // 设置录音
+    void startRecording();           // 开始录音
+    void stopRecording();            // 停止录音
+    void finishRecording();          // 完成录音处理
+    
+    // 圆形图标创建方法
+    QIcon createCircularIcon(const QString& iconPath, int size); // 创建圆形蒙版图标
 };
