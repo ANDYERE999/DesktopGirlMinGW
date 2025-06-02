@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "D:/project/DesktopGirlMinGW/cmake-build-debug/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp" "CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj.d"
   "D:/project/DesktopGirlMinGW/cmake-build-debug/DesktopGirlMinGW_autogen/mocs_compilation.cpp" "CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj.d"
   "D:/project/DesktopGirlMinGW/GLCore.cpp" "CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj.d"
   "D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppAllocator.cpp" "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.obj.d"
@@ -22,6 +23,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppWavFileHandler.cpp" "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj.d"
   "D:/project/DesktopGirlMinGW/LAppLive2D/Src/TouchManager.cpp" "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj.d"
   "D:/project/DesktopGirlMinGW/ProjectSources/Src/AudioOutput.cpp" "CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj.d"
+  "D:/project/DesktopGirlMinGW/SpeechBubbleWidget.cpp" "CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.obj.d"
   "D:/project/DesktopGirlMinGW/main.cpp" "CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj" "gcc" "CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj.d"
   )
 

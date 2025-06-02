@@ -548,6 +548,22 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qbuffer.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QDebug \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qdebug.h \
+ D:/project/DesktopGirlMinGW/SpeechBubbleWidget.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QPainterPath \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpainterpath.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QFont \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QFontMetrics \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qfontmetrics.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qstring.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QFontDatabase \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qfontdatabase.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGraphicsOpacityEffect \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicseffect.h \
  D:/project/DesktopGirlMinGW/LAppLive2D/Inc/LAppModel.hpp \
  D:/project/DesktopGirlMinGW/Thirdparty/Framework/src/Model/CubismUserModel.hpp \
  D:/project/DesktopGirlMinGW/Thirdparty/Framework/src/Effect/CubismPose.hpp \

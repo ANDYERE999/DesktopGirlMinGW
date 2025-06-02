@@ -68,6 +68,14 @@ include CMakeFiles/DesktopGirlMinGW.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/DesktopGirlMinGW.dir/flags.make
 
+DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp: D:/project/DesktopGirlMinGW/resources.qrc
+DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp: CMakeFiles/DesktopGirlMinGW_autogen.dir/AutoRcc_resources_EWIEGA46WW_Info.json
+DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp: D:/project/DesktopGirlMinGW/asset/font/adorable.ttf
+DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp: C:/Qt/6.9.0/mingw_64/bin/rcc.exe
+DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp: C:/Qt/6.9.0/mingw_64/bin/rcc.exe
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic RCC for resources.qrc"
+	"C:\Program Files\JetBrains\CLion 2025.1.1\bin\cmake\win\x64\bin\cmake.exe" -E cmake_autorcc D:/project/DesktopGirlMinGW/cmake-build-debug/CMakeFiles/DesktopGirlMinGW_autogen.dir/AutoRcc_resources_EWIEGA46WW_Info.json Debug
+
 CMakeFiles/DesktopGirlMinGW.dir/codegen:
 .PHONY : CMakeFiles/DesktopGirlMinGW.dir/codegen
 
@@ -75,7 +83,7 @@ CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.ob
 CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj: DesktopGirlMinGW_autogen/mocs_compilation.cpp
 CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\DesktopGirlMinGW_autogen\mocs_compilation.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\DesktopGirlMinGW_autogen\mocs_compilation.cpp.obj -c D:\project\DesktopGirlMinGW\cmake-build-debug\DesktopGirlMinGW_autogen\mocs_compilation.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.i: cmake_force
@@ -90,7 +98,7 @@ CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/fl
 CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj: D:/project/DesktopGirlMinGW/main.cpp
 CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\main.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\main.cpp.obj -c D:\project\DesktopGirlMinGW\main.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/main.cpp.i: cmake_force
@@ -105,7 +113,7 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/
 CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: D:/project/DesktopGirlMinGW/GLCore.cpp
 CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\GLCore.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\GLCore.cpp.obj -c D:\project\DesktopGirlMinGW\GLCore.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.i: cmake_force
@@ -116,11 +124,26 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.s"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\project\DesktopGirlMinGW\GLCore.cpp -o CMakeFiles\DesktopGirlMinGW.dir\GLCore.cpp.s
 
+CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/flags.make
+CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
+CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.obj: D:/project/DesktopGirlMinGW/SpeechBubbleWidget.cpp
+CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\SpeechBubbleWidget.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\SpeechBubbleWidget.cpp.obj -c D:\project\DesktopGirlMinGW\SpeechBubbleWidget.cpp
+
+CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\project\DesktopGirlMinGW\SpeechBubbleWidget.cpp > CMakeFiles\DesktopGirlMinGW.dir\SpeechBubbleWidget.cpp.i
+
+CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\project\DesktopGirlMinGW\SpeechBubbleWidget.cpp -o CMakeFiles\DesktopGirlMinGW.dir\SpeechBubbleWidget.cpp.s
+
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/flags.make
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.obj: D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppAllocator.cpp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppAllocator.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppAllocator.cpp.obj -c D:\project\DesktopGirlMinGW\LAppLive2D\Src\LAppAllocator.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.i: cmake_force
@@ -135,7 +158,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDefine.cpp.obj: CMakeFiles/De
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDefine.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDefine.cpp.obj: D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppDefine.cpp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDefine.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDefine.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDefine.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDefine.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppDefine.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppDefine.cpp.obj -c D:\project\DesktopGirlMinGW\LAppLive2D\Src\LAppDefine.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDefine.cpp.i: cmake_force
@@ -150,7 +173,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj: CMakeFiles/
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj: D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppDelegate.cpp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppDelegate.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppDelegate.cpp.obj -c D:\project\DesktopGirlMinGW\LAppLive2D\Src\LAppDelegate.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.i: cmake_force
@@ -165,7 +188,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj: CMakeF
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj: D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppLive2DManager.cpp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppLive2DManager.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppLive2DManager.cpp.obj -c D:\project\DesktopGirlMinGW\LAppLive2D\Src\LAppLive2DManager.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppLive2DManager.cpp.i: cmake_force
@@ -180,7 +203,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.obj: CMakeFiles/Des
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.obj: D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppModel.cpp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppModel.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppModel.cpp.obj -c D:\project\DesktopGirlMinGW\LAppLive2D\Src\LAppModel.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppModel.cpp.i: cmake_force
@@ -195,7 +218,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppPal.cpp.obj: CMakeFiles/Deskt
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppPal.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppPal.cpp.obj: D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppPal.cpp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppPal.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppPal.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppPal.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppPal.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppPal.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppPal.cpp.obj -c D:\project\DesktopGirlMinGW\LAppLive2D\Src\LAppPal.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppPal.cpp.i: cmake_force
@@ -210,7 +233,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppSprite.cpp.obj: CMakeFiles/De
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppSprite.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppSprite.cpp.obj: D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppSprite.cpp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppSprite.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppSprite.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppSprite.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppSprite.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppSprite.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppSprite.cpp.obj -c D:\project\DesktopGirlMinGW\LAppLive2D\Src\LAppSprite.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppSprite.cpp.i: cmake_force
@@ -225,7 +248,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppTextureManager.cpp.obj: CMake
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppTextureManager.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppTextureManager.cpp.obj: D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppTextureManager.cpp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppTextureManager.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppTextureManager.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppTextureManager.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppTextureManager.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppTextureManager.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppTextureManager.cpp.obj -c D:\project\DesktopGirlMinGW\LAppLive2D\Src\LAppTextureManager.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppTextureManager.cpp.i: cmake_force
@@ -240,7 +263,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj: CMakeFiles/Desk
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj: D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppView.cpp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppView.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppView.cpp.obj -c D:\project\DesktopGirlMinGW\LAppLive2D\Src\LAppView.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.i: cmake_force
@@ -255,7 +278,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj: CMake
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj: D:/project/DesktopGirlMinGW/LAppLive2D/Src/LAppWavFileHandler.cpp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppWavFileHandler.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\LAppWavFileHandler.cpp.obj -c D:\project\DesktopGirlMinGW\LAppLive2D\Src\LAppWavFileHandler.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.i: cmake_force
@@ -270,7 +293,7 @@ CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj: CMakeFiles/
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj: D:/project/DesktopGirlMinGW/LAppLive2D/Src/TouchManager.cpp
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\TouchManager.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\LAppLive2D\Src\TouchManager.cpp.obj -c D:\project\DesktopGirlMinGW\LAppLive2D\Src\TouchManager.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.i: cmake_force
@@ -285,7 +308,7 @@ CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj: CMakeFil
 CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
 CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj: D:/project/DesktopGirlMinGW/ProjectSources/Src/AudioOutput.cpp
 CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\ProjectSources\Src\AudioOutput.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\ProjectSources\Src\AudioOutput.cpp.obj -c D:\project\DesktopGirlMinGW\ProjectSources\Src\AudioOutput.cpp
 
 CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.i: cmake_force
@@ -296,11 +319,27 @@ CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.s: cmake_forc
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.s"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\project\DesktopGirlMinGW\ProjectSources\Src\AudioOutput.cpp -o CMakeFiles\DesktopGirlMinGW.dir\ProjectSources\Src\AudioOutput.cpp.s
 
+CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/flags.make
+CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/includes_CXX.rsp
+CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj: DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp
+CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj: CMakeFiles/DesktopGirlMinGW.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj -MF CMakeFiles\DesktopGirlMinGW.dir\DesktopGirlMinGW_autogen\EWIEGA46WW\qrc_resources.cpp.obj.d -o CMakeFiles\DesktopGirlMinGW.dir\DesktopGirlMinGW_autogen\EWIEGA46WW\qrc_resources.cpp.obj -c D:\project\DesktopGirlMinGW\cmake-build-debug\DesktopGirlMinGW_autogen\EWIEGA46WW\qrc_resources.cpp
+
+CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\project\DesktopGirlMinGW\cmake-build-debug\DesktopGirlMinGW_autogen\EWIEGA46WW\qrc_resources.cpp > CMakeFiles\DesktopGirlMinGW.dir\DesktopGirlMinGW_autogen\EWIEGA46WW\qrc_resources.cpp.i
+
+CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\project\DesktopGirlMinGW\cmake-build-debug\DesktopGirlMinGW_autogen\EWIEGA46WW\qrc_resources.cpp -o CMakeFiles\DesktopGirlMinGW.dir\DesktopGirlMinGW_autogen\EWIEGA46WW\qrc_resources.cpp.s
+
 # Object files for target DesktopGirlMinGW
 DesktopGirlMinGW_OBJECTS = \
 "CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj" \
 "CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj" \
 "CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj" \
+"CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.obj" \
 "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.obj" \
 "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDefine.cpp.obj" \
 "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj" \
@@ -312,7 +351,8 @@ DesktopGirlMinGW_OBJECTS = \
 "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cpp.obj" \
 "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj" \
 "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj" \
-"CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj"
+"CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj" \
+"CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj"
 
 # External object files for target DesktopGirlMinGW
 DesktopGirlMinGW_EXTERNAL_OBJECTS =
@@ -320,6 +360,7 @@ DesktopGirlMinGW_EXTERNAL_OBJECTS =
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj
+DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.obj
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppAllocator.cpp.obj
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDefine.cpp.obj
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppDelegate.cpp.obj
@@ -332,6 +373,7 @@ DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppView.cp
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/LAppWavFileHandler.cpp.obj
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj
+DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/build.make
 DesktopGirlMinGW.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6OpenGLWidgets.a
 DesktopGirlMinGW.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6Widgets.a
@@ -345,7 +387,7 @@ DesktopGirlMinGW.exe: C:/Qt/6.9.0/mingw_64/lib/libQt6Core.a
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/linkLibs.rsp
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/objects1.rsp
 DesktopGirlMinGW.exe: CMakeFiles/DesktopGirlMinGW.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable DesktopGirlMinGW.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX executable DesktopGirlMinGW.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\DesktopGirlMinGW.dir\link.txt --verbose=$(VERBOSE)
 	"C:\Program Files\JetBrains\CLion 2025.1.1\bin\cmake\win\x64\bin\cmake.exe" -E make_directory D:/project/DesktopGirlMinGW/cmake-build-debug/plugins/platforms/
 	"C:\Program Files\JetBrains\CLion 2025.1.1\bin\cmake\win\x64\bin\cmake.exe" -E copy C:/Qt/6.9.0/mingw_64/plugins/platforms/qwindows.dll D:/project/DesktopGirlMinGW/cmake-build-debug/plugins/platforms/
@@ -363,7 +405,7 @@ CMakeFiles/DesktopGirlMinGW.dir/clean:
 	$(CMAKE_COMMAND) -P CMakeFiles\DesktopGirlMinGW.dir\cmake_clean.cmake
 .PHONY : CMakeFiles/DesktopGirlMinGW.dir/clean
 
-CMakeFiles/DesktopGirlMinGW.dir/depend:
+CMakeFiles/DesktopGirlMinGW.dir/depend: DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp
 	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\project\DesktopGirlMinGW D:\project\DesktopGirlMinGW D:\project\DesktopGirlMinGW\cmake-build-debug D:\project\DesktopGirlMinGW\cmake-build-debug D:\project\DesktopGirlMinGW\cmake-build-debug\CMakeFiles\DesktopGirlMinGW.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/DesktopGirlMinGW.dir/depend
 

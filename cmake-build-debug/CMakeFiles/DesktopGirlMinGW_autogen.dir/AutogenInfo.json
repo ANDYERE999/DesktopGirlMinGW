@@ -472,7 +472,8 @@
 		"C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Multimedia/Qt6QWindowsMediaPluginTargets.cmake",
 		"C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Multimedia/Qt6QWindowsMediaPluginTargets-relwithdebinfo.cmake",
 		"C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Multimedia/Qt6QWindowsMediaPluginAdditionalTargetInfo.cmake",
-		"C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Multimedia/Qt6MultimediaVersionlessAliasTargets.cmake"
+		"C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Multimedia/Qt6MultimediaVersionlessAliasTargets.cmake",
+		"D:/project/DesktopGirlMinGW/resources.qrc"
 	],
 	"CMAKE_SOURCE_DIR" : "D:/project/DesktopGirlMinGW",
 	"CROSS_CONFIG" : false,
@@ -490,6 +491,12 @@
 			"D:/project/DesktopGirlMinGW/ProjectSources/Inc/AudioOutput.h",
 			"MU",
 			"OLGTKJA2KD/moc_AudioOutput.cpp",
+			null
+		],
+		[
+			"D:/project/DesktopGirlMinGW/SpeechBubbleWidget.h",
+			"MU",
+			"EWIEGA46WW/moc_SpeechBubbleWidget.cpp",
 			null
 		]
 	],
@@ -637,6 +644,7 @@
 			"MU",
 			null
 		],
+		[ "D:/project/DesktopGirlMinGW/SpeechBubbleWidget.cpp", "MU", null ],
 		[ "D:/project/DesktopGirlMinGW/main.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],

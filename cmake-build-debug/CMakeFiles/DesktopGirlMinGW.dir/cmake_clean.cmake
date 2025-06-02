@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj.d"
   "CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj"
   "CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj.d"
   "CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj"
@@ -27,6 +29,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/DesktopGirlMinGW.dir/LAppLive2D/Src/TouchManager.cpp.obj.d"
   "CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj"
   "CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.obj.d"
+  "CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.obj"
+  "CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.obj.d"
   "CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj"
   "CMakeFiles/DesktopGirlMinGW.dir/main.cpp.obj.d"
   "CMakeFiles/DesktopGirlMinGW_autogen.dir/AutogenUsed.txt"
@@ -35,6 +39,7 @@ file(REMOVE_RECURSE
   "DesktopGirlMinGW.exe"
   "DesktopGirlMinGW.exe.manifest"
   "DesktopGirlMinGW.pdb"
+  "DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp"
   "libDesktopGirlMinGW.dll.a"
 )
 

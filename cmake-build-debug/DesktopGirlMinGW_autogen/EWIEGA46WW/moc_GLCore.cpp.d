@@ -9,6 +9,7 @@ D:/project/DesktopGirlMinGW/cmake-build-debug/DesktopGirlMinGW_autogen/EWIEGA46W
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonDocument \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QJsonObject \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QProcess \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTextStream \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QThread \
   C:/Qt/6.9.0/mingw_64/include/QtCore/QTimer \
@@ -168,6 +169,11 @@ D:/project/DesktopGirlMinGW/cmake-build-debug/DesktopGirlMinGW_autogen/EWIEGA46W
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QDesktopServices \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QFont \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QFontDatabase \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QFontMetrics \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QPainterPath \
   C:/Qt/6.9.0/mingw_64/include/QtGui/QSurfaceFormat \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
@@ -176,6 +182,7 @@ D:/project/DesktopGirlMinGW/cmake-build-debug/DesktopGirlMinGW_autogen/EWIEGA46W
   C:/Qt/6.9.0/mingw_64/include/QtGui/qcursor.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qdesktopservices.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qfontdatabase.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontinfo.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontmetrics.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qfontvariableaxis.h \
@@ -185,6 +192,8 @@ D:/project/DesktopGirlMinGW/cmake-build-debug/DesktopGirlMinGW_autogen/EWIEGA46W
   C:/Qt/6.9.0/mingw_64/include/QtGui/qopengl.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qopenglext.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qpaintdevice.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qpainterpath.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qpalette.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qpen.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qpicture.h \
@@ -231,6 +240,7 @@ D:/project/DesktopGirlMinGW/cmake-build-debug/DesktopGirlMinGW_autogen/EWIEGA46W
   C:/Qt/6.9.0/mingw_64/include/QtOpenGLWidgets/qtopenglwidgetsexports.h \
   C:/Qt/6.9.0/mingw_64/include/QtOpenGLWidgets/qtopenglwidgetsglobal.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QFrame \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGraphicsOpacityEffect \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QHBoxLayout \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QLabel \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QProgressBar \
@@ -242,6 +252,7 @@ D:/project/DesktopGirlMinGW/cmake-build-debug/DesktopGirlMinGW_autogen/EWIEGA46W
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qabstractscrollarea.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qboxlayout.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qframe.h \
+  C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicseffect.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgridlayout.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlabel.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/qlayout.h \
@@ -503,4 +514,5 @@ D:/project/DesktopGirlMinGW/cmake-build-debug/DesktopGirlMinGW_autogen/EWIEGA46W
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h \
-  D:/project/DesktopGirlMinGW/ProjectSources/Inc/AudioOutput.h
+  D:/project/DesktopGirlMinGW/ProjectSources/Inc/AudioOutput.h \
+  D:/project/DesktopGirlMinGW/SpeechBubbleWidget.h

@@ -89,7 +89,14 @@ GLCore::GLCore(int w, int h, QWidget *parent)
       audioInput(nullptr),        // 初始化音频输入
       captureSession(nullptr),    // 初始化捕获会话
       recordingTimer(nullptr),    // 初始化录音计时器
-      isRecording(false)          // 初始化录音状态
+      isRecording(false),         // 初始化录音状态
+      // 对话气泡相关变量初始化
+      speechBubbleWidget(nullptr), // 初始化对话气泡Widget
+      bubbleDisplayTimer(nullptr), // 初始化对话气泡显示计时器
+      bubbleFadeTimer(nullptr),    // 初始化对话气泡淡入淡出计时器
+      isBubbleVisible(false),      // 初始化对话气泡可见性
+      bubbleFadeStep(0),           // 初始化淡入淡出步骤
+      isFadingIn(false)            // 初始化淡入状态
 {
     this->resize(w, h);
     setFocusPolicy(Qt::StrongFocus);  // 确保可以接收键盘事件
@@ -136,6 +143,9 @@ GLCore::GLCore(int w, int h, QWidget *parent)
     // 设置录音系统
     setupRecording();
     
+    // 初始化对话气泡UI
+    setupSpeechBubbleUI();
+    
     // 不要在构造函数中初始化热键系统，等Live2D准备好再初始化
     qDebug() << "GLCore constructor: 延迟初始化热键系统，等待Live2D准备完成";
     
@@ -143,7 +153,7 @@ GLCore::GLCore(int w, int h, QWidget *parent)
     updateConfigIsReacted(true);
     isReacted = true;
     qDebug() << "程序启动：设置默认isReacted=true";
-    
+
     // 显示窗口以获取有效的窗口句柄
     this->show();
     
@@ -203,6 +213,16 @@ GLCore::~GLCore()
     if (favorabilityTimer) {
         favorabilityTimer->stop();
     }
+    
+    // 清理对话气泡相关资源
+    if (bubbleDisplayTimer) {
+        bubbleDisplayTimer->stop();
+    }
+    if (bubbleFadeTimer) {
+        bubbleFadeTimer->stop();
+    }
+    // speechBubbleWidget会通过Qt的父子关系自动清理
+    
     // Qt的父子关系会自动清理QProgressBar和QTimer等组件
 }
 
@@ -344,6 +364,16 @@ void GLCore::resizeEvent(QResizeEvent* event)
         timeoutLabel->setGeometry(labelX, labelY, labelWidth, 40);
         qDebug() << "超时标签位置调整:" << timeoutLabel->geometry();
     }
+    
+    // 调整对话气泡位置
+    if (speechBubbleWidget && speechBubbleWidget->isVisible()) {
+        QSize bubbleSize = speechBubbleWidget->size();
+        // 计算位置：左右居中，上下3/4处
+        int x = (width() - bubbleSize.width()) / 2;
+        int y = height() * 3 / 4 - bubbleSize.height() / 2;
+        speechBubbleWidget->move(x, y);
+        qDebug() << "对话气泡位置调整:" << x << y;
+    }
 }
 
 void GLCore::wheelEvent(QWheelEvent* event)
@@ -479,6 +509,9 @@ void GLCore::updateFavorability() {
     
     // 检查并播放音频文件 - 每秒监测一次
     checkAndPlayAudioFile();
+    
+    // 检查并显示对话气泡 - 每秒监测一次
+    checkAndShowSpeechBubble();
 }
 
 // 新增方法：更新对话框位置
@@ -2138,4 +2171,191 @@ QMediaPlayer* GLCore::createNewMusicPlayer() {
     }
     
     return musicPlayer;
+}
+
+// ========== 对话气泡系统实现 ==========
+
+// 设置对话气泡UI
+void GLCore::setupSpeechBubbleUI() {
+    // 创建对话气泡Widget
+    speechBubbleWidget = new SpeechBubbleWidget(this);
+    speechBubbleWidget->setVisible(false); // 初始隐藏
+    
+    // 创建显示计时器
+    bubbleDisplayTimer = new QTimer(this);
+    bubbleDisplayTimer->setSingleShot(true);
+    connect(bubbleDisplayTimer, &QTimer::timeout, this, &GLCore::onBubbleDisplayTimeout);
+    
+    // 创建淡入淡出计时器
+    bubbleFadeTimer = new QTimer(this);
+    connect(bubbleFadeTimer, &QTimer::timeout, this, &GLCore::onBubbleFadeUpdate);
+    
+    qDebug() << "对话气泡UI初始化完成";
+}
+
+// 检查并显示对话气泡
+void GLCore::checkAndShowSpeechBubble() {
+    // 如果当前正在显示气泡，不检查新的
+    if (isBubbleVisible) {
+        return;
+    }
+    
+    QString outJsonPath = QDir::currentPath() + "/contact/out.json";
+    
+    // 检查文件是否存在
+    if (!QFile::exists(outJsonPath)) {
+        return;
+    }
+    
+    QFile file(outJsonPath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "无法打开out.json文件:" << outJsonPath;
+        return;
+    }
+    
+    QByteArray data = file.readAll();
+    file.close();
+    
+    QJsonParseError error;
+    QJsonDocument doc = QJsonDocument::fromJson(data, &error);
+    
+    if (error.error != QJsonParseError::NoError) {
+        qDebug() << "out.json解析错误:" << error.errorString();
+        // 解析失败也要删除文件
+        deleteSpeechBubbleFile();
+        return;
+    }
+    
+    QJsonObject obj = doc.object();
+    QString text = obj["text"].toString();
+    int displayTime = obj["time"].toInt(3); // 默认3秒
+    
+    if (text.isEmpty()) {
+        qDebug() << "out.json中text为空";
+        deleteSpeechBubbleFile();
+        return;
+    }
+    
+    qDebug() << "发现对话气泡文件，文本:" << text << "显示时长:" << displayTime << "秒";
+    
+    // 立即删除文件，避免重复显示
+    deleteSpeechBubbleFile();
+    
+    // 显示对话气泡
+    showSpeechBubble(text, displayTime);
+}
+
+// 显示对话气泡
+void GLCore::showSpeechBubble(const QString& text, int displayTime) {
+    if (!speechBubbleWidget) {
+        qDebug() << "对话气泡Widget未初始化";
+        return;
+    }
+    
+    // 设置文本
+    speechBubbleWidget->setText(text);
+    
+    // 获取推荐大小并调整位置
+    QSize bubbleSize = speechBubbleWidget->getRecommendedSize();
+    speechBubbleWidget->resize(bubbleSize);
+    
+    // 计算居中位置
+    int x = (width() - bubbleSize.width()) / 2;
+    int y = height() * 3 / 4 - bubbleSize.height() / 2;
+    speechBubbleWidget->move(x, y);
+    
+    qDebug() << "对话气泡位置:" << x << y << "大小:" << bubbleSize;
+    
+    // 开始淡入效果
+    isBubbleVisible = true;
+    isFadingIn = true;
+    bubbleFadeStep = 0;
+    
+    speechBubbleWidget->setOpacity(0.0);
+    speechBubbleWidget->setVisible(true);
+    
+    // 启动淡入淡出计时器（每50毫秒更新一次，0.5秒完成淡入）
+    bubbleFadeTimer->start(50);
+    
+    // 设置显示时长计时器（淡入0.5秒 + 显示时间 + 淡出0.5秒）
+    int totalDisplayTime = 500 + displayTime * 1000 + 500;
+    bubbleDisplayTimer->start(displayTime * 1000 + 500); // 淡入后开始计时
+    
+    qDebug() << "开始显示对话气泡，总时长:" << totalDisplayTime << "毫秒";
+}
+
+// 隐藏对话气泡
+void GLCore::hideSpeechBubble() {
+    if (!isBubbleVisible || !speechBubbleWidget) {
+        return;
+    }
+    
+    // 开始淡出效果
+    isFadingIn = false;
+    bubbleFadeStep = 10; // 从最大不透明度开始淡出
+    
+    // 如果淡入淡出计时器没有运行，启动它
+    if (!bubbleFadeTimer->isActive()) {
+        bubbleFadeTimer->start(50);
+    }
+    
+    qDebug() << "开始隐藏对话气泡（淡出效果）";
+}
+
+// 更新气泡淡入淡出效果
+void GLCore::updateBubbleFade() {
+    if (!speechBubbleWidget || !isBubbleVisible) {
+        bubbleFadeTimer->stop();
+        return;
+    }
+    
+    if (isFadingIn) {
+        // 淡入过程
+        bubbleFadeStep++;
+        qreal opacity = bubbleFadeStep / 10.0;
+        speechBubbleWidget->setOpacity(opacity);
+        
+        if (bubbleFadeStep >= 10) {
+            // 淡入完成
+            bubbleFadeTimer->stop();
+            qDebug() << "对话气泡淡入完成";
+        }
+    } else {
+        // 淡出过程
+        bubbleFadeStep--;
+        qreal opacity = bubbleFadeStep / 10.0;
+        speechBubbleWidget->setOpacity(opacity);
+        
+        if (bubbleFadeStep <= 0) {
+            // 淡出完成，隐藏气泡
+            bubbleFadeTimer->stop();
+            speechBubbleWidget->setVisible(false);
+            isBubbleVisible = false;
+            qDebug() << "对话气泡淡出完成并隐藏";
+        }
+    }
+}
+
+// 删除对话气泡文件
+void GLCore::deleteSpeechBubbleFile() {
+    QString outJsonPath = QDir::currentPath() + "/contact/out.json";
+    
+    if (QFile::exists(outJsonPath)) {
+        if (QFile::remove(outJsonPath)) {
+            qDebug() << "成功删除out.json文件";
+        } else {
+            qDebug() << "删除out.json文件失败:" << outJsonPath;
+        }
+    }
+}
+
+// 对话气泡显示超时槽函数
+void GLCore::onBubbleDisplayTimeout() {
+    qDebug() << "对话气泡显示时间到，开始隐藏";
+    hideSpeechBubble();
+}
+
+// 对话气泡淡入淡出更新槽函数
+void GLCore::onBubbleFadeUpdate() {
+    updateBubbleFade();
 }

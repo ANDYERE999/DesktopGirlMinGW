@@ -538,6 +538,22 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qbuffer.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QDebug \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qdebug.h \
+ D:/project/DesktopGirlMinGW/SpeechBubbleWidget.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QPainterPath \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qpainterpath.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QFont \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qfont.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QFontMetrics \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qfontmetrics.h \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
+ C:/Qt/6.9.0/mingw_64/include/QtCore/qstring.h \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/QFontDatabase \
+ C:/Qt/6.9.0/mingw_64/include/QtGui/qfontdatabase.h \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/QGraphicsOpacityEffect \
+ C:/Qt/6.9.0/mingw_64/include/QtWidgets/qgraphicseffect.h \
  D:/project/DesktopGirlMinGW/LAppLive2D/Inc/LAppView.hpp \
  D:/project/DesktopGirlMinGW/Thirdparty/Framework/src/Math/CubismMatrix44.hpp \
  D:/project/DesktopGirlMinGW/Thirdparty/Framework/src/Math/CubismViewMatrix.hpp \
@@ -606,22 +622,16 @@ CMakeFiles/DesktopGirlMinGW.dir/GLCore.cpp.obj: \
  C:/Qt/6.9.0/mingw_64/include/QtGui/QWheelEvent \
  C:/Qt/6.9.0/mingw_64/include/QtGui/QResizeEvent \
  C:/Qt/6.9.0/mingw_64/include/QtGui/QKeyEvent \
- C:/Qt/6.9.0/mingw_64/include/QtGui/QFontMetrics \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qfontmetrics.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/QTextDocument \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qtextdocument.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/QIcon \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qicon.h \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/QMediaFormat \
  C:/Qt/6.9.0/mingw_64/include/QtMultimedia/qmediaformat.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/QPainter \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qpainter.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qpixmap.h \
  C:/Qt/6.9.0/mingw_64/include/QtGui/QBitmap \
  C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
- C:/Qt/6.9.0/mingw_64/include/QtGui/QPainterPath \
- C:/Qt/6.9.0/mingw_64/include/QtGui/qpainterpath.h \
  C:/Qt/6.9.0/mingw_64/include/QtCore/QRandomGenerator \
  C:/Qt/6.9.0/mingw_64/include/QtCore/qrandom.h \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/random \

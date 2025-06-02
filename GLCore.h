@@ -30,6 +30,7 @@
 #include "ProjectSources/Inc/AudioOutput.h"
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include "SpeechBubbleWidget.h"
 
 // 热键配置结构体
 struct HotkeyConfig {
@@ -89,6 +90,10 @@ private slots:
     void onButton3Clicked();    // 按钮3点击槽函数
     void onMicrophoneClicked(); // 麦克风按钮点击槽函数
     void onRecordingTimeout();  // 录音超时槽函数
+    
+    // 对话气泡相关槽函数
+    void onBubbleDisplayTimeout(); // 对话气泡显示超时槽函数
+    void onBubbleFadeUpdate();     // 对话气泡淡入淡出更新槽函数
 
 private:
     bool isLeftPressed; // 鼠标左键是否按下
@@ -97,7 +102,7 @@ private:
 
     // 边框显示状态
     bool isFrameless;   // 是否无边框状态
-    
+
     // 初始窗口大小
     int initialWidth;
     int initialHeight;
@@ -152,6 +157,14 @@ private:
     QList<QMediaPlayer*> musicPlayers;             // 音乐播放器列表（支持多个同时播放）
     QList<QAudioOutput*> audioOutputs;             // 音频输出设备列表
     
+    // 对话气泡相关
+    SpeechBubbleWidget* speechBubbleWidget;         // 对话气泡Widget
+    QTimer* bubbleDisplayTimer;                     // 对话气泡显示计时器
+    QTimer* bubbleFadeTimer;                        // 对话气泡淡入淡出计时器
+    bool isBubbleVisible;                           // 对话气泡是否可见
+    int bubbleFadeStep;                             // 淡入淡出步骤（0-10）
+    bool isFadingIn;                                // 是否正在淡入
+    
     // 私有方法
     int readFavorabilityFromConfig(); // 从配置文件读取好感度
     void setupFavorabilityUI();      // 设置好感度UI
@@ -202,6 +215,14 @@ private:
     void updateMicrophoneContainer(); // 更新麦克风容器位置
     void updateComponentsVisibility(); // 更新组件可见性
     void playClickSound();           // 播放点击音效
+    
+    // 对话气泡相关方法
+    void setupSpeechBubbleUI();      // 设置对话气泡UI
+    void checkAndShowSpeechBubble(); // 检查并显示对话气泡
+    void showSpeechBubble(const QString& text, int displayTime); // 显示对话气泡
+    void hideSpeechBubble();         // 隐藏对话气泡
+    void updateBubbleFade();         // 更新气泡淡入淡出效果
+    void deleteSpeechBubbleFile();   // 删除对话气泡文件
     
     // 按钮状态更新方法
     void updateButton1Icon();        // 更新按钮1图标

@@ -154,6 +154,30 @@ DesktopGirlMinGW_autogen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesktopGirlMinGW_autogen.dir\build.make CMakeFiles/DesktopGirlMinGW_autogen.dir/build
 .PHONY : DesktopGirlMinGW_autogen/fast
 
+DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.obj: DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj
+.PHONY : DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.obj
+
+# target to build an object file
+DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesktopGirlMinGW.dir\build.make CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj
+.PHONY : DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.obj
+
+DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.i: DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.i
+.PHONY : DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.i
+
+# target to preprocess a source file
+DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesktopGirlMinGW.dir\build.make CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.i
+.PHONY : DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.i
+
+DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.s: DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.s
+.PHONY : DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.s
+
+# target to generate assembly for a file
+DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesktopGirlMinGW.dir\build.make CMakeFiles/DesktopGirlMinGW.dir/DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.s
+.PHONY : DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.cpp.s
+
 DesktopGirlMinGW_autogen/mocs_compilation.obj: DesktopGirlMinGW_autogen/mocs_compilation.cpp.obj
 .PHONY : DesktopGirlMinGW_autogen/mocs_compilation.obj
 
@@ -490,6 +514,30 @@ ProjectSources/Src/AudioOutput.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesktopGirlMinGW.dir\build.make CMakeFiles/DesktopGirlMinGW.dir/ProjectSources/Src/AudioOutput.cpp.s
 .PHONY : ProjectSources/Src/AudioOutput.cpp.s
 
+SpeechBubbleWidget.obj: SpeechBubbleWidget.cpp.obj
+.PHONY : SpeechBubbleWidget.obj
+
+# target to build an object file
+SpeechBubbleWidget.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesktopGirlMinGW.dir\build.make CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.obj
+.PHONY : SpeechBubbleWidget.cpp.obj
+
+SpeechBubbleWidget.i: SpeechBubbleWidget.cpp.i
+.PHONY : SpeechBubbleWidget.i
+
+# target to preprocess a source file
+SpeechBubbleWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesktopGirlMinGW.dir\build.make CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.i
+.PHONY : SpeechBubbleWidget.cpp.i
+
+SpeechBubbleWidget.s: SpeechBubbleWidget.cpp.s
+.PHONY : SpeechBubbleWidget.s
+
+# target to generate assembly for a file
+SpeechBubbleWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\DesktopGirlMinGW.dir\build.make CMakeFiles/DesktopGirlMinGW.dir/SpeechBubbleWidget.cpp.s
+.PHONY : SpeechBubbleWidget.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -525,6 +573,9 @@ help:
 	@echo ... DesktopGirlMinGW_autogen
 	@echo ... DesktopGirlMinGW_autogen_timestamp_deps
 	@echo ... DesktopGirlMinGW
+	@echo ... DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.obj
+	@echo ... DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.i
+	@echo ... DesktopGirlMinGW_autogen/EWIEGA46WW/qrc_resources.s
 	@echo ... DesktopGirlMinGW_autogen/mocs_compilation.obj
 	@echo ... DesktopGirlMinGW_autogen/mocs_compilation.i
 	@echo ... DesktopGirlMinGW_autogen/mocs_compilation.s
@@ -567,6 +618,9 @@ help:
 	@echo ... ProjectSources/Src/AudioOutput.obj
 	@echo ... ProjectSources/Src/AudioOutput.i
 	@echo ... ProjectSources/Src/AudioOutput.s
+	@echo ... SpeechBubbleWidget.obj
+	@echo ... SpeechBubbleWidget.i
+	@echo ... SpeechBubbleWidget.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

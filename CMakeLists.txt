@@ -43,7 +43,7 @@ if (NOT CONSOLE)
     set(CON WIN32)
 endif()
 
-add_executable(DesktopGirlMinGW ${CON} main.cpp GLCore.cpp ${LApp2D} ${PROJECT_SOURCES})
+add_executable(DesktopGirlMinGW ${CON} main.cpp GLCore.cpp SpeechBubbleWidget.cpp resources.qrc ${LApp2D} ${PROJECT_SOURCES})
 
 # --- 新增/修改：为目标指定链接器搜索路径 ---
 #target_link_directories(DesktopGirlMinGW PRIVATE "${CMAKE_SOURCE_DIR}/Lib/Debug/")
